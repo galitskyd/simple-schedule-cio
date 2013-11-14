@@ -1,0 +1,2 @@
+This is just an overview of how we are going to use Github and Bitbucket 
+in the event one doesn't know or forgets.
