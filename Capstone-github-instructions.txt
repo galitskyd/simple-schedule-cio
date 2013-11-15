@@ -1,2 +1,20 @@
-This is just an overview of how we are going to use Github and Bitbucket 
-in the event one doesn't know or forgets.
+This is just an overview of how we are going to use Github in the event one 
+doesn't know or forgets.
+
+We will be using Github's branching system, pull request system, comments and
+issue sections.
+
+There is one main branch, "master". This branch is not to be edited directly, 
+the reason for this branch is to always have a place that is error free and 
+can give the ability to start over if you break your branch. 
+
+When starting a new task make a new branch, branching off of master. Make 
+commits to the new branch and when everything is ready for review push the new
+branch up Github.  From there go onto Github and select your newly pushed 
+branch and make a pull request. From there other members from the group can 
+review your code and make comments or concerns. Depending on if that person 
+thinks it works well they can merge your branch to master. Please don't merge
+your own branch.
+
+Lets try one branch per 'issue' and name the branch something relevant to what
+you are doing (for tracking purposes).
