@@ -21,7 +21,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void gridViewUpdate()
     {
-        //dt = basicInfoSurgery.dt();
         dv = new DataView(dt);
         String dateValue = tbDate.Text;
         dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedValue + "' AND Date='" + tbDate.Text + "'";
