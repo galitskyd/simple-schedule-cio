@@ -11,7 +11,8 @@ public class dbConnect
 {
     static public SqlConnection connection()
     {
-        string connString = "Data Source=MATT-LT\\SQLEXPRESS;Initial Catalog=BSU_PROJECT;Persist Security Info=True;User ID=admin;Password=capstone";
+
+        string connString = "Data Source=DULDEN-PC\\SQLEXPRESS;Initial Catalog=BSU_PROJECT;Integrated Security=True";
         SqlConnection conn = new SqlConnection(connString);
         return conn;
     }
