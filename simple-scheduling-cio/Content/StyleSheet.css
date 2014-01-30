@@ -1,15 +1,20 @@
-﻿
-#mainPageContainer{
-    text-align:center;
-    margin:auto auto;
-    position:relative;
-    min-width:46em;
-    width:75%;
-    background:#9999FF;
+﻿body{
+    background:#FFF;
 }
-#GridView1{
-    width:100%;
+
+/* Main Schedule View Styles */
+
+.header-bar{
+    color: #333;
 }
-body{
-    background:#333333;
+
+.header-title{
+    font-size: 1.5em;
+    color: #000;
+}
+
+.header-subtitle{
+    font-size: 1.2em;
+    color: #808080;
+    padding-left: 5px;
 }

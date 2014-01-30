@@ -16,6 +16,8 @@ public partial class _Default : System.Web.UI.Page
     {
             GridView1.DataSource = basicInfo.dt();
             GridView1.DataBind();
+            System.Console.Write(basicInfo.dt());
+            
     }
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
@@ -28,5 +30,6 @@ public partial class _Default : System.Web.UI.Page
 
             GridView1.DataSource = dataView;
             GridView1.DataBind();
+        
     }
 }
