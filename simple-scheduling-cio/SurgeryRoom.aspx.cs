@@ -37,14 +37,12 @@ public partial class _Default : System.Web.UI.Page
         {
             int j = 0;
             if (i == 0) timeStub = timeStart;
-            else
-            {
-                timeStub = TimeSpan.Parse(dt.Rows[i - 1][0].ToString());
-                j += Convert.ToInt32(dt.Rows[i - 1][1]);
-            }
+            else timeStub = TimeSpan.Parse(dt.Rows[i-1][2].ToString());
+            dt.Rows[i][1] = timeStub;
             j += timeStub.Minutes + timeStub.Hours * 60;
+            j += Convert.ToInt32(dt.Rows[i][3]);
             timeStub = TimeSpan.FromMinutes(j);
-            dt.Rows[i][0] = timeStub;
+            dt.Rows[i][2] = timeStub;
         }
         return dt;
     }
@@ -53,7 +51,7 @@ public partial class _Default : System.Web.UI.Page
         /*bool blnAuth = false;
         Login login1 = (Login)LoginView1.FindControl("login1");
         blnAuth = authenticate(login1.UserName, "312647835");
-        if (blnAuth) FormsAuthentication.SetAuthCookie(login1.UserName, false);
+        if (blnAuth) FormsAuthentication.SetAuthCookie(login1.UserName, true);
         e.Authenticated = blnAuth;*/
     }
     bool authenticate(string UserName, string Password)
@@ -78,6 +76,11 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        
+        String redirect = "";
+        redirect += "SurgeryRoomAdd.aspx?";
+        redirect += "loc=" + ddlLocation.SelectedValue;
+        redirect += "&rm=" + ddlRoom.SelectedValue;
+        redirect += "&date=" + tbDate.Text;
+        Response.Redirect(redirect);
     }
 }

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Surgery Room Schedule</title>
     <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
 </head>
 <body>
@@ -22,7 +22,7 @@
             <h1>Central Indiana Orthepedics</h1>
             <h3>Surgery Viewer</h3>
             <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" />
-            <!--<asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClientClick="$('#divAddEvent').showModal(); return false;"/>-->
+            <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" />
             <br />
             <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" />
             <asp:DropDownList ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">

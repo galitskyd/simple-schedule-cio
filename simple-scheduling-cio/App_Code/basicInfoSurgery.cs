@@ -21,11 +21,19 @@ public class basicInfoSurgery
         DataColumn dc;
         dc = new DataColumn("Position");
         info.Columns.Add(dc);
+        dc = new DataColumn("Start Time");
+        info.Columns.Add(dc);
+        dc = new DataColumn("End Time");
+        info.Columns.Add(dc);
         dc = new DataColumn("Duration");
         info.Columns.Add(dc);
         dc = new DataColumn("Provider");
         info.Columns.Add(dc);
         dc = new DataColumn("Patient");
+        info.Columns.Add(dc);
+        dc = new DataColumn("Age");
+        info.Columns.Add(dc);
+        dc = new DataColumn("Gender");
         info.Columns.Add(dc);
         dc = new DataColumn("Surgery");
         info.Columns.Add(dc);
@@ -44,8 +52,28 @@ public class basicInfoSurgery
 
             for (int x = 0; x < InfoDataTable.Columns.Count; x++)
             {
-                row[x] = (InfoDataTable.Rows[i][x].ToString());
+                if (x == 1) row[x-1] = InfoDataTable.Rows[i][x].ToString();
+                if ((x == 2) || (x == 3)) row[x + 1] = InfoDataTable.Rows[i][x].ToString();
+                if (x == 4)
+                {
+                    String lastName = InfoDataTable.Rows[i][x].ToString();
+                    String firstName = InfoDataTable.Rows[i][5].ToString();
+                    row[x+1] = lastName + ", " + firstName;
+                }
                 if (x == 6)
+                {
+                    string dateVal = InfoDataTable.Rows[i][x].ToString();
+                    string pattern = "yyyyMMdd";
+                    DateTime parsedDate;
+                    DateTime today = DateTime.Today;
+                    DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
+                    int age = today.Year - parsedDate.Year;
+                    if (parsedDate > today.AddYears(-age)) age--;
+                    if (parsedDate != today.AddYears(-age)) row[x] = age.ToString();
+                    else row[x] = age.ToString() + "*";
+                }
+                if ((x > 6) && (x < 10)) row[x] = InfoDataTable.Rows[i][x].ToString();
+                if (x == 10)
                 {
                     string dateVal = InfoDataTable.Rows[i][x].ToString();
                     string pattern = "yyyyMMdd";
@@ -53,6 +81,7 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     row[x] = parsedDate.ToString("yyyy/MM/dd");
                 }
+                if (x > 10) row[x] = InfoDataTable.Rows[i][x].ToString();
             }
             info.Rows.Add(row);
         }
