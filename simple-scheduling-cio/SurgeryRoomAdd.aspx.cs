@@ -78,41 +78,44 @@ public partial class Default2 : System.Web.UI.Page
         DateTime parsedDate;
         DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
         date = parsedDate.ToString("yyyyMMdd");
-
-        //Need to determine exiting positions...
-        String insertEvent = "INSERT INTO dbo.surgery_room_schedule " +
+        
+        using (SqlConnection conn = dbConnect.connection())
+        {
+            String insertEvent = "INSERT INTO dbo.surgery_room_schedule " +
             "VALUES ("+
             "(SELECT Max(ordering_position) " +
-            "FROM dbo.surgery_room_schedule " + 
-            "WHERE location_id=(SELECT location_id " + 
-                "FROM dbo.location_mstr " + 
-                "WHERE location_name='" + ddlLocation.SelectedValue + "') " + 
-            "AND room_number=" + ddlRoom.SelectedValue + ")+1"+
-            ",'" +
-            date + "'," + tbDuration.Text + 
-            ",(SELECT location_id FROM dbo.location_mstr WHERE location_name='" +
-            ddlLocation.SelectedValue+"')," +
-            ddlRoom.SelectedValue+",'" +
-            ddlProvider.SelectedValue+"','" +
-            ddlPatient.SelectedValue+"','" +
-            tbSurgery.Text + "','" + tbDetails.Text + "');";
-        
-        //SQL Injection Protection Stuff
-        /*String insertEvent = "INSERT INTO dbo.surger_room_schedule " +
-            "values(@ordering_position,@surg_date,@duration,"+
-            "@location_id,@room_number,@provider_id,@med_rec_nbr"+
-            "@surgery_name,@details)";*/
-
-        SqlConnection conn = dbConnect.connection();
-        try
-        {
-            String sqlCmdString = insertEvent;
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            Response.Redirect("SurgeryRoom.aspx");
+                "FROM dbo.surgery_room_schedule " + 
+                "WHERE location_id=(SELECT location_id " + 
+                    "FROM dbo.location_mstr " + 
+                    "WHERE location_name=@location_name) " + 
+                "AND room_number=@room_number)+1,"+
+            "@surg_date,@duration," + 
+            "(SELECT location_id FROM dbo.location_mstr WHERE location_name=" +
+            "@location_name)," +
+            "@room_number,@provider_id,@med_rec_nbr," +
+            "@surgery_name,@details);";
+            
+            using (SqlCommand cmd = new SqlCommand(insertEvent, conn))
+            {
+                cmd.Parameters.AddWithValue("@location_name", ddlLocation.SelectedValue);
+                cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue);
+                cmd.Parameters.AddWithValue("@surg_date", date);
+                cmd.Parameters.AddWithValue("@duration", tbDuration.Text);
+                cmd.Parameters.AddWithValue("@provider_id", ddlProvider.SelectedValue);
+                cmd.Parameters.AddWithValue("@med_rec_nbr", ddlPatient.SelectedValue);
+                cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
+                cmd.Parameters.AddWithValue("@details", tbDetails.Text);
+                
+                try
+                {
+                    conn.Open();
+                    System.Diagnostics.Debug.WriteLine(cmd);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    Response.Redirect("SurgeryRoom.aspx");
+                }
+                catch { Console.WriteLine("Error"); }
+            }
         }
-        catch { Console.WriteLine("Error"); }
     }
 }
