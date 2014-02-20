@@ -106,4 +106,4 @@ Backup*/
 UpgradeLog*.XML
 
 # secret file
-*/[Aa]pp_[Cc]ode/bdConnect
+simple-scheduling-cio/App_Code/dbConnect.cs
