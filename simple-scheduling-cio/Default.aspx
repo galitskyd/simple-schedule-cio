@@ -5,16 +5,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" type="html/sandboxed" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/msv.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div id="mainPageContainer">
-        <h1>Central Indiana Orthepedics</h1>
-        <h3>Doctor Viewer</h3>
-        <asp:GridView ID="GridView1" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>
-        <asp:Table ID="info" runat="server"></asp:Table>
+    <div class="navbar navbar-default">
+        <a class="navbar-brand">Central Indiana Orthepedics</a> 
+        <p class="navbar-text">Main Schedule View</p>
     </div>
+    <form id="form1" runat="server">
+        <div id="mainPageContainer">
+            <asp:GridView ID="GridView1" CssClass="table table-striped" RowStyle-CssClass="table-row" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>
+        </div>
     </form>
+    <div id="expanded-filter" class="filter-bar filter-box">
+        <div class="filter-tabs">
+            <span class="active">Provider</span><span>Patient</span><span>Other Tab</span>
+            <i id="filter-collapse" class="glyphicon glyphicon-arrow-down pull-right"></i>
+        </div>
+        <div class="filter-content">
+            Last Name:
+        </div>
+    </div>
+    <div id="collapsed-filter" class="filter-bar no-show">
+        <b style="padding:8px 10px; display:inline-block">Filters</b>
+        <i id="filter-expand" class="glyphicon glyphicon-arrow-up pull-right"></i>
+    </div>
 </body>
 </html>
