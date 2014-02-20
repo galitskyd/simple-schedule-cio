@@ -1,15 +1,62 @@
-﻿
-#mainPageContainer{
-    text-align:center;
-    margin:auto auto;
-    position:relative;
-    min-width:46em;
-    width:75%;
-    background:#9999FF;
+﻿body{
+    background:#FFF;
+    margin: 0;
+    padding: 0;
 }
-#GridView1{
-    width:100%;
+
+/* Main Schedule View Styles */
+
+.navbar {
+    margin-bottom: 0;
 }
-body{
-    background:#333333;
+
+.table > tbody > tr > td{
+    padding: 10px 8px;
+}
+
+.no-show {
+    display: none;
+}
+
+.filter-bar {
+    width: 100%;
+    top: 95%;
+    height: 5%;
+    position: fixed;
+    background-color: #f9f9f9;
+}
+.filter-box {
+    top: 75%;
+    height: 25%;
+}
+
+.filter-tabs {
+    height: 40px;
+    background-color: #CCC;
+}
+
+.filter-tabs > span {
+    padding: 8px 15px;
+    border: 1px solid #CCC;
+    display: inline-block;
+    height: 100%;
+    background-color: #f9f9f9;
+}
+
+span.active {
+    border-bottom: #f9f9f9;
+}
+
+.filter-tabs > span + span {
+    border-left: 0;
+}
+
+.filter-content {
+    padding: 8px 15px;
+}
+
+#filter-collapse,
+#filter-expand {
+    padding: 12px;
+    height: 100%;
 }
