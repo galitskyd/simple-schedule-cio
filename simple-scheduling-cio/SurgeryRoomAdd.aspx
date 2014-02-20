@@ -24,7 +24,7 @@
                 <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
                     <asp:ListItem Value="1">OR1</asp:ListItem>
                     <asp:ListItem Value="2">OR2</asp:ListItem>
-                    <asp:ListItem Value="3">OR3</asp:ListItem>
+                    <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div style="clear:both"></div><br />
@@ -38,8 +38,9 @@
             </div>
             <div style="clear:both"></div><br />
             <div style="float:left; width:50%">
-                <asp:Label ID="lbPatient" Text="Patient: " runat="server"></asp:Label>
-                <asp:DropDownList ID="ddlPatient" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true"/>
+                <asp:Label ID="lbPatient" Text="MedRec#: " runat="server"></asp:Label>
+                <!--<asp:DropDownList ID="ddlPatient" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true"/>-->
+                <asp:TextBox ID="tbPatient" runat="server" />
             </div>
             <div style="float:left; width:50%">
                 <asp:Label ID="lbProvider" Text="Provider: " runat="server"></asp:Label>

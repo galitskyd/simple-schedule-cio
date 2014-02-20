@@ -32,7 +32,8 @@ public static DataTable infoData()
                 "dbo.surgery_room_schedule.details,"+
                 "dbo.surgery_room_schedule.surg_date,"+
                 "dbo.location_mstr.location_name,"+
-                "dbo.surgery_room_schedule.room_number"+
+                "dbo.surgery_room_schedule.room_number,"+
+                "dbo.patient.med_rec_nbr"+
                 " FROM dbo.location_mstr,dbo.provider_mstr,dbo.person,dbo.patient,dbo.surgery_room_schedule"+
                 " WHERE dbo.patient.med_rec_nbr = dbo.surgery_room_schedule.med_rec_nbr"+
                 " AND dbo.person.person_id = dbo.patient.person_id"+ 

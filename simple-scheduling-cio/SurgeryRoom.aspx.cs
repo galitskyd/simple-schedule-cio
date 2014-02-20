@@ -17,32 +17,29 @@ public partial class _Default : System.Web.UI.Page
     {
         if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
         if (tbTime.Text == "") tbTime.Text = "07:00:00";
-        gridViewUpdate();
+        listViewUpdate();
     }
-    protected void gridViewUpdate()
+    protected void listViewUpdate()
     {
         dv = new DataView(dt);
-        String dateValue = tbDate.Text;
         dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedValue + "' AND Date='" + tbDate.Text + "'";
         dt = dv.ToTable();
         dt = calculateTimes(dt);
-        GridView1.DataSource = dt;
-        GridView1.DataBind();
+        ListView1.DataSource = dt;
+        ListView1.DataBind();
     }
     protected DataTable calculateTimes(DataTable dt)
     {
-        TimeSpan timeStub;
-        TimeSpan timeStart = TimeSpan.Parse(tbTime.Text);
+        DateTime timeStub;
+        DateTime timeStart = DateTime.Parse(tbTime.Text);
         for (int i = 0; i < dt.Rows.Count; i++)
         {
-            int j = 0;
+            Double j = 0;
             if (i == 0) timeStub = timeStart;
-            else timeStub = TimeSpan.Parse(dt.Rows[i-1][2].ToString());
-            dt.Rows[i][1] = timeStub;
-            j += timeStub.Minutes + timeStub.Hours * 60;
-            j += Convert.ToInt32(dt.Rows[i][3]);
-            timeStub = TimeSpan.FromMinutes(j);
-            dt.Rows[i][2] = timeStub;
+            else timeStub = DateTime.Parse(dt.Rows[i - 1][2].ToString());
+            dt.Rows[i][1] = timeStub.ToShortTimeString();
+            j = Double.Parse(dt.Rows[i][3].ToString());
+            dt.Rows[i][2] = timeStub.AddMinutes(j).ToShortTimeString();
         }
         return dt;
     }

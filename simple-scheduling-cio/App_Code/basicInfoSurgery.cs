@@ -45,6 +45,8 @@ public class basicInfoSurgery
         info.Columns.Add(dc);
         dc = new DataColumn("Room");
         info.Columns.Add(dc);
+        dc = new DataColumn("MedRec#");
+        info.Columns.Add(dc);
         DataRow row;
         for (int i = 0; i < InfoDataTable.Rows.Count; i++)
         {
@@ -69,8 +71,7 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     int age = today.Year - parsedDate.Year;
                     if (parsedDate > today.AddYears(-age)) age--;
-                    if (parsedDate != today.AddYears(-age)) row[x] = age.ToString();
-                    else row[x] = age.ToString() + "*";
+                    else row[x] = age.ToString();
                 }
                 if ((x > 6) && (x < 10)) row[x] = InfoDataTable.Rows[i][x].ToString();
                 if (x == 10)
@@ -81,7 +82,9 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     row[x] = parsedDate.ToString("yyyy/MM/dd");
                 }
-                if (x > 10) row[x] = InfoDataTable.Rows[i][x].ToString();
+                if (x > 10 && x<13) row[x] = InfoDataTable.Rows[i][x].ToString();
+                if (x == 13) row[x] = InfoDataTable.Rows[i][x].ToString().Substring(3);
+
             }
             info.Rows.Add(row);
         }

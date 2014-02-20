@@ -18,7 +18,7 @@ public partial class Default2 : System.Web.UI.Page
             String location = Request.QueryString["loc"];
             String roomNum = Request.QueryString["rm"];
             String date = Request.QueryString["date"];
-            LoadPatients();
+            //LoadPatients();
             LoadProviders();
             ddlLocation.SelectedValue = location;
             ddlRoom.SelectedValue = roomNum;
@@ -26,7 +26,7 @@ public partial class Default2 : System.Web.UI.Page
         }
     }
 
-    private void LoadPatients()
+    /**private void LoadPatients()
     {
         SqlConnection conn = dbConnect.connection();
         try
@@ -49,7 +49,7 @@ public partial class Default2 : System.Web.UI.Page
         ddlPatient.DataTextField = "full_name";
         ddlPatient.DataValueField = "med_rec_nbr";
         ddlPatient.DataBind();
-    }
+    }*/
 
     private void LoadProviders()
     {
@@ -102,7 +102,7 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@surg_date", date);
                 cmd.Parameters.AddWithValue("@duration", tbDuration.Text);
                 cmd.Parameters.AddWithValue("@provider_id", ddlProvider.SelectedValue);
-                cmd.Parameters.AddWithValue("@med_rec_nbr", ddlPatient.SelectedValue);
+                cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                 cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
                 cmd.Parameters.AddWithValue("@details", tbDetails.Text);
                 

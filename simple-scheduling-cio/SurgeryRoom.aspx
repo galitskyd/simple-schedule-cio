@@ -32,9 +32,43 @@
             <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="Room" DataValueField="Room" AutoPostBack="true">
                 <asp:ListItem Value="1">OR1</asp:ListItem>
                 <asp:ListItem Value="2">OR2</asp:ListItem>
-                <asp:ListItem Value="3">OR3</asp:ListItem>
+                <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
             </asp:DropDownList>
             <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
+            <asp:ListView ID="ListView1" runat="server">
+                <LayoutTemplate>
+                    <ul>
+                        <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
+                    </ul>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <li>
+                        <hr />
+                        <table style="table-layout: fixed">
+                            <tr>
+                                <td rowspan="2" valign="top" style="width:200px"><%#Eval("Position") %></td>
+                                <td rowspan="2" valign="top" style="width:200px"><%#Eval("Duration") %></td>
+                                <td align="left" style="width:200px"><%#Eval("Start Time") %></td>
+                                <td align="left" style="width:1100px"><%#Eval("Patient") %></td>
+                                <td style="width:50px">Wgt</td>
+                                <td style="width:50px"><%#Eval("Room") %></td>
+                                <td align="left" style="width:400px"><b>Anasthesia</b> </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="width:200px"><%#Eval("End Time") %></td>
+                                <td align="left" style="width:1200px"><%#Eval("Provider") %></td>
+                                <td style="width:50px"><%#Eval("Age") %></td>
+                                <td style="width:50px"><%#Eval("Gender") %></td>
+                                <td style="width:400px"><b>Surgery Equipment</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="width:400px"><%#Eval("MedRec#") %></td>
+                                <td colspan="5" align="left" style="width:1800px"><%#Eval("Surgery") %>; <%#Eval("Details") %></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ItemTemplate>
+            </asp:ListView>
             <asp:Table ID="info" runat="server"></asp:Table>
         </div>
     </form>
