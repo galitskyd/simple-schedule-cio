@@ -71,7 +71,7 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     int age = today.Year - parsedDate.Year;
                     if (parsedDate > today.AddYears(-age)) age--;
-                    else row[x] = age.ToString();
+                    row[x] = age.ToString();
                 }
                 if ((x > 6) && (x < 10)) row[x] = InfoDataTable.Rows[i][x].ToString();
                 if (x == 10)
