@@ -1,3 +1,19 @@
+﻿<<<<<<< HEAD
+﻿
+#mainPageContainer{
+    text-align:center;
+    margin:auto auto;
+    position:relative;
+    min-width:46em;
+    width:75%;
+    background:#9999FF;
+}
+#GridView1{
+    width:100%;
+}
+ul {
+    list-style-type: none;
+}
 ﻿body{
     background:#FFF;
     margin: 0;
