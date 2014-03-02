@@ -32,4 +32,21 @@ public partial class _Default : System.Web.UI.Page
             GridView1.DataBind();
         
     }
+   /* protected void gridViewUpdate()
+    {
+        DataView dv;
+        dv = basicInfo.dt().DefaultView;
+        dv.RowFilter = "Doctor" + " LIKE '*" + FilterSearchTerms.Text + "*'";
+        GridView1.DataSource = dv;
+        GridView1.DataBind();
+    }
+    */
+    protected void FilterSearchTerms_TextChanged(object sender, EventArgs e)
+    {
+        DataView dv;
+        dv = basicInfo.dt().DefaultView;
+        dv.RowFilter = "Doctor" + " LIKE '*" + FilterSearchTermsDoctor.Text + "*'";
+        GridView1.DataSource = dv;
+        GridView1.DataBind();
+    }
 }

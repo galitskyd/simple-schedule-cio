@@ -19,7 +19,6 @@
         <div id="mainPageContainer">
             <asp:GridView ID="GridView1" CssClass="table table-striped" RowStyle-CssClass="table-row" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>
         </div>
-    </form>
     <div id="expanded-filter" class="filter-bar filter-box">
         <div class="filter-tabs">
             <span class="active">Provider</span><span>Patient</span><span>Other Tab</span>
@@ -27,8 +26,10 @@
         </div>
         <div class="filter-content">
             Last Name:
-        </div>
+            <asp:TextBox ID="FilterSearchTermsDoctor" runat="server" OnTextChanged="FilterSearchTerms_TextChanged"></asp:TextBox>
+&nbsp;</div>
     </div>
+    </form>
     <div id="collapsed-filter" class="filter-bar no-show">
         <b style="padding:8px 10px; display:inline-block">Filters</b>
         <i id="filter-expand" class="glyphicon glyphicon-arrow-up pull-right"></i>
