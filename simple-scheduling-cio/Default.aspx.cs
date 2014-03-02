@@ -10,6 +10,7 @@ using System.Data;
 
 public partial class _Default : System.Web.UI.Page
 {
+    DataView dv;
     static Boolean asc = true;
     static string sort = "Asc";
     protected void Page_Load(object sender, EventArgs e)
@@ -41,12 +42,25 @@ public partial class _Default : System.Web.UI.Page
         GridView1.DataBind();
     }
     */
-    protected void FilterSearchTerms_TextChanged(object sender, EventArgs e)
+    protected void txtSearch_KeyUp(object sender, EventArgs e)
     {
-        DataView dv;
         dv = basicInfo.dt().DefaultView;
-        dv.RowFilter = "Doctor" + " LIKE '*" + FilterSearchTermsDoctor.Text + "*'";
+        string outputInfo = "";
+
+        if (outputInfo.Length == 0)
+        {
+            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%')";
+        }
+        else
+        {
+            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%')";
+        }
+
+
+
+        dv.RowFilter = outputInfo;
         GridView1.DataSource = dv;
         GridView1.DataBind();
     }
+
 }

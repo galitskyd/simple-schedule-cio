@@ -26,8 +26,10 @@
         </div>
         <div class="filter-content">
             Last Name:
-            <asp:TextBox ID="FilterSearchTermsDoctor" runat="server" OnTextChanged="FilterSearchTerms_TextChanged"></asp:TextBox>
-&nbsp;</div>
+            &nbsp;<asp:TextBox ID="FilterSearchTermsDoctor" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsPatient" runat="server"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" OnClick="txtSearch_KeyUp" Text="Filter" />
+        </div>
     </div>
     </form>
     <div id="collapsed-filter" class="filter-bar no-show">
