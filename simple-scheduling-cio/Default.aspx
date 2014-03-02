@@ -28,6 +28,12 @@
             Last Name:
             &nbsp;<asp:TextBox ID="FilterSearchTermsDoctor" runat="server"></asp:TextBox>
             <asp:TextBox ID="FilterSearchTermsPatient" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsLocation" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsAppointment" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsDuration" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsDetail" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FilterSearchTermsStatus" runat="server"></asp:TextBox>
+            <br />
             <asp:Button ID="Button1" runat="server" OnClick="txtSearch_KeyUp" Text="Filter" />
         </div>
     </div>

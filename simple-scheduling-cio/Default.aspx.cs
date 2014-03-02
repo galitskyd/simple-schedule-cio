@@ -49,11 +49,11 @@ public partial class _Default : System.Web.UI.Page
 
         if (outputInfo.Length == 0)
         {
-            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%')";
+            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text +  "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
         }
         else
         {
-            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%')";
+            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text +  "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
         }
 
 
