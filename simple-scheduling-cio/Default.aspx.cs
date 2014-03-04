@@ -18,6 +18,7 @@ public partial class _Default : System.Web.UI.Page
             GridView1.DataSource = basicInfo.dt();
             GridView1.DataBind();
             System.Console.Write(basicInfo.dt());
+            if (FilterSearchTermsAppointment.Text == "") FilterSearchTermsAppointment.Text = DateTime.Today.ToString("MM/dd/yyyy");
             
     }
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -49,11 +50,11 @@ public partial class _Default : System.Web.UI.Page
 
         if (outputInfo.Length == 0)
         {
-            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text +  "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
+            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text + "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND [Appt Date] LIKE '%" + FilterSearchTermsAppointment.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
         }
         else
         {
-            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text +  "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
+            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text + "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND [Appt Date] LIKE '%" + FilterSearchTermsAppointment.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
         }
 
 
