@@ -18,6 +18,7 @@ public partial class _Default : System.Web.UI.Page
         if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
         if (tbTime.Text == "") tbTime.Text = "07:00:00";
         listViewUpdate();
+        checkUser();
     }
     protected void listViewUpdate()
     {
@@ -79,5 +80,45 @@ public partial class _Default : System.Web.UI.Page
         redirect += "&rm=" + ddlRoom.SelectedValue;
         redirect += "&date=" + tbDate.Text;
         Response.Redirect(redirect);
+    }
+    protected void checkUser(){
+        
+        if(Session["loggedIN"]!="true"){
+            btnAdd.Visible = false;
+            tbTime.Enabled = false;
+            signIN.Visible = true;
+            signOUT.Visible = false;
+        }
+        else
+        {
+            btnAdd.Visible = true;
+            tbTime.Enabled = true;
+            signIN.Visible = false;
+            signOUT.Visible = true;
+        }
+    }
+    protected void loginUser_Click(object sender, EventArgs e)
+    {
+        string username = user.Text;
+        string password = pass.Text;
+        DataTable dt = sqlDataTableSurgery.AuthenticateUser();
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (username == dt.Rows[i][0].ToString() && password == dt.Rows[i][1].ToString())
+            {
+
+                Session["loggedIN"] = "true";
+                checkUser();
+            }
+        }
+        user.Text = "";
+        pass.Text = "";
+
+        
+    }
+    protected void signOUT_Click(object sender, EventArgs e)
+    {
+        Session["loggedIN"] = "false";
+        checkUser();
     }
 }
