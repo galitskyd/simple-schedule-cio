@@ -11,13 +11,11 @@ using System.Data;
 public class sqlDataTableSurgery
 {
     static DataTable dtInfo = new DataTable();
-
+    static SqlConnection conn = dbConnect.connection();
 
 public static DataTable infoData()
      {
         dtInfo.Clear();
-        SqlConnection conn = dbConnect.connection();
-
         try
         {
             string sqlCmdString = "SELECT dbo.surgery_room_schedule.surgery_event_id,"+
@@ -44,8 +42,25 @@ public static DataTable infoData()
             SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
             SqlDataReader reader = cmd.ExecuteReader();
             dtInfo.Load(reader);
+            conn.Close();
         }
         catch { Console.WriteLine("Error"); }
         return dtInfo;
     }
+public static DataTable AuthenticateUser()
+{
+    DataTable dt = new DataTable();
+    try
+    {
+        string sqlCmdString = "SELECT * FROM dbo.surgery_room_identification";
+        conn.Open();
+        SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
+        SqlDataReader reader = cmd.ExecuteReader();
+        dt.Load(reader);
+        conn.Close();
+    }
+    catch (Exception)
+    {Console.WriteLine("Error Authenticate User");}
+    return dt;
+}
 }
