@@ -1,97 +1,58 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SurgeryRoom.aspx.cs" Inherits="_Default" %>
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Surgery Room Schedule</title>
-    <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('a.login-window').click(function () {
-
-            // Getting the variable's value from a link 
-            var loginBox = $(this).attr('href');
-
-
-            $(".login-popup").fadeIn(300, function () {
-                $('.login-popup').css("display", "block");
+    <head runat="server">
+        <title>Surgery Room Schedule</title>
+        <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
+        <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('a.login-window').click(function () {
+                    // Getting the variable's value from a link 
+                    var loginBox = $(this).attr('href');
+                    $(".login-popup").fadeIn(300, function () {
+                        $('.login-popup').css("display", "block");
+                    });
+                    //Set the center alignment padding + border
+                    var popMargTop = ($(loginBox).height() + 24) / 2;
+                    var popMargLeft = ($(loginBox).width() + 24) / 2;
+                    $(loginBox).css({
+                        'margin-top': -popMargTop,
+                        'margin-left': -popMargLeft
+                    });
+                    // Add the mask to body
+                    $('body').append('<div id="mask"></div>');
+                    $('#mask').fadeIn(300);
+                    $('#user').focus();
+                });
+                $('a.close').click(function () {
+                    $(".login-popup").fadeOut(300, function () {
+                        $('.login-popup').css("display", "none");
+                    });
+                    $('#mask').fadeOut(300, function () {
+                        $('#mask').remove();
+                    });
+                });
             });
-            //Set the center alignment padding + border
-            var popMargTop = ($(loginBox).height() + 24) / 2;
-            var popMargLeft = ($(loginBox).width() + 24) / 2;
-
-            $(loginBox).css({
-                'margin-top': -popMargTop,
-                'margin-left': -popMargLeft
-            });
-
-            // Add the mask to body
-            $('body').append('<div id="mask"></div>');
-            $('#mask').fadeIn(300);
-            
-        });
-        
-        $('a.close').click(function () {
-
-           
-            $(".login-popup").fadeOut(300, function () {
-                $('.login-popup').css("display", "none");
-            });
-            $('#mask').fadeOut(300, function () {
-                $('#mask').remove();
-            });
-        });
-
-    });
-</script>
-</head>
-<body>
-    <form id="loginform" runat="server">
-        <asp:GridView ID="test" runat="server"></asp:GridView>
-        <a href="#login-box" class="login-window" runat="server" id="signIN">Sign In</a>
-        <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
-        <!--<asp:LoginView ID="LoginView1" runat="server">
-            <LoggedInTemplate>
-                <asp:LoginName ID="LoginName1" runat="server" FormatString="Welcome, {0}" />
-                <br />
-            </LoggedInTemplate>
-            <AnonymousTemplate>
-                <asp:Login BackColor="#9999FF" ID="login1" runat="server" UserNameLabelText="Username:" OnAuthenticate="login1_Authenticate"/>
-            </AnonymousTemplate>
-        </asp:LoginView>-->
-        <div id="mainPageContainer">
-            <h1>Central Indiana Orthepedics</h1>
-            <h3>Surgery Viewer</h3>
-            <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" />
-            <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" />
-            <br />
-
-            
- 
-
-
-        <div id="login-box" class="login-popup">
-        <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
-
-            	Username:<label class="username" style="position:relative;left:30px;"> <asp:TextBox runat="server" ID="user" CssClass="inputs"></asp:TextBox></label><br />
-                Password:<label class="password" style="position:relative;left:30px;"> <asp:TextBox runat="server" ID="pass" CssClass="inputs"></asp:TextBox></label><br />
-                
-                <asp:Button ID="loginUser" class="submit button" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
-
-                
-     
-		</div>
-    
-    </div>
-
-
-
-
-
-
-
+        </script>
+    </head>
+    <body>
+        <form id="loginform" runat="server">
+            <asp:GridView ID="test" runat="server"></asp:GridView>
+            <a href="#login-box" class="login-window" runat="server" id="signIN">Sign In</a>
+            <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
+            <div id="mainPageContainer">
+                <h1>Central Indiana Orthepedics</h1>
+                <h3>Surgery Viewer</h3>
+                <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" />
+                <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" /><br />
+                <div id="login-box" class="login-popup">
+                    <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+            	    Username:<label class="username" style="position:relative;left:30px;"> <asp:TextBox  runat="server" ID="user" CssClass="inputs"></asp:TextBox></label><br />
+                    Password:<label class="password" style="position:relative;left:30px;"> <asp:TextBox TextMode="Password" runat="server" ID="pass" CssClass="inputs"></asp:TextBox></label><br />
+                    <asp:Button ID="loginUser" class="submit button" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
+		        </div>
+            </div>
             <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" />
             <asp:DropDownList ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
                 <asp:ListItem Value="Office Muncie">Muncie</asp:ListItem>
@@ -138,7 +99,6 @@
                 </ItemTemplate>
             </asp:ListView>
             <asp:Table ID="info" runat="server"></asp:Table>
-        </div>
-    </form>
-</body>
+        </form>
+    </body>
 </html>

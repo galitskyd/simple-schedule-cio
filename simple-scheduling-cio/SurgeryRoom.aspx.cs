@@ -8,7 +8,6 @@ using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
-
 public partial class _Default : System.Web.UI.Page
 {
     DataTable dt = basicInfoSurgery.dt();
@@ -44,34 +43,6 @@ public partial class _Default : System.Web.UI.Page
         }
         return dt;
     }
-    protected void login1_Authenticate(object sender, AuthenticateEventArgs e)
-    {
-        /*bool blnAuth = false;
-        Login login1 = (Login)LoginView1.FindControl("login1");
-        blnAuth = authenticate(login1.UserName, "312647835");
-        if (blnAuth) FormsAuthentication.SetAuthCookie(login1.UserName, true);
-        e.Authenticated = blnAuth;*/
-    }
-    bool authenticate(string UserName, string Password)
-    {
-        bool boolReturnValue = false;
-        /*SqlConnection conn = dbConnect.connection();
-        String strSQL = "Select * From surgery_room_identification";
-        SqlCommand command = new SqlCommand(strSQL, conn);
-        SqlDataReader dataReader;
-        conn.Open();
-        dataReader = command.ExecuteReader();
-        while (dataReader.Read())
-        {
-            if ((UserName == dataReader["surgery_room_user"].ToString()) & (Password == dataReader["surgery_room_password"].ToString()))
-            {
-                boolReturnValue = true;
-            }
-            dataReader.Close();
-            return boolReturnValue;
-        }*/
-        return boolReturnValue;
-    }
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         String redirect = "";
@@ -101,20 +72,18 @@ public partial class _Default : System.Web.UI.Page
     {
         string username = user.Text;
         string password = pass.Text;
+         
         DataTable dt = sqlDataTableSurgery.AuthenticateUser();
         for (int i = 0; i < dt.Rows.Count; i++)
         {
             if (username == dt.Rows[i][0].ToString() && password == dt.Rows[i][1].ToString())
             {
-
                 Session["loggedIN"] = "true";
                 checkUser();
             }
         }
         user.Text = "";
         pass.Text = "";
-
-        
     }
     protected void signOUT_Click(object sender, EventArgs e)
     {

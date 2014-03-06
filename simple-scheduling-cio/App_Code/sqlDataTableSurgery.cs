@@ -16,10 +16,8 @@ public class sqlDataTableSurgery
 public static DataTable infoData()
      {
         dtInfo.Clear();
-
         try
         {
-            
             string sqlCmdString = "SELECT dbo.surgery_room_schedule.surgery_event_id,"+
                 "dbo.surgery_room_schedule.ordering_position,"+
                 "dbo.surgery_room_schedule.duration,"+
@@ -52,8 +50,6 @@ public static DataTable infoData()
 public static DataTable AuthenticateUser()
 {
     DataTable dt = new DataTable();
-   
-
     try
     {
         string sqlCmdString = "SELECT * FROM dbo.surgery_room_identification";
@@ -64,10 +60,7 @@ public static DataTable AuthenticateUser()
         conn.Close();
     }
     catch (Exception)
-    {
-        Console.WriteLine("Error Authenticate User");
-    }
-
+    {Console.WriteLine("Error Authenticate User");}
     return dt;
 }
 }
