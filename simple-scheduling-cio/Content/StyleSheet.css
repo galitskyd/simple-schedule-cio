@@ -40,6 +40,18 @@ ul {
     height: 5%;
     position: fixed;
     background-color: #f9f9f9;
+
+}
+ .ajax__tab_header .ajax__tab_tab 
+{
+    height: 27px !important;
+    font-size:medium;
+}
+.ajax__tab_body{
+
+}
+.ajax__tab_outer .ajax__tab_inner{
+    height:10em;
 }
 .filter-box {
     top: 75%;
@@ -55,8 +67,18 @@ ul {
     padding: 8px 15px;
     border: 1px solid #CCC;
     display: inline-block;
-    height: 100%;
-    background-color: #f9f9f9;
+    height: 100%;  
+}
+#clearContainer #clearAll{
+    position:relative;
+    display:inline;
+    right:0;
+}
+#clearAll{
+    right:0;
+}
+#providerLabel{
+    font-weight:bolder;
 }
 
 span.active {
@@ -72,8 +94,9 @@ span.active {
 }
 
 #filter-collapse,
-#filter-expand {
-    padding: 12px;
+#filter-expand {    
+    position:absolute;
+    right:0;
     height: 100%;
 }
 
