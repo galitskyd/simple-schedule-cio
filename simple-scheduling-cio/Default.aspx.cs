@@ -141,6 +141,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void rememberActiveTab(string number)
     {
+        HttpCookie myCookie = new HttpCookie("activeTab");
         myCookie.Value = number;
         TabContainer1.ActiveTabIndex = Convert.ToInt32(number);
         Response.Cookies.Add(myCookie);
