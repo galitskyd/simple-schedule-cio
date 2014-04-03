@@ -12,8 +12,9 @@
 </head>
 <body>
     <div class="navbar navbar-default">
-        <a class="navbar-brand">Central Indiana Orthepedics</a> 
+        <a class="navbar-brand">Central Indiana Orthopedics</a> 
         <p class="navbar-text">Main Schedule View</p>
+        <a class="pull-right" href="SurgeryRoom.aspx">SurgeryGenie</a>
     </div>
     <form id="form1" runat="server">
         <div id="mainPageContainer">
