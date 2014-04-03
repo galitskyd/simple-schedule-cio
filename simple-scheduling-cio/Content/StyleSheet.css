@@ -78,9 +78,6 @@ span.active {
 }
 
 /*Login css styles*/
-
- 
-
 #mask {
 	display: none;
 	background: #000; 
@@ -113,15 +110,34 @@ img.btn_close {
 	float: right; 
 	margin: -28px -28px 0 0;
 }
-
  
 .inputs{
     position:relative;
-
     width:60%;
     left:-30px;
 }
 
- 
+.surgery-holdings {
+    border: 1px solid #000;
+    padding-left: 0;
+    padding-right: 0;
+}
 
-  
+.surgery-holdings li {
+    border-top: 1px solid #000;
+    padding: 10px;
+}
+
+.surgery-holdings li:first-child {
+    border-top: 0;
+}
+
+.ui-sortable-helper {
+    border: 1px solid #000 !important;
+    background-color: #FA3E54;
+}
+
+.sortable-placeholder {
+    height: 80px;
+    border: 3px solid #9999FF !important;
+}

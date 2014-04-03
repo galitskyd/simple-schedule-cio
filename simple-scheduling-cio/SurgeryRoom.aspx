@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
         <title>Surgery Room Schedule</title>
+        <link rel="stylesheet" type="html/sandboxed" href="Content/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
         <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.custom.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('a.login-window').click(function () {
@@ -33,16 +35,48 @@
                         $('#mask').remove();
                     });
                 });
+                var start; var finish;
+                $('.selectable').sortable({
+                    axis: "y",
+                    cursor: "move",
+                    containment: "parent",
+                    tolerance: "pointer",
+                    opacity: 0.8,
+                    placeholder: "sortable-placeholder",
+
+                    start: function(e, ui) {
+                        start = ui.item.index() + 1;
+                    },
+
+                    update: function(e, ui) {
+                        finish = ui.item.index() + 1;
+                    },
+
+                    stop: function (e, ui) {
+                        $.ajax({
+                            type: "POST",
+                            url: "updateInfo.aspx",
+                            context: ui.item,
+                            data: {initial: start, final: finish}
+                        }).done(function (html) {
+                            ui.item.parent().html(html);
+                        });
+                    }
+                });
+                $('.selectable').disableSelection();
             });
         </script>
     </head>
     <body>
+        <div class="navbar navbar-default">
+            <a class="navbar-brand">SurgeryGenie</a>
+            <a class="pull-right" href="Default.aspx">Main Schedule View</a>
+        </div>
         <form id="loginform" runat="server">
             <asp:GridView ID="test" runat="server"></asp:GridView>
-            <a href="#login-box" class="login-window" runat="server" id="signIN">Sign In</a>
+            <a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a>
             <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
             <div id="mainPageContainer">
-                <h1>Central Indiana Orthepedics</h1>
                 <h3>Surgery Viewer</h3>
                 <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" />
                 <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" /><br />
@@ -66,13 +100,12 @@
             <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
             <asp:ListView ID="ListView1" runat="server">
                 <LayoutTemplate>
-                    <ul>
+                    <ul class="selectable surgery-holdings col-lg-8 col-lg-offset-2">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                     </ul>
                 </LayoutTemplate>
                 <ItemTemplate>
                     <li>
-                        <hr />
                         <table style="table-layout: fixed">
                             <tr>
                                 <td rowspan="2" valign="top" style="width:200px"><%#Eval("Position") %></td>

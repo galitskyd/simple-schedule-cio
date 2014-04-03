@@ -53,6 +53,7 @@ public static DataTable AuthenticateUser()
     try
     {
         string sqlCmdString = "SELECT * FROM dbo.surgery_room_identification";
+        Console.WriteLine(sqlCmdString);
         conn.Open();
         SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
         SqlDataReader reader = cmd.ExecuteReader();
