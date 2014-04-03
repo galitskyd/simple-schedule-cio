@@ -35,7 +35,7 @@ public static DataTable infoData()
                                     "dbo.location_mstr," +
                                     "dbo.appointments " +
                                   "WHERE " +
-                                    "dbo.provider_mstr.primary_loc_id = dbo.location_mstr.location_id " +
+                                    "dbo.appointments.location_id = dbo.location_mstr.location_id " +
                                   "AND " +
                                     "dbo.provider_mstr.provider_id = dbo.appointments.rendering_provider_id";
             conn.Open();
