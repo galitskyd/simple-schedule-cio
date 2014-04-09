@@ -11,56 +11,42 @@ using System.Data;
 public class sqlDataTableSurgery
 {
     static DataTable dtInfo = new DataTable();
-    static SqlConnection conn = dbConnect.connection();
 
 public static DataTable infoData()
      {
         dtInfo.Clear();
-        try
+        using (SqlConnection conn = dbConnect.connectionSurgery())
         {
-            string sqlCmdString = "SELECT dbo.surgery_room_schedule.surgery_event_id,"+
-                "dbo.surgery_room_schedule.ordering_position,"+
-                "dbo.surgery_room_schedule.duration,"+
-                "dbo.provider_mstr.description,"+
-                "dbo.person.last_name,"+
-                "dbo.person.first_name,"+
-                "dbo.person.date_of_birth,"+
-                "dbo.person.sex,"+
-                "dbo.surgery_room_schedule.surgery_name,"+
-                "dbo.surgery_room_schedule.details,"+
-                "dbo.surgery_room_schedule.surg_date,"+
-                "dbo.location_mstr.location_name,"+
-                "dbo.surgery_room_schedule.room_number,"+
-                "dbo.patient.med_rec_nbr"+
-                " FROM dbo.location_mstr,dbo.provider_mstr,dbo.person,dbo.patient,dbo.surgery_room_schedule"+
-                " WHERE dbo.patient.med_rec_nbr = dbo.surgery_room_schedule.med_rec_nbr"+
-                " AND dbo.person.person_id = dbo.patient.person_id"+ 
-                " AND dbo.provider_mstr.provider_id = dbo.surgery_room_schedule.provider_id"+
-                " AND dbo.location_mstr.location_id = dbo.surgery_room_schedule.location_id"+
-                " ORDER BY dbo.surgery_room_schedule.ordering_position";
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            dtInfo.Load(reader);
-            conn.Close();
+            try
+            {
+                string sqlCmdString = "surgGetSchedule";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                dtInfo.Load(reader);
+                conn.Close();
+            }
+            catch { Console.WriteLine("Error"); }
         }
-        catch { Console.WriteLine("Error"); }
         return dtInfo;
     }
 public static DataTable AuthenticateUser()
 {
     DataTable dt = new DataTable();
-    try
+    using (SqlConnection conn = dbConnect.connectionSurgery())
     {
-        string sqlCmdString = "SELECT * FROM dbo.surgery_room_identification";
-        conn.Open();
-        SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-        SqlDataReader reader = cmd.ExecuteReader();
-        dt.Load(reader);
-        conn.Close();
+        try
+        {
+            string sqlCmdString = "surgGetIdentification";
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            dt.Load(reader);
+            conn.Close();
+        }
+        catch (Exception)
+        { Console.WriteLine("Error Authenticate User"); }
     }
-    catch (Exception)
-    {Console.WriteLine("Error Authenticate User");}
     return dt;
 }
 }
