@@ -14,7 +14,7 @@ public class surgManager
 {
     private void executeSQL(String sqlCmdString, String sqlVar, object item)
     {
-        using (SqlConnection conn = dbConnectSurgery.connection())
+        using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
             {
@@ -28,6 +28,22 @@ public class surgManager
                 }
                 catch { Console.WriteLine("Error"); }
             }
+        }
+    }
+
+    public void getItems(String sqlCmdString, DataTable dt)
+    {
+        using (SqlConnection conn = dbConnect.connectionSurgery())
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            catch { Console.WriteLine("Error"); }
         }
     }
     

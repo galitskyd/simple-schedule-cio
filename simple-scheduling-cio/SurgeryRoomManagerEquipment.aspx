@@ -42,12 +42,12 @@
             <div style="display: table-cell;">
                 <asp:Label ID="lblEnabled" runat="server" Text="Enabled"/>
                 <br />
-                <asp:ListBox ID="lbEnabled" runat="server" ToolTip="Enabled" Height="400px"></asp:ListBox>
+                <asp:ListBox ID="lbEnabled" runat="server" ToolTip="Enabled" SelectionMode="Multiple" Height="400px"></asp:ListBox>
             </div>
             <div style="display: table-cell;">
                 <asp:Label ID="lblDisabled" runat="server" Text="Disabled"/>
                 <br />
-                <asp:ListBox ID="lbDisabled" runat="server" ToolTip="Disabled" Height="400px"></asp:ListBox>
+                <asp:ListBox ID="lbDisabled" runat="server" ToolTip="Disabled" SelectionMode="Multiple" Height="400px"></asp:ListBox>
             </div>
             <br />
             <div id="login-box" class="login-popup">

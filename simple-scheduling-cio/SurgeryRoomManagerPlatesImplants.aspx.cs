@@ -17,19 +17,7 @@ public partial class SurgeryRoomManagerPlatesImplants : System.Web.UI.Page
     }
     private void LoadPlatesImplants()
     {
-        using (SqlConnection conn = dbConnectSurgery.connection())
-        {
-            try
-            {
-                String sqlCmdString = "surgPlatesImplantsGet";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                dtPlatesImplants.Load(reader);
-                conn.Close();
-            }
-            catch { Console.WriteLine("Error"); }
-        }
+        surgMan.getItems("surgPlatesImplantsGet", dtPlatesImplants);
         DataView dvPlatesImplantsEnabled = dtPlatesImplants.AsDataView();
         dvPlatesImplantsEnabled.RowFilter = "enabled = 1";
         DataView dvPlatesImplantsDisabled = dtPlatesImplants.AsDataView();

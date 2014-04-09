@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -17,19 +18,7 @@ public partial class SurgeryRoomManagerEquipment : System.Web.UI.Page
     }
     private void LoadEquipment()
     {
-        using (SqlConnection conn = dbConnectSurgery.connection())
-        {
-            try
-            {
-                String sqlCmdString = "surgEquipmentGet";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                dtEquipment.Load(reader);
-                conn.Close();
-            }
-            catch { Console.WriteLine("Error"); }
-        }
+        surgMan.getItems("surgEquipmentGet", dtEquipment);
         DataView dvEquipmentEnabled = dtEquipment.AsDataView();
         dvEquipmentEnabled.RowFilter = "enabled = 1";
         DataView dvEquipmentDisabled = dtEquipment.AsDataView();

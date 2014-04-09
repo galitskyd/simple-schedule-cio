@@ -17,19 +17,7 @@ public partial class SurgeryRoomManagerAnesthesia : System.Web.UI.Page
     }
     private void LoadAnesthesia()
     {
-        using (SqlConnection conn = dbConnectSurgery.connection())
-        {
-            try
-            {
-                String sqlCmdString = "surgAnesthesiaGet";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                dtAnesthesia.Load(reader);
-                conn.Close();
-            }
-            catch { Console.WriteLine("Error"); }
-        }
+        surgMan.getItems("surgAnesthesiaGet", dtAnesthesia);
         DataView dvAnesthesiaEnabled = dtAnesthesia.AsDataView();
         dvAnesthesiaEnabled.RowFilter = "enabled = 1";
         DataView dvAnesthesiaDisabled = dtAnesthesia.AsDataView();

@@ -53,18 +53,21 @@ public partial class Default2 : System.Web.UI.Page
 
     private void LoadProviders()
     {
-        using (SqlConnection conn = dbConnectSurgery.connection())
+        using (SqlConnection conn = dbConnect.connectionSurgery())
         {
-            try
+            String sqlCmdString = "surgGetProviders";
+            
+            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
             {
-                String sqlCmdString = "surgGetProviders";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                providers.Load(reader);
-                conn.Close();
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    providers.Load(reader);
+                    conn.Close();
+                }
+                catch { Console.WriteLine("Error"); }
             }
-            catch { Console.WriteLine("Error"); }
         }
 
         ddlProvider.DataSource = providers;
@@ -81,7 +84,7 @@ public partial class Default2 : System.Web.UI.Page
         DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
         date = parsedDate.ToString("yyyyMMdd");
         
-        using (SqlConnection conn = dbConnectSurgery.connection())
+        using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String insertEvent = "surgAddEvent";
             

@@ -15,7 +15,7 @@ public class sqlDataTableSurgery
 public static DataTable infoData()
      {
         dtInfo.Clear();
-        using (SqlConnection conn = dbConnectSurgery.connection())
+        using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             try
             {
@@ -33,7 +33,7 @@ public static DataTable infoData()
 public static DataTable AuthenticateUser()
 {
     DataTable dt = new DataTable();
-    using (SqlConnection conn = dbConnectSurgery.connection())
+    using (SqlConnection conn = dbConnect.connectionSurgery())
     {
         try
         {

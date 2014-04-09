@@ -47,6 +47,8 @@ public class basicInfoSurgery
         info.Columns.Add(dc);
         dc = new DataColumn("MedRec#");
         info.Columns.Add(dc);
+        dc = new DataColumn("ID");
+        info.Columns.Add(dc);
         DataRow row;
         for (int i = 0; i < InfoDataTable.Rows.Count; i++)
         {
@@ -82,8 +84,8 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     row[x] = parsedDate.ToString("yyyy/MM/dd");
                 }
-                if (x > 10 && x<13) row[x] = InfoDataTable.Rows[i][x].ToString();
-                if (x == 13) row[x] = InfoDataTable.Rows[i][x].ToString().Substring(3);
+                if (x > 10 && x<15) row[x] = InfoDataTable.Rows[i][x].ToString();
+                //if (x == 13) row[x] = InfoDataTable.Rows[i][x].ToString().Substring(3);
 
             }
             info.Rows.Add(row);
