@@ -98,7 +98,7 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@provider_id", ddlProvider.SelectedValue);
                 cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                 cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
-                cmd.Parameters.AddWithValue("@details", tbDetails.Text);
+                cmd.Parameters.AddWithValue("@details", "");
 
                 try
                 {
