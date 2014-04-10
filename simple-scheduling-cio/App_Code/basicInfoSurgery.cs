@@ -54,7 +54,7 @@ public class basicInfoSurgery
         {
             row = info.NewRow();
 
-            for (int x = 0; x < InfoDataTable.Columns.Count; x++)
+            for (int x = 0; x < info.Columns.Count; x++)
             {
                 if (x == 1) row[x-1] = InfoDataTable.Rows[i][x].ToString();
                 if ((x == 2) || (x == 3)) row[x + 1] = InfoDataTable.Rows[i][x].ToString();
@@ -84,8 +84,12 @@ public class basicInfoSurgery
                     DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
                     row[x] = parsedDate.ToString("yyyy/MM/dd");
                 }
-                if (x > 10 && x<15) row[x] = InfoDataTable.Rows[i][x].ToString();
-                //if (x == 13) row[x] = InfoDataTable.Rows[i][x].ToString().Substring(3);
+                if (x > 10 && x < 13)
+                {
+                    row[x] = InfoDataTable.Rows[i][x].ToString();
+                }
+                if (x == 14) row[x] = InfoDataTable.Rows[i][0].ToString();
+                if (x == 13) row[x] = InfoDataTable.Rows[i][x].ToString().Substring(3);
 
             }
             info.Rows.Add(row);

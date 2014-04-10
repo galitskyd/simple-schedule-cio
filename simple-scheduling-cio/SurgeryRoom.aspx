@@ -53,14 +53,9 @@
                     },
 
                     stop: function (e, ui) {
-                        $.ajax({
-                            type: "POST",
-                            url: "updateInfo.aspx",
-                            context: ui.item,
-                            data: {initial: start, final: finish}
-                        }).done(function (html) {
-                            ui.item.parent().html(html);
-                        });
+                        $("#beginVal").val(start);
+                        $("#finalVal").val(finish);
+                        $("#loginform").submit();
                     }
                 });
                 $('.selectable').disableSelection();
@@ -73,6 +68,8 @@
             <a class="pull-right" href="Default.aspx">Main Schedule View</a>
         </div>
         <form id="loginform" runat="server">
+            <asp:HiddenField ID="beginVal" runat="server"></asp:HiddenField>
+            <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
             <asp:GridView ID="test" runat="server"></asp:GridView>
             <a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a>
             <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>

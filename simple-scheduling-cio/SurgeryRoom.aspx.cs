@@ -8,14 +8,21 @@ using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.Text.RegularExpressions;
 public partial class _Default : System.Web.UI.Page
 {
     DataTable dt = basicInfoSurgery.dt();
     DataView dv;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
         if (tbTime.Text == "") tbTime.Text = "07:00:00";
+        if (Session["date"] != null)
+        {
+            tbDate.Text = Session["date"].ToString();
+            Session["date"] = null;
+        } if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
         listViewUpdate();
         checkUser();
     }
@@ -89,5 +96,51 @@ public partial class _Default : System.Web.UI.Page
     {
         Session["loggedIN"] = "false";
         checkUser();
+    }
+    protected void finalVal_TextChanged(object sender, EventArgs e)
+    {
+        int begin = int.Parse(beginVal.Value);
+        int end = int.Parse(finalVal.Value);
+        string date = Regex.Replace(tbDate.Text, @"[^\d]", "");
+        string ID = dt.Rows[int.Parse(beginVal.Value) - 1][14].ToString();
+        string countCol = dt.Columns.Count.ToString();
+        List<List<string>> numbers = new List<List<string>>();
+        if (begin < end)
+        {
+            for (int i = begin; i < end; i++)
+            {
+                if (i != begin - 1)
+                {
+                    List<string> row = new List<string>();
+                    row.Add(dt.Rows[i][0].ToString());
+                    row.Add(dt.Rows[i][14].ToString());
+                    numbers.Add(row);
+                }
+            }
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                sqlDataTableSurgery.updateOrder(int.Parse(numbers[i][0]), int.Parse(numbers[i][0]) - 1, date, int.Parse(numbers[i][1]));
+            }
+        }
+        if (begin > end)
+        {
+            for (int i = end - 1; i < begin; i++)
+            {
+                if (i != begin - 1)
+                {
+                    List<string> row = new List<string>();
+                    row.Add(dt.Rows[i][0].ToString());
+                    row.Add(dt.Rows[i][14].ToString());
+                    numbers.Add(row);
+                }
+            }
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                sqlDataTableSurgery.updateOrder(int.Parse(numbers[i][0]), int.Parse(numbers[i][0]) + 1, date, int.Parse(numbers[i][1]));
+            }
+        }
+        sqlDataTableSurgery.updateOrder(begin, end, date, int.Parse(ID));
+        Session["date"] = tbDate.Text;
+        Response.Redirect("SurgeryRoom.aspx");
     }
 }
