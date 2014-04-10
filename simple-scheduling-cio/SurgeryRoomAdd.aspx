@@ -48,13 +48,10 @@
             </div>
             <div style="clear:both"></div><br />
             <div style="float:left; width:50%">
-                <asp:Label ID="lbSurgery" Text="Surgery: " runat="server"></asp:Label>
+                <asp:Label ID="lbSurgery" Text="Surgery Details: " runat="server"></asp:Label>
                 <asp:TextBox ID="tbSurgery" runat="server" />
             </div>
-            <div style="float:left; width:50%">
-                <asp:Label ID="lbDetails" Text="Details: " runat="server"></asp:Label>
-                <asp:TextBox ID="tbDetails" runat="server" />
-            </div>
+
             <div style="clear:both"></div><br />
             <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click"/>
         </div>
