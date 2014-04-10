@@ -49,4 +49,19 @@ public static DataTable AuthenticateUser()
     }
     return dt;
 }
+public static void updateOrder(int beginNumber, int endNumber, string date, int uniqueNumber)
+{
+    DataTable dtInfo = new DataTable();
+    SqlConnection conn = dbConnect.connectionSurgery();
+    string cmdString =
+        "UPDATE dbo.surgery_room_schedule " +
+        "SET    ordering_position=" + endNumber + " " +
+        "WHERE  ordering_position=" + beginNumber + " " +
+        "AND    surg_date='" + date + "' " +
+        "AND    surgery_event_id=" + uniqueNumber;
+    conn.Open();
+    SqlCommand cmd = new SqlCommand(cmdString, conn);
+    cmd.ExecuteNonQuery();
+    conn.Close();
+}
 }
