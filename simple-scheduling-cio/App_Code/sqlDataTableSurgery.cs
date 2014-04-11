@@ -17,16 +17,18 @@ public static DataTable infoData()
         dtInfo.Clear();
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
-            try
+            string sqlCmdString = "surgGetSchedule";
+            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
             {
-                string sqlCmdString = "surgGetSchedule";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                dtInfo.Load(reader);
-                conn.Close();
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    dtInfo.Load(reader);
+                    conn.Close();
+                }
+                catch { Console.WriteLine("Error"); }
             }
-            catch { Console.WriteLine("Error"); }
         }
         return dtInfo;
     }
@@ -35,17 +37,19 @@ public static DataTable AuthenticateUser()
     DataTable dt = new DataTable();
     using (SqlConnection conn = dbConnect.connectionSurgery())
     {
-        try
+        string sqlCmdString = "surgGetIdentification";
+        using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
         {
-            string sqlCmdString = "surgGetIdentification";
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            dt.Load(reader);
-            conn.Close();
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            catch (Exception)
+            { Console.WriteLine("Error Authenticate User"); }
         }
-        catch (Exception)
-        { Console.WriteLine("Error Authenticate User"); }
     }
     return dt;
 }
