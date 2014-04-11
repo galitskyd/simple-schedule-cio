@@ -18,8 +18,13 @@ public partial class PrintPage : System.Web.UI.Page
     DataView dv;
     protected void Page_Load(object sender, EventArgs e)
     {
+        listView1Update();
+    }
+
+    protected void listView1Update()
+    {
         dv = new DataView(dt);
-        dv.RowFilter = "Date='" + Session["date"].ToString() +"' AND Room='" + "1" + "'";
+        dv.RowFilter = "Date='" + Session["date"].ToString() + "' AND Room='" + "1" + "'";
         dt = dv.ToTable();
         ListView1.DataSource = dt;
         ListView1.DataBind();
