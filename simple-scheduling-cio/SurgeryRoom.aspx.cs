@@ -146,6 +146,7 @@ public partial class _Default : System.Web.UI.Page
     protected void Print_Click(object sender, EventArgs e)
     {
         Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
         Response.Redirect("PrintPage.aspx");
     }
 }
