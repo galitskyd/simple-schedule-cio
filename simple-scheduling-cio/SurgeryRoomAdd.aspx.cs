@@ -128,7 +128,6 @@ public partial class Default2 : System.Web.UI.Page
                         else if ((type == "provider") && (cmdString=="surgAddEventProvider")) cmd.Parameters.AddWithValue("@providerID", item.Value);
                         try
                         {
-                            System.Diagnostics.Debug.WriteLine("Insert Item " + type);
                             conn.Open();
                             cmd.ExecuteNonQuery();
                             conn.Close();
@@ -157,7 +156,6 @@ public partial class Default2 : System.Web.UI.Page
         {
             using (SqlCommand cmd = new SqlCommand(insertEvent, conn))
             {
-                System.Diagnostics.Debug.WriteLine("Insert Event");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@location_name", ddlLocation.SelectedValue);
                 cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue);
@@ -170,13 +168,11 @@ public partial class Default2 : System.Web.UI.Page
 
                 try
                 {
-                    System.Diagnostics.Debug.WriteLine("Insert Event Try");
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     dtID.Load(reader);
                     conn.Close();
                     id = Int32.Parse(dtID.Rows[0][0].ToString());
-                    System.Diagnostics.Debug.WriteLine(id);
                     blnRedirect = true;
                 }
                 catch { Console.WriteLine("Error"); }

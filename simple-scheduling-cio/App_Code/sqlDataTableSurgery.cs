@@ -10,15 +10,12 @@ using System.Data;
 /// </summary>
 public class sqlDataTableSurgery
 {
-    static DataTable dtInfo = new DataTable();
-
-public static DataTable infoData()
-     {
-        dtInfo.Clear();
+    public static DataTable infoData(String cmdString)
+    {
+        DataTable dtInfo = new DataTable();
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
-            string sqlCmdString = "surgGetSchedule";
-            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+            using (SqlCommand cmd = new SqlCommand(cmdString, conn))
             {
                 try
                 {
@@ -32,40 +29,53 @@ public static DataTable infoData()
         }
         return dtInfo;
     }
-public static DataTable AuthenticateUser()
-{
-    DataTable dt = new DataTable();
-    using (SqlConnection conn = dbConnect.connectionSurgery())
+    public static DataTable infoDataSchedule()
     {
-        string sqlCmdString = "surgGetIdentification";
-        using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
-        {
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                dt.Load(reader);
-                conn.Close();
-            }
-            catch (Exception)
-            { Console.WriteLine("Error Authenticate User"); }
-        }
+        return infoData("surgGetSchedule");
     }
-    return dt;
-}
-public static void updateOrder(int beginNumber, int endNumber, string date, int uniqueNumber)
-{
-    DataTable dtInfo = new DataTable();
-    SqlConnection conn = dbConnect.connectionSurgery();
-    string cmdString =
-        "UPDATE dbo.surgery_room_schedule " +
-        "SET    ordering_position=" + endNumber + " " +
-        "WHERE  ordering_position=" + beginNumber + " " +
-        "AND    surg_date='" + date + "' " +
-        "AND    surgery_event_id=" + uniqueNumber;
-    conn.Open();
-    SqlCommand cmd = new SqlCommand(cmdString, conn);
-    cmd.ExecuteNonQuery();
-    conn.Close();
-}
+    public static DataTable infoDataProviders()
+    {
+        return infoData("surgGetScheduleProviders");
+    }
+    public static DataTable infoDataItems()
+    {
+        return infoData("surgGetScheduleItems");
+    }
+
+    public static DataTable AuthenticateUser()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = dbConnect.connectionSurgery())
+        {
+            string sqlCmdString = "surgGetIdentification";
+            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    dt.Load(reader);
+                    conn.Close();
+                }
+                catch (Exception)
+                { Console.WriteLine("Error Authenticate User"); }
+            }
+        }
+        return dt;
+    }
+    public static void updateOrder(int beginNumber, int endNumber, string date, int uniqueNumber)
+    {
+        DataTable dtInfo = new DataTable();
+        SqlConnection conn = dbConnect.connectionSurgery();
+        string cmdString =
+            "UPDATE dbo.surgery_room_schedule " +
+            "SET    ordering_position=" + endNumber + " " +
+            "WHERE  ordering_position=" + beginNumber + " " +
+            "AND    surg_date='" + date + "' " +
+            "AND    surgery_event_id=" + uniqueNumber;
+        conn.Open();
+        SqlCommand cmd = new SqlCommand(cmdString, conn);
+        cmd.ExecuteNonQuery();
+        conn.Close();
+    }
 }

@@ -111,18 +111,19 @@
                                 <td align="left" style="width:1100px"><%#Eval("Patient") %></td>
                                 <td style="width:50px">Wgt</td>
                                 <td style="width:50px"><%#Eval("Room") %></td>
-                                <td align="left" style="width:400px"><b>Anasthesia</b> </td>
+                                <td align="left" style="width:400px"><b>Anasthesia</b><br /><%#Eval("Anesthesia") %> </td>
                             </tr>
                             <tr>
                                 <td align="left" style="width:200px"><%#Eval("End Time") %></td>
                                 <td align="left" style="width:1200px"><%#Eval("Provider") %></td>
                                 <td style="width:50px"><%#Eval("Age") %></td>
                                 <td style="width:50px"><%#Eval("Gender") %></td>
-                                <td style="width:400px"><b>Surgery Equipment</b></td>
+                                <td style="width:400px"><b>Surgery Equipment</b><br /><%#Eval("Equipment") %></td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="width:400px"><%#Eval("MedRec#") %></td>
-                                <td colspan="5" align="left" style="width:1800px"><%#Eval("Surgery") %>; <%#Eval("Details") %></td>
+                                <td colspan="4" align="left" style="width:1800px"><%#Eval("Surgery") %></td>
+                                <td sytle="width:400px"><b>Plates/Implants</b><br /><%#Eval("Plates") %></td>
                             </tr>
                         </table>
                     </li>
