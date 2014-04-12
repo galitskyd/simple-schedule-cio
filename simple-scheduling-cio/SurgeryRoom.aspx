@@ -94,6 +94,7 @@
                 <asp:ListItem Value="2">OR2</asp:ListItem>
                 <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
             </asp:DropDownList>
+            <asp:Button ID="Print" runat="server" OnClick="Print_Click" style="height: 26px" Text="Print Schedule" />
             <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
             <asp:ListView ID="ListView1" runat="server">
                 <LayoutTemplate>

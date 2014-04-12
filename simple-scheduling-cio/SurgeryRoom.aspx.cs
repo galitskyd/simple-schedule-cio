@@ -143,4 +143,10 @@ public partial class _Default : System.Web.UI.Page
         Session["date"] = tbDate.Text;
         Response.Redirect("SurgeryRoom.aspx");
     }
+    protected void Print_Click(object sender, EventArgs e)
+    {
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Response.Redirect("PrintPage.aspx");
+    }
 }
