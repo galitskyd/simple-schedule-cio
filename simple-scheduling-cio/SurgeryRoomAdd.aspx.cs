@@ -19,19 +19,52 @@ public partial class Default2 : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-            String location = Request.QueryString["loc"];
-            String roomNum = Request.QueryString["rm"];
-            String date = Request.QueryString["date"];
-            //LoadPatients();
+            LoadPatients();
             LoadProviders();
             LoadItems();
-            ddlLocation.SelectedValue = location;
-            ddlRoom.SelectedValue = roomNum;
-            tbDate.Text = date;
+            if (Session["date"] != null) tbDate.Text = Session["date"].ToString();
+            if (Session["location"] != null) ddlLocation.SelectedValue = Session["location"].ToString();
+            if (Session["room"] != null) ddlRoom.SelectedValue = Session["room"].ToString();
+        }
+        if (Page.IsPostBack)
+        {
+            WebControl wcICausedPostBack = (WebControl)GetPostBackControl(sender as Page);
+            int indx = wcICausedPostBack.TabIndex;
+            var ctrl = from control in wcICausedPostBack.Parent.Controls.OfType<WebControl>()
+                       where control.TabIndex > indx
+                       select control;
+            ctrl.DefaultIfEmpty(wcICausedPostBack).First().Focus();
         }
     }
+    
+    protected Control GetPostBackControl(Page page)
+    {
+        Control control = null;
+        string ctrlname = page.Request.Params.Get("__EVENTTARGET");
+        if (ctrlname != null && ctrlname != string.Empty)
+        {
+            control = page.FindControl(ctrlname);
+        }
+        else
+        {
+            foreach (string ctl in page.Request.Form)
+            {
+                Control c = page.FindControl(ctl);
+                if (c is System.Web.UI.WebControls.Button || c is System.Web.UI.WebControls.ImageButton)
+                {
+                    control = c;
+                    break;
+                }
+            }
+        }
+        return control;
+    }
 
-    /**private void LoadPatients()
+    /** 
+     * TODO: Change to Stored Procedure, should not be 
+     * mixing dbConnect strings in same file.
+     */
+    private void LoadPatients()
     {
         SqlConnection conn = dbConnect.connection();
         try
@@ -50,11 +83,11 @@ public partial class Default2 : System.Web.UI.Page
         catch { Console.WriteLine("Error"); }
         
         patients.Columns.Add("full_name", typeof(string), "last_name + ', ' + first_name");
-        ddlPatient.DataSource = patients;
-        ddlPatient.DataTextField = "full_name";
-        ddlPatient.DataValueField = "med_rec_nbr";
-        ddlPatient.DataBind();
-    }*/
+        lbPatient.DataSource = patients;
+        lbPatient.DataTextField = "full_name";
+        lbPatient.DataValueField = "med_rec_nbr";
+        lbPatient.DataBind();
+    }
 
     private void LoadProviders()
     {
@@ -183,5 +216,10 @@ public partial class Default2 : System.Web.UI.Page
         addEventComponent("surgAddEventItem", lbEquipment, id, "E");
         addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
         if (blnRedirect) Response.Redirect("SurgeryRoom.aspx");
+    }
+    protected void tbPatient_TextChanged(object sender, EventArgs e)
+    {
+        if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
+            lbPatient.SelectedValue = tbPatient.Text;
     }
 }

@@ -37,10 +37,13 @@
                 <asp:TextBox ID="tbDuration" runat="server" />
             </div>
             <div style="clear:both"></div><br />
-            <div style="float:left; width:50%">
+            <div style="float:left; width:25%">
                 <asp:Label ID="lblPatient" Text="MedRec#: " runat="server"></asp:Label><br />
-                <!--<asp:DropDownList ID="ddlPatient" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true"/>-->
-                <asp:TextBox ID="tbPatient" runat="server" />
+                <asp:TextBox ID="tbPatient" runat="server" AutoPostBack="true" OnTextChanged="tbPatient_TextChanged"/>
+            </div>
+            <div style="float:left; width:25%">
+                <br />
+                <asp:ListBox ID="lbPatient" runat="server" DataTextField="Patient" DataValueField="Patient" AutoPostBack="true" TabIndex="-1"/>
             </div>
             <div style="float:left; width:50%">
                 <asp:Label ID="lblProvider" Text="Provider: " runat="server"></asp:Label><br />

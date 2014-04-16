@@ -17,12 +17,23 @@ public partial class _Default : System.Web.UI.Page
     DataView dv;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (tbTime.Text == "") tbTime.Text = "07:00:00";
+        if (tbTime.Text == "") tbTime.Text = "06:30:00";
         if (Session["date"] != null)
         {
             tbDate.Text = Session["date"].ToString();
             Session["date"] = null;
-        } if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+        }
+        if (Session["location"] != null)
+        {
+            ddlLocation.SelectedValue = Session["location"].ToString();
+            Session["location"] = null;
+        }
+        if (Session["room"] != null)
+        {
+            ddlRoom.SelectedValue = Session["room"].ToString();
+            Session["room"] = null;
+        }
+        else if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
         listViewUpdate();
         checkUser();
     }
@@ -52,12 +63,10 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        String redirect = "";
-        redirect += "SurgeryRoomAdd.aspx?";
-        redirect += "loc=" + ddlLocation.SelectedValue;
-        redirect += "&rm=" + ddlRoom.SelectedValue;
-        redirect += "&date=" + tbDate.Text;
-        Response.Redirect(redirect);
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
+        Response.Redirect("SurgeryRoomAdd.aspx");
     }
     protected void checkUser(){
         
@@ -141,6 +150,8 @@ public partial class _Default : System.Web.UI.Page
         }
         sqlDataTableSurgery.updateOrder(begin, end, date, int.Parse(ID));
         Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
         Response.Redirect("SurgeryRoom.aspx");
     }
 }
