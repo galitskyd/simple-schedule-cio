@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 public partial class _Default : System.Web.UI.Page
 {
     DataTable dt = basicInfoSurgery.dt();
+    DataTable dtBind = new DataTable();
     DataTable dtORRooms = new DataTable();
     DataView dv;
     protected void Page_Load(object sender, EventArgs e)
@@ -43,7 +44,7 @@ public partial class _Default : System.Web.UI.Page
     {
         dv = new DataView(dt);
         dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedItem + "' AND Date='" + tbDate.Text + "'";
-        DataTable dtBind = dv.ToTable();
+        dtBind = dv.ToTable();
         dtBind = calculateTimes(dtBind);
         ListView1.DataSource = dtBind;
         ListView1.DataBind();
