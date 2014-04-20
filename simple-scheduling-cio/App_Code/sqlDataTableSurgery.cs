@@ -55,7 +55,6 @@ public class sqlDataTableSurgery
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    System.Diagnostics.Debug.WriteLine(reader.ToString());
                     dt.Load(reader);
                     conn.Close();
                 }

@@ -118,8 +118,6 @@ public partial class Default2 : System.Web.UI.Page
         }
 
         lbProvider.DataSource = dtProviders;
-        lbProvider.DataTextField = "description";
-        lbProvider.DataValueField = "provider_id";
         lbProvider.DataBind();
     }
     private void LoadORRooms()

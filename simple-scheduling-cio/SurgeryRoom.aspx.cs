@@ -42,7 +42,7 @@ public partial class _Default : System.Web.UI.Page
     protected void listViewUpdate()
     {
         dv = new DataView(dt);
-        dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedItem + "'";
+        dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedItem + "' AND Date='" + tbDate.Text + "'";
         DataTable dtBind = dv.ToTable();
         dtBind = calculateTimes(dtBind);
         ListView1.DataSource = dtBind;
@@ -136,8 +136,8 @@ public partial class _Default : System.Web.UI.Page
         int begin = int.Parse(beginVal.Value);
         int end = int.Parse(finalVal.Value);
         string date = Regex.Replace(tbDate.Text, @"[^\d]", "");
-        string ID = dt.Rows[int.Parse(beginVal.Value) - 1]["ID"].ToString();
-        string countCol = dt.Columns.Count.ToString();
+        string ID = dtBind.Rows[int.Parse(beginVal.Value) - 1]["ID"].ToString();
+        string countCol = dtBind.Columns.Count.ToString();
         List<List<string>> numbers = new List<List<string>>();
         if (begin < end)
         {
@@ -146,8 +146,8 @@ public partial class _Default : System.Web.UI.Page
                 if (i != begin - 1)
                 {
                     List<string> row = new List<string>();
-                    row.Add(dt.Rows[i]["Position"].ToString());
-                    row.Add(dt.Rows[i]["ID"].ToString());
+                    row.Add(dtBind.Rows[i]["Position"].ToString());
+                    row.Add(dtBind.Rows[i]["ID"].ToString());
                     numbers.Add(row);
                 }
             }
@@ -163,8 +163,8 @@ public partial class _Default : System.Web.UI.Page
                 if (i != begin - 1)
                 {
                     List<string> row = new List<string>();
-                    row.Add(dt.Rows[i]["Position"].ToString());
-                    row.Add(dt.Rows[i]["ID"].ToString());
+                    row.Add(dtBind.Rows[i]["Position"].ToString());
+                    row.Add(dtBind.Rows[i]["ID"].ToString());
                     numbers.Add(row);
                 }
             }
