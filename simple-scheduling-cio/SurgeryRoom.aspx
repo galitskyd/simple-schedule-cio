@@ -85,15 +85,11 @@
 		        </div>
             </div>
             <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" />
-            <asp:DropDownList ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
+            <asp:DropDownList ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                 <asp:ListItem Value="Office Muncie">Muncie</asp:ListItem>
                 <asp:ListItem Value="Office Anderson">Anderson</asp:ListItem>
             </asp:DropDownList>
-            <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="Room" DataValueField="Room" AutoPostBack="true">
-                <asp:ListItem Value="1">OR1</asp:ListItem>
-                <asp:ListItem Value="2">OR2</asp:ListItem>
-                <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
-            </asp:DropDownList>
+            <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
             <asp:Button ID="Print" runat="server" OnClick="Print_Click" style="height: 26px" Text="Print Schedule" />
             <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
             <asp:ListView ID="ListView1" runat="server">
@@ -106,25 +102,25 @@
                     <li>
                         <table style="table-layout: fixed">
                             <tr>
-                                <td rowspan="2" valign="top" style="width:200px"><%#Eval("Position") %></td>
-                                <td rowspan="2" valign="top" style="width:200px"><%#Eval("Duration") %></td>
-                                <td align="left" style="width:200px"><%#Eval("Start Time") %></td>
-                                <td align="left" style="width:1100px"><%#Eval("Patient") %></td>
-                                <td style="width:50px">Wgt</td>
+                                <td rowspan="2" style="width:200px;vertical-align:top"><%#Eval("Position") %></td>
+                                <td rowspan="2" style="width:200px;vertical-align:top"><%#Eval("Duration") %></td>
+                                <td style="width:200px;text-align:left"><%#Eval("Start Time") %></td>
+                                <td style="width:1100px;text-align:left"><%#Eval("Patient") %> &nbsp&nbsp&nbsp <%#Eval("Birthdate") %></td>
+                                <td style="width:50px"><%#Eval("Weight") %></td>
                                 <td style="width:50px"><%#Eval("Room") %></td>
-                                <td align="left" style="width:400px"><b>Anasthesia</b><br /><%#Eval("Anesthesia") %> </td>
+                                <td style="width:400px;text-align:left"><b>Anasthesia</b><br /><%#Eval("Anesthesia") %> </td>
                             </tr>
                             <tr>
-                                <td align="left" style="width:200px"><%#Eval("End Time") %></td>
-                                <td align="left" style="width:1200px"><%#Eval("Provider") %></td>
+                                <td style="width:200px;text-align:left"><%#Eval("End Time") %></td>
+                                <td style="width:1200px;text-align:left"><%#Eval("Provider") %></td>
                                 <td style="width:50px"><%#Eval("Age") %></td>
                                 <td style="width:50px"><%#Eval("Gender") %></td>
                                 <td style="width:400px"><b>Surgery Equipment</b><br /><%#Eval("Equipment") %></td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="width:400px"><%#Eval("MedRec#") %></td>
-                                <td colspan="4" align="left" style="width:1800px"><%#Eval("Surgery") %></td>
-                                <td sytle="width:400px"><b>Plates/Implants</b><br /><%#Eval("Plates") %></td>
+                                <td colspan="4" style="width:1800px;text-align:left"><%#Eval("Surgery Details") %></td>
+                                <td style="width:400px"><b>Plates/Implants</b><br /><%#Eval("Plates") %></td>
                             </tr>
                         </table>
                     </li>
