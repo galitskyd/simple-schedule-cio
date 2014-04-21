@@ -9,8 +9,26 @@
     <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/msv.js"></script>
+
 </head>
 <body>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#<%=startDateTxtBx.ClientID %>").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $("#<%=apptDateBTN.ClientID%>").click();
+                }
+                });
+                $("#<%=EndDate.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=apptDateBTN.ClientID%>").click();
+                }
+                });
+        });
+    </script>
     <div class="navbar navbar-default">
         <a class="navbar-brand">Central Indiana Orthopedics</a> 
         <p class="navbar-text">Main Schedule View</p>
@@ -23,13 +41,14 @@
             <div id="expanded-filter" class="filter-bar filter-box">
                 <i id="filter-collapse" class="glyphicon glyphicon-arrow-down pull-right"></i> 
                 <div id="clearContainer">
-                <asp:Button id="clearAll" runat="server" onclick="clearAll_Click" Text="Clear All Filters"></asp:Button>
+                <asp:Button id="clearAll" runat="server" onclick="clearAll_Click" Text="Clear All Filters" TabIndex="-1"></asp:Button>
                 </div>
         <div class="filter-tabs">
         <div class="tabs">
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" />
+           
        
-            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server">
+            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" style="visibility:visible">
                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="Provider">
                     <ContentTemplate>
                         <br /><br />
@@ -73,15 +92,47 @@
 
                 <ajaxToolkit:TabPanel ID="TabPanel4" runat="server" HeaderText="Appointment Date">
                     <ContentTemplate>
+                      
+                        Appointment Date:<asp:Button Text="Filter" runat="server" ID="apptDateBTN" OnClick="apptDateBTN_Click" />
+                        <asp:Button Text="Reset" runat="server" ID="apptDateClearBTN" OnClick="apptDateClearBTN_Click" />
                         <br /><br />
-                        Appointment Date:
-                         <asp:TextBox ID="apptDate" runat="server" placeholder="Date"></asp:TextBox>
-    
-                        <asp:Button Text="Filter" runat="server" ID="apptDateBTN" OnClick="apptDateBTN_Click" />
-                        <asp:Button Text="Clear" runat="server" ID="apptDateClearBTN" OnClick="apptDateClearBTN_Click" ToolTip="Click To Clear Date Filters" />
-                        <br />
+                        Start Date: <asp:TextBox ID="startDateTxtBx" runat="server" placeholder="Start Date" Width="100px"></asp:TextBox>
+                        <div id="endDateContainer"> End Date: &nbsp;&nbsp;<asp:TextBox ID="EndDate" runat="server" placeholder="End Date" Width="100px"></asp:TextBox></div>
+                        <div id="dateSubmitButtonContainer">
+                        
+                        </div>
+                            <br />
                         <asp:Label ID="errorApptDate" runat="server" Text=""></asp:Label>
                         <br />
+                        
+                         <ajaxToolkit:CalendarExtender 
+                                ID="startDatePicker" 
+                                TargetControlID="startDateTxtBx" 
+                                runat="server" 
+                                Format="MM/dd/yyyy"
+                                PopupPosition="Right"
+                                />
+                        <ajaxToolkit:CalendarExtender 
+                                ID="CalendarExtender2" 
+                                TargetControlID="endDate" 
+                                runat="server" 
+                                Format="MM/dd/yyyy"
+                                PopupPosition="Right"
+                                />
+
+                        <style type="text/css">
+                            .ajax__calendar_container{
+                                position:relative;
+                                top:-100px;
+                            }
+                        #dateSubmitButtonContainer{
+                           
+                        }
+                        #endDateContainer{
+                        }
+                        </style>
+                       
+                            
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
 
@@ -127,35 +178,6 @@
             </ajaxToolkit:TabContainer>
         </div> 
             </div></div>
-
-
-
-
-
-
-
-
-
-        <!--
-    <div id="expanded-filter" class="filter-bar filter-box">
-        <div class="filter-tabs">
-            <span class="active">Provider</span><span>Patient</span><span>Other Tab</span>
-            <i id="filter-collapse" class="glyphicon glyphicon-arrow-down pull-right"></i>
-        </div>
-        <div class="filter-content">
-            Last Name:
-            &nbsp;<asp:TextBox ID="FilterSearchTermsDoctor" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsPatient" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsLocation" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsAppointment" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsDuration" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsDetail" runat="server"></asp:TextBox>
-            <asp:TextBox ID="FilterSearchTermsStatus" runat="server"></asp:TextBox>
-            <br />
-            <asp:Button ID="Button1" runat="server" OnClick="txtSearch_KeyUp" Text="Filter" />
-        </div>
-       
-    </div> -->
     </form>
     <div id="collapsed-filter" class="filter-bar no-show">
         <b style="padding:8px 10px; display:inline-block">Filters</b>

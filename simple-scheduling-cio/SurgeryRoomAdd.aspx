@@ -15,8 +15,8 @@
             <div style="float:left; width:50%">
                 <asp:Label ID="lblLocation" Text="Location: " runat="server" ></asp:Label><br />
                 <asp:DropDownList ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
-                    <asp:ListItem Value="Office Muncie">Muncie</asp:ListItem>
-                    <asp:ListItem Value="Office Anderson">Anderson</asp:ListItem>
+                    <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
+                    <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div style="float:left; width:50%">
