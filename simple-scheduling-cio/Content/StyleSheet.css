@@ -148,7 +148,7 @@ img.btn_close {
 
 .surgery-holdings li {
     border-top: 1px solid #000;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 .surgery-holdings li:first-child {
@@ -163,4 +163,43 @@ img.btn_close {
 .sortable-placeholder {
     height: 80px;
     border: 3px solid #9999FF !important;
+}
+
+.surgery-menu {
+    display: inline-block;
+    padding: 10px 0;
+    border: 0;
+    font-size: 2.1em;
+    background-color: #E2E3E3;
+    cursor: pointer;
+}
+
+.surgery-menu.smaller {
+    font-size: 1.5em;
+}
+
+.surgery-menu#tbDate {
+    display: block;
+}
+
+.surgery-menu.smaller + .surgery-menu.smaller {
+    margin-left: 20px;
+}
+
+.surgery-menu:hover {
+    background-color: #ABACAC;
+}
+
+.surgery-menu:focus {
+    border: 0;
+    background-color: #ABACAC;
+}
+
+.appointment-listitem {
+
+}
+
+.appointment-listitem > div { 
+    float:none; 
+    display: inline-block;
 }
