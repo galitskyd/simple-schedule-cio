@@ -25,13 +25,25 @@ public partial class _Default : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        string fullPathURL = HttpContext.Current.Request.Url.Query;
+        
+        if (fullPathURL == "")
+        {
+                string todayDate = DateTime.Today.ToString("MM/dd/yyyy");
+                changeDate(todayDate, todayDate);
+        }
+        if(!IsPostBack)
+        {
+            Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+            var parameters = HttpUtility.ParseQueryString(uri.Query);
+             startDateTxtBx.Text = parameters["startDate"];
+              EndDate.Text = parameters["endDate"];
+        }
         myCookie = Request.Cookies["activeTab"];
-
         if (myCookie != null) TabContainer1.ActiveTabIndex = Convert.ToInt32(myCookie.Value);
             GridView1.DataSource = basicInfo.dt();
             GridView1.DataBind();
             System.Console.Write(basicInfo.dt());
-           // if (FilterSearchTermsAppointment.Text == "") FilterSearchTermsAppointment.Text = DateTime.Today.ToString("MM/dd/yyyy");
             filter();
     }
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -43,25 +55,6 @@ public partial class _Default : System.Web.UI.Page
         dataView.Sort = e.SortExpression + " " + sort;
         GridView1.DataSource = dataView;
         GridView1.DataBind();
-    }
-    protected void txtSearch_KeyUp(object sender, EventArgs e)
-    {
-        /*
-        dv = basicInfo.dt().DefaultView;
-        string outputInfo = "";
-
-        if (outputInfo.Length == 0)
-        {
-            outputInfo = "(Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text + "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND [Appt Date] LIKE '%" + FilterSearchTermsAppointment.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
-        }
-        else
-        {
-            outputInfo += " AND (Doctor LIKE '%" + FilterSearchTermsDoctor.Text + "%' AND Patient LIKE '%" + FilterSearchTermsPatient.Text + "%' AND Location LIKE '%" + FilterSearchTermsLocation.Text + "%' AND Duration LIKE '%" + FilterSearchTermsDuration.Text + "%' AND [Appt Date] LIKE '%" + FilterSearchTermsAppointment.Text + "%' AND Details LIKE '%" + FilterSearchTermsDetail.Text + "%' AND Status LIKE '%" + FilterSearchTermsStatus.Text + "%')";
-        }
-        dv.RowFilter = outputInfo;
-        GridView1.DataSource = dv;
-        GridView1.DataBind();
-         */
     }
     protected string filterSelection(string filter,string col, string[] val,int type)
     {
@@ -87,7 +80,8 @@ public partial class _Default : System.Web.UI.Page
         string[] providers=null;
         string[] patient = null;
         string[] location = null;
-        string[] apptDate = null;
+        string[] startDate = null;
+        string[] endDate = null;
         string[] duration = null;
         string[] details = null;
         string[] status = null;
@@ -96,11 +90,11 @@ public partial class _Default : System.Web.UI.Page
         if (parameters["Provider"] != null) providers = Regex.Split(parameters["Provider"], ",");
         if (parameters["Patient"] != null) patient = Regex.Split(parameters["Patient"], ",");
         if (parameters["Location"] != null) location = Regex.Split(parameters["Location"], ",");
-        if (parameters["AppointmentDate"] != null) apptDate = Regex.Split(parameters["AppointmentDate"], ",");
+        if (parameters["startDate"] != null) startDate = Regex.Split(parameters["startDate"], ",");
+        if (parameters["endDate"] != null) endDate = Regex.Split(parameters["endDate"], ",");
         if (parameters["Duration"] != null) duration = Regex.Split(parameters["Duration"], ",");
         if (parameters["Details"] != null) details = Regex.Split(parameters["Details"], ",");
         if (parameters["Status"] != null) status = Regex.Split(parameters["Status"], ",");
-
         if (providers != null) filter = filterSelection(filter, "Doctor", providers, type);
         if (patient != null)
         {
@@ -112,24 +106,36 @@ public partial class _Default : System.Web.UI.Page
             if (providers == null && patient == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Location", location, type);
         }
-        if (apptDate != null)
+        if (startDate != null)
         {
+            DateTime tempDate = DateTime.Today;
             if (providers == null && patient == null && location == null) type = 0; else type = 1;
-            filter = filterSelection(filter, "[Appt Date]", apptDate, type);
+            try { tempDate = Convert.ToDateTime(parameters["startDate"]); }
+            catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+            try
+            {
+                tempDate = Convert.ToDateTime(parameters["endDate"]);
+                tempDate = tempDate.AddDays(1);
+            }
+            catch {errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+            
+            
+            if (type == 0) filter = "( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
+            else filter += " AND  ( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
         }
         if (duration != null)
         {
-            if (providers == null && patient == null && location == null && apptDate == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && startDate == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Duration", duration, type);
         }
         if (details != null)
         {
-            if (providers == null && patient == null && location == null && apptDate == null && duration == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && startDate == null && duration == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Details", details, type);
         }
         if (status != null)
         {
-            if (providers == null && patient == null && location == null && apptDate == null && duration == null && details == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && startDate == null && duration == null && details == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Status", status, type);
         }
         dv = basicInfo.dt().DefaultView;
@@ -195,21 +201,62 @@ public partial class _Default : System.Web.UI.Page
             errorOut(locationName, errorLocation, "*Please Insert A Location");
         }
     }
-    protected void apptDateBTN_Click(object sender, EventArgs e)
+    void emptyVal()
     {
-        if (apptDate.Text != "")
-        {
-        filters = filters + "AppointmentDate=" + apptDate.Text + "&";
-        rememberActiveTab("3");
+        DateTime sT = DateTime.Today;
+        DateTime eT = DateTime.Today;
+
+        try { sT = Convert.ToDateTime(startDateTxtBx); }
+        catch {errorOut(EndDate, errorApptDate, "Not Valid Date");}
+        
+        try{ eT = Convert.ToDateTime(EndDate.Text); }
+        catch{ errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+
+        if (startDateTxtBx.Text == "") startDateTxtBx.Text = DateTime.Today.ToString("MM/dd/yyyy");
+        if (EndDate.Text == "" || eT < sT) EndDate.Text = startDateTxtBx.Text;
+            changeDate(startDateTxtBx.Text, EndDate.Text);
+    }
+    void changeDate(string start, string end)
+    {
+        Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+        var parameters = HttpUtility.ParseQueryString(uri.Query);
+        parameters.Remove("startDate");
+        parameters.Remove("endDate");
+        filters = "?" + parameters.ToString();
+        filters = filters + "startDate=" + start + "&endDate=" + end + "&";
         Response.Redirect(url + filters);
-        }
-        else
+    }
+    public bool testDate(string date)
+    {
+        try
         {
-            rememberActiveTab("3");
-            errorOut(apptDate, errorApptDate, "*Please Insert An Appt Date");
+            DateTime temp = Convert.ToDateTime(date);
+            return true;
+        }
+        catch
+        {
+            return false;
         }
     }
+    protected void apptDateBTN_Click(object sender, EventArgs e)
+    {
+        if (testDate(startDateTxtBx.Text) && testDate(EndDate.Text))
+        {
+            DateTime sT = DateTime.Today;
+            DateTime eT = DateTime.Today;
 
+            try { sT = Convert.ToDateTime(startDateTxtBx); }
+            catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+
+            try { eT = Convert.ToDateTime(EndDate.Text); }
+            catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+            rememberActiveTab("3");
+            if (startDateTxtBx.Text != "" && EndDate.Text != "" && sT < eT) changeDate(startDateTxtBx.Text, EndDate.Text);
+            else emptyVal();
+        }
+        if (testDate(startDateTxtBx.Text) == false) errorOut(startDateTxtBx, errorApptDate, "Not Valid Date");
+        if (testDate(EndDate.Text) == false) errorOut(EndDate, errorApptDate, "Not Valid Date");
+    }
     protected void durationBTN_Click(object sender, EventArgs e)
     {
         if (duration.Text != "")
@@ -259,7 +306,7 @@ public partial class _Default : System.Web.UI.Page
         parameters.Remove(filterName);
         filters = "?" + parameters.ToString();
         rememberActiveTab(tabNumber);
-        Response.Redirect("~/Default?" + parameters.ToString());
+        Response.Redirect("~/Default.aspx?" + parameters.ToString());
     }
     protected void providerNameClearBTN_Click(object sender, EventArgs e)
     {
@@ -275,7 +322,16 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void apptDateClearBTN_Click(object sender, EventArgs e)
     {
-        clearFilter("AppointmentDate", "3");
+        string now = DateTime.Today.ToString("MM/dd/yyyy");
+        Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+        var parameters = HttpUtility.ParseQueryString(uri.Query);
+        parameters.Remove("startDate");
+        parameters.Remove("endDate");
+        parameters.Add("startDate",now);
+        parameters.Add("endDate", now);
+        filters = "?" + parameters.ToString();
+        rememberActiveTab("3");
+        Response.Redirect("~/Default.aspx?" + parameters.ToString());
     }
     protected void durationClearBTN_Click(object sender, EventArgs e)
     {
@@ -292,6 +348,7 @@ public partial class _Default : System.Web.UI.Page
     protected void clearAll_Click(object sender, EventArgs e)
     {
         filters = "?";
-        Response.Redirect("~/Default");
+        Session["startDate"] = "";
+        Response.Redirect("~/Default.aspx");
     }
 }

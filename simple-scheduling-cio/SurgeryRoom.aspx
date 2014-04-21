@@ -95,8 +95,8 @@
 		            </div>
                     <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
                     <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
-                        <asp:ListItem Value="Office Muncie">Muncie</asp:ListItem>
-                        <asp:ListItem Value="Office Anderson">Anderson</asp:ListItem>
+                        <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
+                        <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="Room" DataValueField="Room" AutoPostBack="true">
                         <asp:ListItem Value="1">OR1</asp:ListItem>
