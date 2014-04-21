@@ -58,7 +58,7 @@ public class sqlDataTableSurgery
                     conn.Close();
                 }
                 catch (Exception)
-                { Console.WriteLine("Error Authenticate User"); }
+                { System.Diagnostics.Debug.WriteLine("Error Authenticate User"); }
             }
         }
         return dt;
