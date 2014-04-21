@@ -144,8 +144,5 @@
                 </ItemTemplate>
             </asp:ListView>
         </form>
-        <section>
-            Blob
-        </section>
     </body>
 </html>
