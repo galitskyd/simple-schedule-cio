@@ -220,6 +220,10 @@ public partial class Default2 : System.Web.UI.Page
     protected void tbPatient_TextChanged(object sender, EventArgs e)
     {
         if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
+        {
             lbPatient.SelectedValue = tbPatient.Text;
+            var name = lbPatient.SelectedItem.Text;
+            showPatient.Text = "Patient: " + name;
+        }
     }
 }
