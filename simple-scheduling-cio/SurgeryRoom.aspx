@@ -2,12 +2,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Surgery Room Schedule</title>
-        <link rel="stylesheet" type="html/sandboxed" href="Content/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="Content/jquery-ui-1.10.4.custom.min.css" />
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
         <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="Scripts/html5shiv.js"></script>
+        <script type="text/javascript" src="Scripts/respond.min.js"></script>
+        <![endif]-->
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tbDate').datepicker({
