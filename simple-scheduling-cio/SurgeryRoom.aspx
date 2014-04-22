@@ -4,7 +4,7 @@
     <head runat="server">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Surgery Room Schedule</title>
+        <title>SurgeryGenie</title>
         <link rel="stylesheet" type="text/css" href="Content/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="Content/jquery-ui-1.10.4.custom.min.css" />
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
@@ -77,22 +77,29 @@
         </script>
     </head>
     <body style="background-color: #E2E3E3">
+        <form id="loginform" runat="server">
         <header class="navbar navbar-default" role="navigation">
-            <a class="navbar-brand">SurgeryGenie</a>
-            <a class="pull-right" href="Default.aspx">Main Schedule View</a>
+            <div class="container-fluid">
+                <a class="navbar-brand">SurgeryGenie</a>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="Default.aspx">Main Schedule View</a></li>
+                        <li><a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a></li>
+                    </ul>
+                </div>
+            </div>
+            
         </header>
         
-        <form id="loginform" runat="server">
+        
             <section style="background-color: #D4E6E8">
                 <asp:HiddenField ID="beginVal" runat="server"></asp:HiddenField>
                 <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
                 <asp:GridView ID="test" runat="server"></asp:GridView>
-                <a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a>
                 <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
 
                 <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
                     <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
-                    <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" />
                     <div id="login-box" class="login-popup">
                         <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
             	        Username:<label class="username" style="position:relative;left:30px;"> <asp:TextBox  runat="server" ID="user" CssClass="inputs"></asp:TextBox></label><br />
@@ -109,6 +116,7 @@
                         <asp:ListItem Value="2">OR2</asp:ListItem>
                         <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
                     <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" />
                 </div>
             </section>
@@ -178,8 +186,5 @@
                 </ItemTemplate>
             </asp:ListView>
         </form>
-        <section>
-            Blob
-        </section>
     </body>
 </html>
