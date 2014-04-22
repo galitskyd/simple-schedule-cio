@@ -80,11 +80,11 @@
 
         });
     </script>
-    <div class="navbar navbar-default">
+    <header class="navbar navbar-default" role="navigation">
         <a class="navbar-brand">Central Indiana Orthopedics</a> 
         <p class="navbar-text">Main Schedule View</p>
         <a class="pull-right" href="SurgeryRoom.aspx">SurgeryGenie</a>
-    </div>
+    </header>
     <form id="form1" runat="server">
         <div id="mainPageContainer">
             <asp:GridView ID="GridView1" CssClass="table table-striped" RowStyle-CssClass="table-row" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>
