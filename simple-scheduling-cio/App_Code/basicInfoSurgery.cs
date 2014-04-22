@@ -29,17 +29,17 @@ public class basicInfoSurgery
         info.Columns.Add(dc);
         dc = new DataColumn("Duration");
         info.Columns.Add(dc);
-        dc = new DataColumn("Provider");
-        info.Columns.Add(dc);
         dc = new DataColumn("Patient");
+        info.Columns.Add(dc);
+        dc = new DataColumn("Birthdate");
         info.Columns.Add(dc);
         dc = new DataColumn("Age");
         info.Columns.Add(dc);
         dc = new DataColumn("Gender");
         info.Columns.Add(dc);
-        dc = new DataColumn("Surgery");
+        dc = new DataColumn("Weight");
         info.Columns.Add(dc);
-        dc = new DataColumn("Details");
+        dc = new DataColumn("Surgery Details");
         info.Columns.Add(dc);
         dc = new DataColumn("Date");
         info.Columns.Add(dc);
@@ -51,77 +51,77 @@ public class basicInfoSurgery
         info.Columns.Add(dc);
         dc = new DataColumn("ID");
         info.Columns.Add(dc);
+        dc = new DataColumn("Provider");
+        info.Columns.Add(dc);
         dc = new DataColumn("Anesthesia");
         info.Columns.Add(dc);
         dc = new DataColumn("Equipment");
         info.Columns.Add(dc);
         dc = new DataColumn("Plates");
         info.Columns.Add(dc);
-        DataRow row;
-        for (int i = 0; i < infoDataTable.Rows.Count; i++)
+        DataRow newRow;
+        foreach (DataRow row in infoDataTable.Rows)
         {
-            row = info.NewRow();
-
-            for (int x = 0; x < info.Columns.Count; x++)
+            newRow = info.NewRow();
+            foreach (DataColumn col in info.Columns)
             {
-                if (x == 1) row[x - 1] = infoDataTable.Rows[i][x].ToString();
-                if ((x == 2) || (x == 3)) row[x + 1] = infoDataTable.Rows[i][x].ToString();
-                if (x == 4)
+                if (col.ColumnName == "Position") newRow[col] = row["ordering_position"].ToString();
+                if (col.ColumnName == "Duration") newRow[col] = row["duration"].ToString();
+                if (col.ColumnName == "Patient") newRow[col] = row["last_name"].ToString() + ", " + row["first_name"].ToString();
+                if (col.ColumnName == "Birthdate")
                 {
-                    String lastName = infoDataTable.Rows[i][x].ToString();
-                    String firstName = infoDataTable.Rows[i][5].ToString();
-                    row[x + 1] = lastName + ", " + firstName;
+                    String birthdate = "";
+                    if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                    newRow[col] = birthdate;
                 }
-                if (x == 6)
+                if (col.ColumnName == "Age")
                 {
-                    string dateVal = infoDataTable.Rows[i][x].ToString();
-                    string pattern = "yyyyMMdd";
-                    DateTime parsedDate;
-                    DateTime today = DateTime.Today;
-                    DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                    int age = today.Year - parsedDate.Year;
-                    if (parsedDate > today.AddYears(-age)) age--;
-                    row[x] = age.ToString();
+                    if (row["date_of_birth"].ToString() != "") newRow[col] = getAge(row["date_of_birth"].ToString()).ToString();
+                    else newRow[col] = "";
                 }
-                if ((x > 6) && (x < 10)) row[x] = infoDataTable.Rows[i][x].ToString();
-                if (x == 10)
-                {
-                    string dateVal = infoDataTable.Rows[i][x].ToString();
-                    string pattern = "yyyyMMdd";
-                    DateTime parsedDate;
-                    DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                    row[x] = parsedDate.ToString("yyyy/MM/dd");
-                }
-                if (x > 10 && x < 13)
-                {
-                    row[x] = infoDataTable.Rows[i][x].ToString();
-                }
-                if (x == 14) row[x] = infoDataTable.Rows[i][0].ToString();
-                if (x == 13) row[x] = infoDataTable.Rows[i][x].ToString().Substring(3);
-
+                if (col.ColumnName == "Gender") newRow[col] = row["sex"].ToString();
+                if (col.ColumnName == "Weight") newRow[col] = row["weight_lb"].ToString();
+                if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
+                if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
+                if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
+                if (col.ColumnName == "MedRec#") newRow[col] = row["med_rec_nbr"].ToString();
+                if (col.ColumnName == "ID") newRow[col] = row["surgery_event_id"].ToString();
             }
-            info.Rows.Add(row);
+            info.Rows.Add(newRow);
         }
         for (int i = 0; i < info.Rows.Count; i++)
         {
             DataTable dt;
             String items = "";
-            int surgEventID = int.Parse(info.Rows[i][14].ToString());
+            int surgEventID = int.Parse(info.Rows[i]["ID"].ToString());
             dt = dtItemFilter(providerDataTable, surgEventID, "provider");
             items = parsedItems(dt, surgEventID, ", <br />&nbsp&nbsp&nbsp");
-            info.Rows[i][4] = items;
+            info.Rows[i]["Provider"] = items;
             dt = dtItemFilter(itemsDataTable, surgEventID, "A");
             items = parsedItems(dt, surgEventID, ", ");
-            info.Rows[i][15] = items;
+            if (items.Count() == 0) info.Rows[i]["Anesthesia"] = "N/A";
+            else info.Rows[i]["Anesthesia"] = items;
             dt = dtItemFilter(itemsDataTable, surgEventID, "E");
             items = parsedItems(dt, surgEventID, ", ");
-            info.Rows[i][16] = items;
+            if (items.Count() == 0) info.Rows[i]["Equipment"] = "N/A";
+            else info.Rows[i]["Equipment"] = items;
             dt = dtItemFilter(itemsDataTable, surgEventID, "P");
             items = parsedItems(dt, surgEventID, ", ");
-            info.Rows[i][17] = items;
+            if (items.Count() == 0) info.Rows[i]["Plates"] = "N/A";
+            else info.Rows[i]["Plates"] = items;
         }
         return info;
-
+    }
+    static private int getAge(String dateVal)
+    {
+        string pattern = "yyyyMMdd";
+        DateTime parsedDate;
+        DateTime today = DateTime.Today;
+        DateTime.TryParseExact(dateVal, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
+        int age = today.Year - parsedDate.Year;
+        if (parsedDate > today.AddYears(-age)) age--;
+        return age;
     }
     static private DataTable dtItemFilter(DataTable dt, int surgEventID, String type)
     {
