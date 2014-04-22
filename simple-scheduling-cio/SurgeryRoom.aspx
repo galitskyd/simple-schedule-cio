@@ -88,10 +88,7 @@
                     </ul>
                 </div>
             </div>
-            
         </header>
-        
-        
             <section style="background-color: #D4E6E8">
                 <asp:HiddenField ID="beginVal" runat="server"></asp:HiddenField>
                 <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
