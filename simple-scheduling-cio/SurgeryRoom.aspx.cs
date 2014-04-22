@@ -37,6 +37,7 @@ public partial class _Default : System.Web.UI.Page
             Session["room"] = null;
         }
         else if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+        Session["surgery_event_id"] = null;
         listViewUpdate();
         checkUser();
     }
