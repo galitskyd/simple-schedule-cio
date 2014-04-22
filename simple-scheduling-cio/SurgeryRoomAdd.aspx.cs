@@ -184,7 +184,6 @@ public partial class Default2 : System.Web.UI.Page
                 { Console.WriteLine("Error"); }
             }
         }
-        System.Diagnostics.Debug.WriteLine(dtModifyEvent.Columns[0].ColumnName);
         foreach (DataColumn col in dtModifyEvent.Columns)
         {
             if (col.ColumnName == "Column1") ddlLocation.SelectedValue = dtModifyEvent.Rows[0][col].ToString();
@@ -258,7 +257,6 @@ public partial class Default2 : System.Web.UI.Page
         {
             if (row["type"].ToString() == "A")
             {
-                System.Diagnostics.Debug.WriteLine("A");
                 foreach (ListItem item in lbAnesthesia.Items)
                     if (item.Value == row["item_id"].ToString()) item.Selected = true;
             }
@@ -321,7 +319,6 @@ public partial class Default2 : System.Web.UI.Page
                         {
                             conn.Open();
                             cmd.ExecuteNonQuery();
-                            System.Diagnostics.Debug.WriteLine("Ding");
                             conn.Close();
                             cmd.Parameters.Clear();
                         }
@@ -371,7 +368,6 @@ public partial class Default2 : System.Web.UI.Page
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    System.Diagnostics.Debug.WriteLine("hrmekje");
                     blnRedirect = true;
                 }
 
@@ -383,7 +379,6 @@ public partial class Default2 : System.Web.UI.Page
                         conn.Close();
                         id = Int32.Parse(dtID.Rows[0][0].ToString());
                         blnRedirect = true;
-                        System.Diagnostics.Debug.WriteLine("Pong");
                     }
                     catch { Console.WriteLine("Error"); }
             }
@@ -398,7 +393,6 @@ public partial class Default2 : System.Web.UI.Page
     {
         int id = int.Parse(Session["surg_event_id"].ToString());
         Session["surg_event_id"] = null;
-        System.Diagnostics.Debug.WriteLine(id);
         addEvent("surgModifyEvent", id);
     }
 
