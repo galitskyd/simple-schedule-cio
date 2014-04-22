@@ -27,6 +27,44 @@
                         $("#<%=apptDateBTN.ClientID%>").click();
                 }
                 });
+                $("#<%=providerName.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=providerNameBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=patientName.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=patientNameBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=locationName.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=locationNameBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=duration.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=durationBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=details.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=detailsBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=status.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=statusBTN.ClientID%>").click();
+                    }
+                });
+               
+
         });
     </script>
     <div class="navbar navbar-default">
