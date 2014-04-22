@@ -4,11 +4,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    <link rel="stylesheet" type="html/sandboxed" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/msv.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="Scripts/html5shiv.js"></script>
+    <script type="text/javascript" src="Scripts/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 <body>
@@ -29,11 +35,11 @@
                 });
         });
     </script>
-    <div class="navbar navbar-default">
+    <header class="navbar navbar-default" role="navigation">
         <a class="navbar-brand">Central Indiana Orthopedics</a> 
         <p class="navbar-text">Main Schedule View</p>
         <a class="pull-right" href="SurgeryRoom.aspx">SurgeryGenie</a>
-    </div>
+    </header>
     <form id="form1" runat="server">
         <div id="mainPageContainer">
             <asp:GridView ID="GridView1" CssClass="table table-striped" RowStyle-CssClass="table-row" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>

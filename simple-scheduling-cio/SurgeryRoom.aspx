@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Surgery Room Schedule</title>
-        <link rel="stylesheet" type="html/sandboxed" href="Content/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="Content/jquery-ui-1.10.4.custom.min.css" />
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
         <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="Scripts/html5shiv.js"></script>
+        <script type="text/javascript" src="Scripts/respond.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tbDate').datepicker({
@@ -71,20 +75,20 @@
         </script>
     </head>
     <body style="background-color: #E2E3E3">
-        <div class="navbar navbar-default">
+        <header class="navbar navbar-default" role="navigation">
             <a class="navbar-brand">SurgeryGenie</a>
             <a class="pull-right" href="Default.aspx">Main Schedule View</a>
-        </div>
+        </header>
         
         <form id="loginform" runat="server">
-            <section style="background-color: #E2E3E3">
+            <section style="background-color: #D4E6E8">
                 <asp:HiddenField ID="beginVal" runat="server"></asp:HiddenField>
                 <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
                 <asp:GridView ID="test" runat="server"></asp:GridView>
                 <a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a>
                 <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
 
-                <div id="mainPageContainer" class="col-lg-8 col-lg-offset-2" style="float: none; padding: 0;">
+                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
                     <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
                     <asp:Button ID="btnAdd" runat="server" Text="Add Event" OnClick="btnAdd_Click" />
                     <div id="login-box" class="login-popup">
@@ -95,8 +99,8 @@
 		            </div>
                     <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
                     <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
-                        <asp:ListItem Value="Office Muncie">Muncie</asp:ListItem>
-                        <asp:ListItem Value="Office Anderson">Anderson</asp:ListItem>
+                        <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
+                        <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="Room" DataValueField="Room" AutoPostBack="true">
                         <asp:ListItem Value="1">OR1</asp:ListItem>
@@ -117,22 +121,24 @@
                 </LayoutTemplate>
                 <ItemTemplate>
                     <li class="appointment-listitem">
+                        <div class="row">
                         <div class="col-lg-7 clearfix">
                             <div class="row">
-                                <div id="appointment-time" class="col-lg-3"><%#Eval("Start Time") %> - <%#Eval("End Time") %></div>
+                                <div id="appointment-time" class="col-lg-4"><b><%#Eval("Start Time") %> - <%#Eval("End Time") %></b></div>
                                 <div id="appointment-patient" class="col-lg-4"><%#Eval("Patient") %></div>
-                                <div id="appointment-dob" class="col-lg-3">Date of Birth</div>
+                                <div id="appointment-dob" class="col-lg-2">Date of Birth</div>
                                 <div id="appointment-weight" class="col-lg-1">Wgt</div>
                                 <div id="appointment-room" class="col-lg-1"><%#Eval("Room") %></div>
                             </div>
                             <div class="row">
                                 <div id="appointment-provider" class="col-lg-4"><%#Eval("Provider") %></div>
                                 <div id="appointment-mrn" class="col-lg-4"><%#Eval("MedRec#") %></div>
-                                <div id="appointment-age" class="col-lg-2"><%#Eval("Age") %></div>
-                                <div id="appointment-gender" class="col-lg-2"><%#Eval("Gender") %></div>
+                                <div class="col-lg-2"></div>
+                                <div id="appointment-age" class="col-lg-1"><%#Eval("Age") %></div>
+                                <div id="appointment-gender" class="col-lg-1"><%#Eval("Gender") %></div>
                             </div>
                             <div class="row">
-                                <div id="appointment-surgery" class="col-lg-12"><%#Eval("Surgery") %></div>
+                                <div id="appointment-surgery" class="col-lg-12"><b>Details:</b> <%#Eval("Surgery") %></div>
                             </div>
                         </div>
                         <div class="col-lg-4"">
@@ -164,6 +170,7 @@
                                     <a href="#">Edit</a>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </li>
                 </ItemTemplate>
