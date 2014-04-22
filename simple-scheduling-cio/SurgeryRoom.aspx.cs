@@ -256,6 +256,10 @@ public partial class _Default : System.Web.UI.Page
                 }
             }
         }
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
+        Response.Redirect("SurgeryRoom.aspx");
     }
     protected void ListView1_ItemCommand(object sender, CommandEventArgs e)
     {
