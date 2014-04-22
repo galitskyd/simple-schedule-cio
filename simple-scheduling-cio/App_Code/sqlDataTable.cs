@@ -23,16 +23,20 @@ public static DataTable infoData()
             string sqlCmdString = "SELECT " +
                                     "dbo.provider_mstr.description," +
                                     "dbo.appointments.description," +
+                                    "dbo.person.date_of_birth," +
+                                    "dbo.patient.med_rec_nbr," +
                                     "dbo.location_mstr.location_name," +
                                     "dbo.appointments.appt_date," +
                                     "dbo.appointments.begintime," +
                                     "dbo.appointments.endtime," +
-                                    "dbo.appointments.duration," +
+                                    //"dbo.appointments.duration," +
                                     "dbo.appointments.details," +
                                     "dbo.appointments.workflow_status " +
                                   "FROM " +
                                     "dbo.provider_mstr," +
                                     "dbo.location_mstr," +
+                                    "dbo.person," +
+                                    "dbo.patient," +
                                     "dbo.appointments " +
                                   "WHERE " +
                                     "dbo.appointments.location_id = dbo.location_mstr.location_id " +
