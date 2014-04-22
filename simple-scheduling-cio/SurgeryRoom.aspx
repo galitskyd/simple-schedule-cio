@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SurgeryRoom.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SurgeryRoom.aspx.cs" Inherits="_Default" EnableEventValidation="false" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
@@ -92,7 +92,7 @@
             <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
             <asp:Button ID="Print" runat="server" OnClick="Print_Click" style="height: 26px" Text="Print Schedule" />
             <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
-            <asp:ListView ID="ListView1" runat="server">
+            <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand">
                 <LayoutTemplate>
                     <ul class="selectable surgery-holdings col-lg-8 col-lg-offset-2">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
@@ -109,6 +109,7 @@
                                 <td style="width:50px"><%#Eval("Weight") %></td>
                                 <td style="width:50px"><%#Eval("Room") %></td>
                                 <td style="width:400px;text-align:left"><b>Anasthesia</b><br /><%#Eval("Anesthesia") %> </td>
+                                <td style="width:50px"><asp:Button ID="btnModifyItem" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" /></td>
                             </tr>
                             <tr>
                                 <td style="width:200px;text-align:left"><%#Eval("End Time") %></td>
@@ -116,6 +117,7 @@
                                 <td style="width:50px"><%#Eval("Age") %></td>
                                 <td style="width:50px"><%#Eval("Gender") %></td>
                                 <td style="width:400px"><b>Surgery Equipment</b><br /><%#Eval("Equipment") %></td>
+                                <td style="width:50px"><asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" /></td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="width:400px"><%#Eval("MedRec#") %></td>

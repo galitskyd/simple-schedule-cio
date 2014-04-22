@@ -95,13 +95,30 @@ public partial class _Default : System.Web.UI.Page
         Session["room"] = ddlRoom.SelectedValue;
         Response.Redirect("SurgeryRoomAdd.aspx");
     }
-    protected void checkUser(){
-        
-        if(Session["loggedIN"]!="true"){
+    protected void checkUser()
+    {
+
+        if (Session["loggedIN"] != "true")
+        {
             btnAdd.Visible = false;
             tbTime.Enabled = false;
             signIN.Visible = true;
             signOUT.Visible = false;
+            foreach (ListViewItem item in ListView1.Items)
+            {
+                Button btnDelete = item.FindControl("btnDeleteItem") as Button;
+                if (btnDelete != null)
+                {
+                    btnDelete.Visible = false;
+                    btnDelete.Enabled = false;
+                }
+                Button btnModify = item.FindControl("btnModifyItem") as Button;
+                if (btnModify != null)
+                {
+                    btnModify.Visible = false;
+                    btnModify.Enabled = false;
+                }
+            }
         }
         else
         {
@@ -109,13 +126,28 @@ public partial class _Default : System.Web.UI.Page
             tbTime.Enabled = true;
             signIN.Visible = false;
             signOUT.Visible = true;
+            foreach (ListViewItem item in ListView1.Items)
+            {
+                Button btnDelete = item.FindControl("btnDeleteItem") as Button;
+                if (btnDelete != null)
+                {
+                    btnDelete.Visible = true;
+                    btnDelete.Enabled = true;
+                }
+                Button btnModify = item.FindControl("btnModifyItem") as Button;
+                if (btnModify != null)
+                {
+                    btnModify.Visible = true;
+                    btnModify.Enabled = true;
+                }
+            }
         }
     }
     protected void loginUser_Click(object sender, EventArgs e)
     {
         string username = user.Text;
         string password = pass.Text;
-         
+
         DataTable dt = sqlDataTableSurgery.AuthenticateUser();
         for (int i = 0; i < dt.Rows.Count; i++)
         {
@@ -191,5 +223,52 @@ public partial class _Default : System.Web.UI.Page
     {
         LoadORRooms();
         listViewUpdate();
+    }
+    protected void modifyEvent(int id)
+    {
+        Session["surg_event_id"] = id;
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
+        Response.Redirect("SurgeryRoomAdd.aspx");
+    }
+    protected void deleteEvent(int id)
+    {
+        System.Diagnostics.Debug.WriteLine("bjieogeo");
+        System.Diagnostics.Debug.WriteLine(id);
+        if (id != null)
+        {
+            using (SqlConnection conn = dbConnect.connectionSurgery())
+            {
+                String sqlCmdString = "surgDeleteEvent";
+                using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@surgery_event_id", id);
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    catch
+                    { Console.WriteLine("Error"); }
+                }
+            }
+        }
+    }
+    protected void ListView1_ItemCommand(object sender, CommandEventArgs e)
+    {
+        System.Diagnostics.Debug.WriteLine(e.CommandName + e.CommandArgument);
+        if (e.CommandName == "ModifyEvent")
+        {
+            int id = int.Parse(e.CommandArgument.ToString());
+            modifyEvent(id);
+        }
+        if (e.CommandName == "DeleteEvent")
+        {
+            int id = int.Parse(e.CommandArgument.ToString());
+            deleteEvent(id);
+        }
     }
 }
