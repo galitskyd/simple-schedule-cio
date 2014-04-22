@@ -202,3 +202,7 @@ img.btn_close {
 .appointment-listitem > div.row > div {
     display: inline-block;
 }
+
+.submit-add-surgery {
+    width: 100%;
+}
