@@ -51,12 +51,7 @@
                         $("#<%=locationNameBTN.ClientID%>").click();
                     }
                 });
-                $("#<%=duration.ClientID %>").keypress(function (e) {
-                    if (e.keyCode == 13) {
-                        e.preventDefault();
-                        $("#<%=durationBTN.ClientID%>").click();
-                    }
-                });
+
                 $("#<%=details.ClientID %>").keypress(function (e) {
                     if (e.keyCode == 13) {
                         e.preventDefault();
@@ -67,6 +62,18 @@
                     if (e.keyCode == 13) {
                         e.preventDefault();
                         $("#<%=statusBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=birthDateName.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=birthDateBTN.ClientID%>").click();
+                    }
+                });
+                $("#<%=medRecNum.ClientID %>").keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        e.preventDefault();
+                        $("#<%=medRecNumBTN.ClientID%>").click();
                     }
                 });
                
@@ -120,6 +127,31 @@
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
 
+                <ajaxToolkit:TabPanel ID="TabPanel8" runat="server" HeaderText="Birth Date">
+                    <ContentTemplate>
+                        <br /><br />
+                        Birth Date:
+                         <asp:TextBox ID="birthDateName" runat="server" placeholder="Birth Date"></asp:TextBox>
+                        <asp:Button Text="Filter" runat="server" ID="birthDateBTN" OnClick="birthDateBTN_Click" />
+                        <asp:Button Text="Clear" runat="server" ID="birthDateClearBTN" OnClick="birthDateClearBTN_Click" ToolTip="Click To Clear Birth Date Filters" />
+                        <br />
+                        <asp:Label ID="errorBirthDate" runat="server" Text=""></asp:Label>
+                        <br />
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
+
+                <ajaxToolkit:TabPanel ID="TabPanel9" runat="server" HeaderText="Med Rec Number">
+                    <ContentTemplate>
+                        <br /><br />
+                        Med Rec Number:
+                         <asp:TextBox ID="medRecNum" runat="server" placeholder="Med Rec Number"></asp:TextBox>
+                        <asp:Button Text="Filter" runat="server" ID="medRecNumBTN" OnClick="medRecNumBTN_Click" />
+                        <asp:Button Text="Clear" runat="server" ID="medRecNumClearBTN" OnClick="medRecNumClearBTN_Click" ToolTip="Click To Clear Med Rec Number Filters" />
+                        <br />
+                        <asp:Label ID="errorMedRecNum" runat="server" Text=""></asp:Label>
+                        <br />
+                    </ContentTemplate>
+                </ajaxToolkit:TabPanel>
                
                 <ajaxToolkit:TabPanel ID="TabPanel3" runat="server" HeaderText="Location">
                     <ContentTemplate>
@@ -177,19 +209,6 @@
                         </style>
                        
                             
-                    </ContentTemplate>
-                </ajaxToolkit:TabPanel>
-
-                <ajaxToolkit:TabPanel ID="TabPanel5" runat="server" HeaderText="Duration">
-                    <ContentTemplate>
-                        <br /><br />
-                        Duration:
-                         <asp:TextBox ID="duration" runat="server" placeholder="Duration"></asp:TextBox>
-                        <asp:Button Text="Filter" runat="server" ID="durationBTN" OnClick="durationBTN_Click" />
-                        <asp:Button Text="Clear" runat="server" ID="durationClearBTN" OnClick="durationClearBTN_Click" ToolTip="Click To Clear Duration Filters" />
-                        <br />
-                        <asp:Label ID="errorDuration" runat="server" Text=""></asp:Label>
-                        <br />
                     </ContentTemplate>
                 </ajaxToolkit:TabPanel>
 
