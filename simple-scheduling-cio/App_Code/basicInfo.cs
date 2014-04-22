@@ -42,7 +42,16 @@ public class basicInfo{
             for (int x = 0; x < InfoDataTable.Columns.Count; x++)
             {
                
-                if(x<5) row[x] =(InfoDataTable.Rows[i][x].ToString());
+                if(x<5 && x!=2) row[x] =(InfoDataTable.Rows[i][x].ToString());
+                if (x == 2)
+                {
+                    string dateVal = InfoDataTable.Rows[i][x].ToString();
+                    string time = InfoDataTable.Rows[i][6].ToString();
+                    string pattern = "yyyyMMddHHmm";
+                    DateTime parsedDate;
+                    DateTime.TryParseExact(dateVal + time, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
+                    row[x] = parsedDate.ToString("MM/dd/yyyy"); 
+                }
                 if (x==5)
                 {
                     string dateVal = InfoDataTable.Rows[i][x].ToString();

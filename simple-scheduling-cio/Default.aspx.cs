@@ -82,9 +82,10 @@ public partial class _Default : System.Web.UI.Page
         string[] location = null;
         string[] startDate = null;
         string[] endDate = null;
-        string[] duration = null;
         string[] details = null;
         string[] status = null;
+        string[] birthDate = null;
+        string[] medRec = null;
         Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
         var parameters = HttpUtility.ParseQueryString(uri.Query);
         if (parameters["Provider"] != null) providers = Regex.Split(parameters["Provider"], ",");
@@ -92,24 +93,36 @@ public partial class _Default : System.Web.UI.Page
         if (parameters["Location"] != null) location = Regex.Split(parameters["Location"], ",");
         if (parameters["startDate"] != null) startDate = Regex.Split(parameters["startDate"], ",");
         if (parameters["endDate"] != null) endDate = Regex.Split(parameters["endDate"], ",");
-        if (parameters["Duration"] != null) duration = Regex.Split(parameters["Duration"], ",");
         if (parameters["Details"] != null) details = Regex.Split(parameters["Details"], ",");
         if (parameters["Status"] != null) status = Regex.Split(parameters["Status"], ",");
+        if (parameters["birthDate"] != null) birthDate = Regex.Split(parameters["birthDate"], ",");
+        if (parameters["medRecNum"] != null) medRec = Regex.Split(parameters["medRecNum"], ",");
+
         if (providers != null) filter = filterSelection(filter, "Doctor", providers, type);
         if (patient != null)
         {
             if (providers == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Patient", patient, type);
         }
+        if (birthDate != null)
+        {
+            if (providers == null && patient==null) type = 0; else type = 1;
+            filter = filterSelection(filter, "[Birth Date]", birthDate, type);
+        }
+        if (medRec != null)
+        {
+            if (providers == null && patient == null && birthDate==null) type = 0; else type = 1;
+            filter = filterSelection(filter, "[Med Rec Number]", medRec, type);
+        }
         if (location != null)
         {
-            if (providers == null && patient == null) type = 0; else type = 1;
+            if (providers == null && patient == null && birthDate == null && medRec==null) type = 0; else type = 1;
             filter = filterSelection(filter, "Location", location, type);
         }
         if (startDate != null)
         {
             DateTime tempDate = DateTime.Today;
-            if (providers == null && patient == null && location == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && birthDate == null && medRec == null) type = 0; else type = 1;
             try { tempDate = Convert.ToDateTime(parameters["startDate"]); }
             catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
             try
@@ -123,19 +136,15 @@ public partial class _Default : System.Web.UI.Page
             if (type == 0) filter = "( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
             else filter += " AND  ( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
         }
-        if (duration != null)
-        {
-            if (providers == null && patient == null && location == null && startDate == null) type = 0; else type = 1;
-            filter = filterSelection(filter, "Duration", duration, type);
-        }
+        
         if (details != null)
         {
-            if (providers == null && patient == null && location == null && startDate == null && duration == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && startDate == null && birthDate == null && medRec == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Details", details, type);
         }
         if (status != null)
         {
-            if (providers == null && patient == null && location == null && startDate == null && duration == null && details == null) type = 0; else type = 1;
+            if (providers == null && patient == null && location == null && startDate == null && details == null && birthDate == null && medRec == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Status", status, type);
         }
         dv = basicInfo.dt().DefaultView;
@@ -192,12 +201,12 @@ public partial class _Default : System.Web.UI.Page
         if (locationName.Text != "")
         {
         filters = filters + "Location=" + locationName.Text + "&";
-        rememberActiveTab("2");
+        rememberActiveTab("4");
         Response.Redirect(url + filters);
         }
         else
         {
-            rememberActiveTab("2");
+            rememberActiveTab("4");
             errorOut(locationName, errorLocation, "*Please Insert A Location");
         }
     }
@@ -257,31 +266,18 @@ public partial class _Default : System.Web.UI.Page
         if (testDate(startDateTxtBx.Text) == false) errorOut(startDateTxtBx, errorApptDate, "Not Valid Date");
         if (testDate(EndDate.Text) == false) errorOut(EndDate, errorApptDate, "Not Valid Date");
     }
-    protected void durationBTN_Click(object sender, EventArgs e)
-    {
-        if (duration.Text != "")
-        {
-            filters = filters + "Duration=" + duration.Text + "&";
-            rememberActiveTab("4");
-            Response.Redirect(url + filters);
-        }
-        else
-        {
-            rememberActiveTab("4");
-            errorOut(duration, errorDuration, "*Please Insert A Duration");
-        }
-    }
+   
     protected void detailsBTN_Click(object sender, EventArgs e)
     {
         if (details.Text != "")
         {
             filters = filters + "Details=" + details.Text + "&";
-            rememberActiveTab("5");
+            rememberActiveTab("6");
             Response.Redirect(url + filters);
         }
         else
         {
-            rememberActiveTab("5");
+            rememberActiveTab("6");
             errorOut(details, errorDetails, "*Please Insert Details");
         }
     }
@@ -290,13 +286,42 @@ public partial class _Default : System.Web.UI.Page
         if (status.Text != "")
         {
             filters = filters + "Status=" + status.Text + "&";
-            rememberActiveTab("6");
+            rememberActiveTab("7");
             Response.Redirect(url + filters);
         }
         else
         {
-            rememberActiveTab("6");
+            rememberActiveTab("7");
             errorOut(status, errorStatus, "*Please Insert A Status");
+        }
+    }
+    protected void birthDateBTN_Click(object sender, EventArgs e)
+    {
+        if (birthDateName.Text != "")
+        {
+            filters = filters + "birthDate=" + birthDateName.Text + "&";
+            rememberActiveTab("2");
+            Response.Redirect(url + filters);
+        }
+        else
+        {
+            rememberActiveTab("2");
+            errorOut(status, errorStatus, "*Please Insert A Birth Date");
+        }
+    }
+
+    protected void medRecNumBTN_Click(object sender, EventArgs e)
+    {
+        if (medRecNum.Text != "" )
+        {
+            filters = filters + "medRecNum=" + medRecNum.Text + "&";
+            rememberActiveTab("3");
+            Response.Redirect(url + filters);
+        }
+        else
+        {
+            rememberActiveTab("2");
+            errorOut(status, errorStatus, "*Please Insert A Med Rec Number");
         }
     }
     protected void clearFilter(string filterName,string tabNumber)
@@ -318,7 +343,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void locationNameClearBTN_Click(object sender, EventArgs e)
     {
-        clearFilter("Location", "2");
+        clearFilter("Location", "4");
     }
     protected void apptDateClearBTN_Click(object sender, EventArgs e)
     {
@@ -330,20 +355,17 @@ public partial class _Default : System.Web.UI.Page
         parameters.Add("startDate",now);
         parameters.Add("endDate", now);
         filters = "?" + parameters.ToString();
-        rememberActiveTab("3");
+        rememberActiveTab("5");
         Response.Redirect("~/Default.aspx?" + parameters.ToString());
     }
-    protected void durationClearBTN_Click(object sender, EventArgs e)
-    {
-        clearFilter("Duration", "4");
-    }
+  
     protected void detailsClearBTN_Click(object sender, EventArgs e)
     {
-        clearFilter("Details", "5");
+        clearFilter("Details", "6");
     }
     protected void statusClearBTN_Click(object sender, EventArgs e)
     {
-        clearFilter("Status", "6");
+        clearFilter("Status", "7");
     }
     protected void clearAll_Click(object sender, EventArgs e)
     {
@@ -351,4 +373,13 @@ public partial class _Default : System.Web.UI.Page
         Session["startDate"] = "";
         Response.Redirect("~/Default.aspx");
     }
+    protected void medRecNumClearBTN_Click(object sender, EventArgs e)
+    {
+        clearFilter("medRecNum", "3");
+    }
+    protected void birthDateClearBTN_Click(object sender, EventArgs e)
+    {
+        clearFilter("birthDate", "2");
+    }
+
 }
