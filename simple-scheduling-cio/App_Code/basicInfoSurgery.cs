@@ -109,7 +109,7 @@ public class basicInfoSurgery
             dt = dtItemFilter(itemsDataTable, surgEventID, "P");
             items = parsedItems(dt, surgEventID, ", ");
             if (items.Count() == 0) info.Rows[i]["Plates"] = "N/A";
-            info.Rows[i]["Plates"] = items;
+            else info.Rows[i]["Plates"] = items;
         }
         return info;
     }
