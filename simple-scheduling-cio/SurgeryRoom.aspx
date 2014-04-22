@@ -10,8 +10,10 @@
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
         <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+        <!--[if lt IE 9]>
         <script type="text/javascript" src="Scripts/html5shiv.js"></script>
         <script type="text/javascript" src="Scripts/respond.min.js"></script>
+        <![endif]-->
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tbDate').datepicker({
