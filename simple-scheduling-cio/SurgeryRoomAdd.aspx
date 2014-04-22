@@ -52,7 +52,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label id="lblLocation">Location</label>
-                                <asp:DropDownList TabIndex="1" ID="ddlLocation" CssClass="form-control" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
+                                <asp:DropDownList TabIndex="1" ID="ddlLocation" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                                     <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
                                     <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
                                 </asp:DropDownList>
@@ -60,11 +60,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label id="lblORRom">OR#</label>
-                            <asp:DropDownList TabIndex="2" ID="ddlRoom" CssClass="form-control" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
-                                <asp:ListItem Value="1">OR1</asp:ListItem>
-                                <asp:ListItem Value="2">OR2</asp:ListItem>
-                                <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:DropDownList ID="ddlRoom" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
                         </div>
                     </div>
                     <div class="row">
@@ -78,6 +74,8 @@
                             <div class="form-group">
                                 <label id="lblDuration">Duration (in minutes)</label>
                                 <asp:TextBox TabIndex="4" ID="tbDuration" CssClass="form-control" runat="server" />
+                                <asp:CompareValidator ID="valCompareDurationMax" runat="server" ControlToValidate="tbDuration" Type="Integer" Operator="LessThanEqual" ErrorMessage="This room cannot be booked past 4:15." ValueToCompare="1"></asp:CompareValidator>
+                                <asp:CompareValidator ID="valCompareDurationMin" runat="server" ControlToValidate="tbDuration" Type="Integer" Operator="GreaterThan" ErrorMessage="Please select a duration greater than zero (0) minutes." ValueToCompare="0"></asp:CompareValidator>
                             </div>
                         </div>
                     </div>
@@ -90,12 +88,12 @@
                             </div>
                         </div>
 
-                        <asp:ListBox ID="lbPatient" Visible="false" runat="server" DataTextField="Patient" DataValueField="Patient" AutoPostBack="true" TabIndex="-1"/>
+                        <asp:ListBox ID="lbPatient" Visible="false" runat="server" DataTextField="full_name" DataValueField="med_rec_nbr" AutoPostBack="true" TabIndex="-1"/>
 
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label id="lblProvider">Provider</label>
-                                <asp:ListBox ID="lbProvider" CssClass="form-control" runat="server" DataTextField="Provider" DataValueField="Provider" AutoPostBack="true" SelectionMode="Multiple" Rows="5"/>
+                                <asp:ListBox ID="lbProvider" CssClass="form-control" runat="server" DataTextField="description" DataValueField="provider_id" AutoPostBack="true" SelectionMode="Multiple" Rows="5"/>
                             </div>
                         </div>
                     </div>
@@ -103,17 +101,25 @@
                         <label id="lblSurgery">Surgery Details</label>
                         <asp:TextBox ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
                     </div>
+                    <div style="float:left; width:33%">
+                        <asp:Label ID="lblLatex" Text="Latex Allergy: " runat="server"></asp:Label><br />
+                        <asp:CheckBox ID="chkLatex" runat="server" />
+                    </div>
+                    <div style="float:left;width:33%">
+                        <asp:Label ID="lblDiabetic" Text="Diabetic: " runat="server"></asp:Label><br />
+                        <asp:CheckBox ID="chkDiabetic" runat="server" />
+                    </div>
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
-                        <asp:ListBox ID="lbAnesthesia" CssClass="form-control" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblEquipment">Equipment</label>
-                        <asp:ListBox ID="lbEquipment" CssClass="form-control" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblPlatesImplants">Plates/Implants</label>
-                        <asp:ListBox ID="lbPlatesImplants" CssClass="form-control" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -122,7 +128,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SurgeryRoom.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SurgeryRoom.aspx.cs" Inherits="_Default" EnableEventValidation="false" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
@@ -104,15 +104,11 @@
                         <asp:Button ID="loginUser" class="submit button" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
 		            </div>
                     <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
-                    <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true">
+                    <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                         <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
                         <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="Room" DataValueField="Room" AutoPostBack="true">
-                        <asp:ListItem Value="1">OR1</asp:ListItem>
-                        <asp:ListItem Value="2">OR2</asp:ListItem>
-                        <asp:ListItem Value="3">Minor Procedure Room</asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
                     <div class="pull-right">
                         <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
                         <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" Enabled="false" />
@@ -120,7 +116,7 @@
                 </div>
             </section>
                 <asp:GridView ID="GridView1" runat="server" AllowSorting="false"></asp:GridView>
-                <asp:ListView ID="ListView1" runat="server">
+                <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand">
                 <LayoutTemplate>
                     <section style="background-color: #F0F1F1; padding-bottom: 20px;">
                     <ul class="selectable surgery-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
@@ -135,8 +131,8 @@
                             <div class="row">
                                 <div id="appointment-time" class="col-lg-4"><b><%#Eval("Start Time") %> - <%#Eval("End Time") %></b></div>
                                 <div id="appointment-patient" class="col-lg-4"><%#Eval("Patient") %></div>
-                                <div id="appointment-dob" class="col-lg-2">Date of Birth</div>
-                                <div id="appointment-weight" class="col-lg-1">Wgt</div>
+                                <div id="appointment-dob" class="col-lg-2"><%#Eval("Birthdate") %></div>
+                                <div id="appointment-weight" class="col-lg-1"><%#Eval("Weight") %></div>
                                 <div id="appointment-room" class="col-lg-1"><%#Eval("Room") %></div>
                             </div>
                             <div class="row" style="margin-top: 5px;">
@@ -147,7 +143,7 @@
                                 <div id="appointment-gender" class="col-lg-1"><%#Eval("Gender") %></div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
-                                <div id="appointment-surgery" class="col-lg-12"><b>Details:</b> <%#Eval("Surgery") %></div>
+                                <div id="appointment-surgery" class="col-lg-12"><b>Details:</b> <%#Eval("Surgery Details") %></div>
                             </div>
                         </div>
                         <div class="col-lg-4"">
@@ -177,6 +173,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a class="btn-link" href="#">Edit</a>
+                                    <asp:Button ID="btnModifyItem" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
+                                    <asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
                                 </div>
                             </div>
                         </div>
