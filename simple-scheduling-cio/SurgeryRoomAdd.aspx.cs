@@ -16,7 +16,7 @@ public partial class Default2 : System.Web.UI.Page
     DataTable dtPlatesImplants = new DataTable();
     DataTable dtModifyEvent = new DataTable();
     surgManager surgMan = new surgManager();
-    int intSumDuration;
+    protected int intSumDuration;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -37,7 +37,8 @@ public partial class Default2 : System.Web.UI.Page
             }
             else intSumDuration = sumDuration(null);
         }
-        SetValidation();
+        
+        //SetValidation();
 
         if (Page.IsPostBack)
         {
@@ -47,6 +48,12 @@ public partial class Default2 : System.Web.UI.Page
                        where control.TabIndex > indx
                        select control;
             ctrl.DefaultIfEmpty(wcICausedPostBack).First().Focus();
+
+            if (Session["surg_event_id"] != null)
+            {
+                intSumDuration = sumDuration(Session["surg_event_id"].ToString());
+            }
+            else intSumDuration = sumDuration(null);
         }
     }
 
@@ -73,11 +80,11 @@ public partial class Default2 : System.Web.UI.Page
         return control;
     }
 
-    private void SetValidation()
+    /*private void SetValidation()
     {
         valCompareDurationMax.ValueToCompare = (585 - intSumDuration).ToString();
         valCompareDurationMax.ErrorMessage = "This room cannot be booked past 4:15.<br /> Please select a duration less than " + (585 - intSumDuration).ToString() + " minutes, or consider a different OR room.";
-    }
+    }*/
 
     private void LoadPatients()
     {
@@ -339,6 +346,7 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void addEvent(String insertEvent, int id)
     {
+        System.Diagnostics.Debug.WriteLine("Ping");
         String date = tbDate.Text;
         string pattern = "yyyy/MM/dd";
         DateTime parsedDate;
