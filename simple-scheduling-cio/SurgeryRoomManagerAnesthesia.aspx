@@ -74,8 +74,8 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Anesthesia</label>
-                                <asp:TextBox  runat="server" ID="txtAnesthesia" CssClass="form-control"></asp:TextBox>
+                                <label>Anesthesia Name</label>
+                                <asp:TextBox  runat="server" ID="txtAnesthesia" CssClass="form-control" PlaceHolder="Anesthesia Name"></asp:TextBox>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -86,7 +86,6 @@
                     </div>
                 </div>
             </div>
-
         </form>
     </body>
 </html>
