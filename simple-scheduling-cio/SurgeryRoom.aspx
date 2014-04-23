@@ -70,41 +70,58 @@
                 <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
                 <asp:GridView ID="test" runat="server"></asp:GridView>
                 
-
-                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
-                    <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
-
-                    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <asp:TextBox  runat="server" ID="user" CssClass="form-control" PlaceHolder="Username"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <asp:TextBox TextMode="Password" runat="server" ID="pass" CssClass="form-control" PlaceHolder="Password"></asp:TextBox>
-                                    </div>
+                <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <asp:TextBox  runat="server" ID="user" CssClass="form-control" PlaceHolder="Username"></asp:TextBox>
                                 </div>
-                                <div class="modal-footer">
-                                    <div class="pull-right clearfix">
-                                        <asp:Button ID="loginUser" class="btn btn-primary" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <asp:TextBox TextMode="Password" runat="server" ID="pass" CssClass="form-control" PlaceHolder="Password"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="pull-right clearfix">
+                                    <asp:Button ID="loginUser" class="btn btn-primary" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
-                    <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
-                        <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
-                        <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
-                    <div class="pull-right">
-                        <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
-                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" Enabled="false" />
+                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
+                            <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
+                            <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
+                                <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
+                                <asp:ListItem Value="Office CIO Anderson">Anderson</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <asp:Button ID="aManager" runat="server" CssClass="btn" Text="Anesthesia Manager" OnClick="btnAnesthesia_Click" />
+                                        <asp:Button ID="eManager" runat="server" CssClass="btn" Text="Equipment Manager" OnClick="btnEquipment_Click" />
+                                        <asp:Button ID="pManager" runat="server" CssClass="btn" Text="Plates/Implants Manager" OnClick="btnPlatesAndImplants_Click" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
+                                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" Enabled="false" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

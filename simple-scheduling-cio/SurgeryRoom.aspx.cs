@@ -104,6 +104,12 @@ public partial class _Default : System.Web.UI.Page
             tbTime.Enabled = false;
             signIN.Visible = true;
             signOUT.Visible = false;
+            aManager.Visible = false;
+            aManager.Enabled = false;
+            eManager.Visible = false;
+            eManager.Enabled = false;
+            pManager.Visible = false;
+            pManager.Enabled = false;
             foreach (ListViewItem item in ListView1.Items)
             {
                 Button btnDelete = item.FindControl("btnDeleteItem") as Button;
@@ -126,6 +132,12 @@ public partial class _Default : System.Web.UI.Page
             tbTime.Enabled = true;
             signIN.Visible = false;
             signOUT.Visible = true;
+            aManager.Visible = true;
+            aManager.Enabled = true;
+            eManager.Visible = true;
+            eManager.Enabled = true;
+            pManager.Visible = true;
+            pManager.Enabled = true;
             foreach (ListViewItem item in ListView1.Items)
             {
                 Button btnDelete = item.FindControl("btnDeleteItem") as Button;
@@ -213,12 +225,29 @@ public partial class _Default : System.Web.UI.Page
         Session["room"] = ddlRoom.SelectedValue;
         Response.Redirect("SurgeryRoom.aspx");
     }
+
     protected void Print_Click(object sender, EventArgs e)
     {
         Session["date"] = tbDate.Text;
         Session["location"] = ddlLocation.SelectedValue;
         Response.Redirect("PrintPage.aspx");
     }
+
+    protected void btnAnesthesia_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SurgeryRoomManagerAnesthesia.aspx");
+    }
+
+    protected void btnEquipment_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SurgeryRoomManagerEquipment.aspx");
+    }
+
+    protected void btnPlatesAndImplants_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SurgeryRoomManagerPlatesImplants.aspx");
+    }
+
     protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
     {
         LoadORRooms();
