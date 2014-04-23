@@ -13,9 +13,9 @@ using System.Data.SqlClient;
 
 public class basicInfo{
 
-    static public DataTable dt()
+    static public DataTable dt(string begin, string end)
     {
-        DataTable InfoDataTable = sqlDataTable.infoData();
+        DataTable InfoDataTable = sqlDataTable.infoData(begin,end);
         DataTable info = new DataTable();
         DataColumn dc;
         dc = new DataColumn("Doctor");

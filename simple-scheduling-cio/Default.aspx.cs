@@ -25,6 +25,8 @@ public partial class _Default : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
+        var parameters = HttpUtility.ParseQueryString(uri.Query);
         string fullPathURL = HttpContext.Current.Request.Url.Query;
         
         if (fullPathURL == "")
@@ -34,16 +36,14 @@ public partial class _Default : System.Web.UI.Page
         }
         if(!IsPostBack)
         {
-            Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
-            var parameters = HttpUtility.ParseQueryString(uri.Query);
              startDateTxtBx.Text = parameters["startDate"];
-              EndDate.Text = parameters["endDate"];
+             EndDate.Text = parameters["endDate"];
         }
         myCookie = Request.Cookies["activeTab"];
         if (myCookie != null) TabContainer1.ActiveTabIndex = Convert.ToInt32(myCookie.Value);
-            GridView1.DataSource = basicInfo.dt();
+        GridView1.DataSource = basicInfo.dt(parameters["startDate"], parameters["endDate"]);
             GridView1.DataBind();
-            System.Console.Write(basicInfo.dt());
+            //System.Console.Write(basicInfo.dt());
             filter();
     }
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -147,7 +147,15 @@ public partial class _Default : System.Web.UI.Page
             if (providers == null && patient == null && location == null && startDate == null && details == null && birthDate == null && medRec == null) type = 0; else type = 1;
             filter = filterSelection(filter, "Status", status, type);
         }
-        dv = basicInfo.dt().DefaultView;
+        DateTime tempDate2=DateTime.Today;
+        string bla= null;
+        try
+        {
+             tempDate2 = Convert.ToDateTime(parameters["endDate"]);
+            bla = tempDate2.AddDays(1).ToString();
+        }
+        catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
+        dv = basicInfo.dt(parameters["startDate"], parameters["endDate"]).DefaultView;
         dv.RowFilter = filter;
         DataTable dt = new DataTable();
         dt = dv.ToTable();
@@ -259,8 +267,8 @@ public partial class _Default : System.Web.UI.Page
 
             try { eT = Convert.ToDateTime(EndDate.Text); }
             catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); }
-            rememberActiveTab("3");
-            if (startDateTxtBx.Text != "" && EndDate.Text != "" && sT < eT) changeDate(startDateTxtBx.Text, EndDate.Text);
+            rememberActiveTab("5");
+            if (startDateTxtBx.Text != "" && EndDate.Text != "") changeDate(startDateTxtBx.Text, EndDate.Text);
             else emptyVal();
         }
         if (testDate(startDateTxtBx.Text) == false) errorOut(startDateTxtBx, errorApptDate, "Not Valid Date");
@@ -381,5 +389,7 @@ public partial class _Default : System.Web.UI.Page
     {
         clearFilter("birthDate", "2");
     }
+
+
 
 }
