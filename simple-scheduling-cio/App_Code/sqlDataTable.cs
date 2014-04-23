@@ -13,39 +13,31 @@ public class sqlDataTable
     static DataTable dtInfo = new DataTable();
 
 
-public static DataTable infoData()
+public static DataTable infoData(string begin,string end)
      {
          dtInfo.Clear();
         SqlConnection conn = dbConnect.connection();
 
         try
         {
-            string sqlCmdString = "SELECT " +
-                                    "dbo.provider_mstr.description," +
-                                    "dbo.appointments.description," +
-                                    "dbo.person.date_of_birth," +
-                                    "dbo.patient.med_rec_nbr," +
-                                    "dbo.location_mstr.location_name," +
-                                    "dbo.appointments.appt_date," +
-                                    "dbo.appointments.begintime," +
-                                    "dbo.appointments.endtime," +
-                                    //"dbo.appointments.duration," +
-                                    "dbo.appointments.details," +
-                                    "dbo.appointments.workflow_status " +
-                                  "FROM " +
-                                    "dbo.provider_mstr," +
-                                    "dbo.location_mstr," +
-                                    "dbo.person," +
-                                    "dbo.patient," +
-                                    "dbo.appointments " +
-                                  "WHERE " +
-                                    "dbo.appointments.location_id = dbo.location_mstr.location_id " +
-                                  "AND " +
-                                    "dbo.provider_mstr.provider_id = dbo.appointments.rendering_provider_id";
+
             conn.Open();
-            SqlCommand cmd = new SqlCommand(sqlCmdString, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+            cmd.CommandText = "getAppointments_BSU";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@beginDateVal", begin);
+            cmd.Parameters.AddWithValue("@endDateVal", end);
+            cmd.Connection = conn;
+            
+
+            
+            reader = cmd.ExecuteReader();
             dtInfo.Load(reader);
+
+
+            conn.Close();
+
         }
         catch { Console.WriteLine("Error"); }
         return dtInfo;
