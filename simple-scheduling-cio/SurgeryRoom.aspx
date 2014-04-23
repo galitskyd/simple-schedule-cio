@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
         <script type="text/javascript" src="Scripts/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="Scripts/bootstrap.js"></script>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="Scripts/html5shiv.js"></script>
         <script type="text/javascript" src="Scripts/respond.min.js"></script>
@@ -22,32 +23,6 @@
                     selectOtherMonths: true,
                     changeMonth: true,
                     changeYear: true
-                });
-                $('a.login-window').click(function () {
-                    // Getting the variable's value from a link 
-                    var loginBox = $(this).attr('href');
-                    $(".login-popup").fadeIn(300, function () {
-                        $('.login-popup').css("display", "block");
-                    });
-                    //Set the center alignment padding + border
-                    var popMargTop = ($(loginBox).height() + 24) / 2;
-                    var popMargLeft = ($(loginBox).width() + 24) / 2;
-                    $(loginBox).css({
-                        'margin-top': -popMargTop,
-                        'margin-left': -popMargLeft
-                    });
-                    // Add the mask to body
-                    $('body').append('<div id="mask"></div>');
-                    $('#mask').fadeIn(300);
-                    $('#user').focus();
-                });
-                $('a.close').click(function () {
-                    $(".login-popup").fadeOut(300, function () {
-                        $('.login-popup').css("display", "none");
-                    });
-                    $('#mask').fadeOut(300, function () {
-                        $('#mask').remove();
-                    });
                 });
                 var start; var finish;
                 $('.selectable').sortable({
@@ -84,7 +59,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="Default.aspx">Main Schedule View</a></li>
-                        <li><a href="#login-box" class="login-window pull-right btn primary" runat="server" id="signIN">Sign In</a></li>
+                        <li><a data-toggle="login-box" data-target="#login-modal" class="btn primary" runat="server" id="signIN" onclick="$('#login-modal').modal();">Sign In</a></li>
+                        <li><asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton></li>
                     </ul>
                 </div>
             </div>
@@ -93,16 +69,33 @@
                 <asp:HiddenField ID="beginVal" runat="server"></asp:HiddenField>
                 <asp:HiddenField ID="finalVal" runat="server" OnValueChanged="finalVal_TextChanged"></asp:HiddenField>
                 <asp:GridView ID="test" runat="server"></asp:GridView>
-                <asp:LinkButton ID="signOUT" runat="server" OnClick="signOUT_Click" Text="Sign Out"></asp:LinkButton>
+                
 
                 <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
                     <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
-                    <div id="login-box" class="login-popup">
-                        <a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
-            	        <span style="color: white;">Username:</span><label class="username" style="position:relative;left:30px;"> <asp:TextBox  runat="server" ID="user" CssClass="inputs"></asp:TextBox></label><br />
-                        <span style="color: white;">Password:</span><label class="password" style="position:relative;left:30px;"> <asp:TextBox TextMode="Password" runat="server" ID="pass" CssClass="inputs"></asp:TextBox></label><br />
-                        <asp:Button ID="loginUser" class="submit button" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
-		            </div>
+
+                    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <asp:TextBox  runat="server" ID="user" CssClass="form-control" PlaceHolder="Username"></asp:TextBox>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <asp:TextBox TextMode="Password" runat="server" ID="pass" CssClass="form-control" PlaceHolder="Password"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="pull-right clearfix">
+                                        <asp:Button ID="loginUser" class="btn btn-primary" runat="server" Text="Sign in" OnClick="loginUser_Click"></asp:Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
                     <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
                         <asp:ListItem Value="Office CIO Muncie">Muncie</asp:ListItem>
@@ -130,7 +123,8 @@
                         <div class="col-lg-7 clearfix">
                             <div class="row">
                                 <div id="appointment-time" class="col-lg-4"><b><%#Eval("Start Time") %> - <%#Eval("End Time") %></b></div>
-                                <div id="appointment-patient" class="col-lg-4"><%#Eval("Patient") %></div>
+                                <div id="appointment-patient" class="col-lg-3"><%#Eval("Patient") %></div>
+                                <div id="appointment-duration" class="col-lg-1"><%#Eval("Duration") %></div>
                                 <div id="appointment-dob" class="col-lg-2"><%#Eval("Birthdate") %></div>
                                 <div id="appointment-weight" class="col-lg-1"><%#Eval("Weight") %></div>
                                 <div id="appointment-room" class="col-lg-1"><%#Eval("Room") %></div>
@@ -172,9 +166,10 @@
                         <div class="col-lg-1">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a class="btn-link" href="#">Edit</a>
-                                    <asp:Button ID="btnModifyItem" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
-                                    <asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
+                                    <asp:Button ID="btnModifyItem" CssClass="btn-link" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
+                                    <div style="margin-top: 10px;">
+                                        <asp:Button ID="btnDeleteItem" CssClass="btn-link" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
