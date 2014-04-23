@@ -234,8 +234,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void deleteEvent(int id)
     {
-        System.Diagnostics.Debug.WriteLine("bjieogeo");
-        System.Diagnostics.Debug.WriteLine(id);
         if (id != null)
         {
             using (SqlConnection conn = dbConnect.connectionSurgery())
