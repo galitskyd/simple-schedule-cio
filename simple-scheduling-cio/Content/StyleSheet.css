@@ -174,17 +174,9 @@ img.btn_close {
     cursor: pointer;
 }
 
-.surgery-menu.smaller {
-    font-size: 1.5em;
-}
-
-.surgery-menu#tbDate {
-    display: block;
-}
-
-.surgery-menu.smaller + .surgery-menu.smaller {
-    margin-left: 20px;
-}
+.surgery-menu.smaller { font-size: 1.5em; }
+.surgery-menu#tbDate { display: block; }
+.surgery-menu.smaller + .surgery-menu.smaller { margin-left: 20px; }
 
 .surgery-menu:hover {
     background-color: #BEE3E8;
@@ -195,14 +187,11 @@ img.btn_close {
     background-color: #BEE3E8;
 }
 
-.appointment-listitem {
+.appointment-listitem > div.row > div { display: inline-block; }
+.submit-add-surgery, .btn-full { width: 100%; }
+.management-title { background-color: #D4E6E8; }
 
-}
-
-.appointment-listitem > div.row > div {
-    display: inline-block;
-}
-
-.submit-add-surgery {
-    width: 100%;
+.management-content {
+    padding: 20px 0;
+    background-color: #F0F1F1;
 }
