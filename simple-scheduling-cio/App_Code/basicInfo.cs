@@ -18,7 +18,7 @@ public class basicInfo{
         DataTable InfoDataTable = sqlDataTable.infoData(begin,end);
         DataTable info = new DataTable();
         DataColumn dc;
-        dc = new DataColumn("Doctor");
+        dc = new DataColumn("Provider");
         info.Columns.Add(dc);
         dc = new DataColumn("Patient");
         info.Columns.Add(dc);
@@ -59,7 +59,7 @@ public class basicInfo{
                     string pattern = "yyyyMMddHHmm";
                     DateTime parsedDate;
                     DateTime.TryParseExact(dateVal+time, pattern, null,System.Globalization.DateTimeStyles.None, out parsedDate);
-                    row[x] = parsedDate.ToString("MM/dd/yyyy-hh:mm tt"); 
+                    row[x] = parsedDate.ToString("MM/dd/yyyy-HH:mm"); 
                 }
                 if (x >7) row[x-2] = (InfoDataTable.Rows[i][x].ToString());
             }
