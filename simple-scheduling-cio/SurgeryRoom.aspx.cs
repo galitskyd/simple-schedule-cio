@@ -234,8 +234,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void deleteEvent(int id)
     {
-        System.Diagnostics.Debug.WriteLine("bjieogeo");
-        System.Diagnostics.Debug.WriteLine(id);
         if (id != null)
         {
             using (SqlConnection conn = dbConnect.connectionSurgery())
@@ -263,7 +261,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ListView1_ItemCommand(object sender, CommandEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine(e.CommandName + e.CommandArgument);
         if (e.CommandName == "ModifyEvent")
         {
             int id = int.Parse(e.CommandArgument.ToString());

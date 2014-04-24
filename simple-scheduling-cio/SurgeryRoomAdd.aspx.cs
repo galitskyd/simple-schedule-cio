@@ -384,11 +384,8 @@ public partial class Default2 : System.Web.UI.Page
                         SqlDataReader reader = cmd.ExecuteReader();
                         dtID.Load(reader);
                         conn.Close();
-                        System.Diagnostics.Debug.WriteLine("ping");
                         id = Int32.Parse(dtID.Rows[0][0].ToString());
-                        System.Diagnostics.Debug.WriteLine("pong");
                         blnRedirect = true;
-                        System.Diagnostics.Debug.WriteLine("ding");
                     }
                     catch { Console.WriteLine("Error"); }
             }
