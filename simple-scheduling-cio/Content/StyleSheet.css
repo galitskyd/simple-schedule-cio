@@ -152,7 +152,7 @@ img.btn_close {
 }
 
 .surgery-holdings li:first-child {
-    border-top: 0;
+    border-top: 2px solid #000;
 }
 
 .ui-sortable-helper {

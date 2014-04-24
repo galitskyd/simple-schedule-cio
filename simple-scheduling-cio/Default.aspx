@@ -185,14 +185,14 @@
                                 ID="startDatePicker" 
                                 TargetControlID="startDateTxtBx" 
                                 runat="server" 
-                                Format="MM/dd/yyyy"
+                                Format="MM/DD/YYYY"
                                 PopupPosition="Right"
                                 />
                         <ajaxToolkit:CalendarExtender 
                                 ID="CalendarExtender2" 
                                 TargetControlID="endDate" 
                                 runat="server" 
-                                Format="MM/dd/yyyy"
+                                Format="MM/DD/YYYY"
                                 PopupPosition="Right"
                                 />
 

@@ -50,7 +50,7 @@ public class basicInfo{
                     string pattern = "yyyyMMddHHmm";
                     DateTime parsedDate;
                     DateTime.TryParseExact(dateVal + time, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                    row[x] = parsedDate.ToString("MM/dd/yyyy"); 
+                    row[x] = parsedDate.ToString("MM/DD/YYYY"); 
                 }
                 if (x==5)
                 {
@@ -59,7 +59,7 @@ public class basicInfo{
                     string pattern = "yyyyMMddHHmm";
                     DateTime parsedDate;
                     DateTime.TryParseExact(dateVal+time, pattern, null,System.Globalization.DateTimeStyles.None, out parsedDate);
-                    row[x] = parsedDate.ToString("MM/dd/yyyy-HH:mm"); 
+                    row[x] = parsedDate.ToString("MM/DD/YYYY-hh:mm tt"); 
                 }
                 if (x >7) row[x-2] = (InfoDataTable.Rows[i][x].ToString());
             }

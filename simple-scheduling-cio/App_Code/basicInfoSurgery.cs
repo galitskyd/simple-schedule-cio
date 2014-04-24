@@ -63,31 +63,49 @@ public class basicInfoSurgery
         foreach (DataRow row in infoDataTable.Rows)
         {
             newRow = info.NewRow();
-            foreach (DataColumn col in info.Columns)
-            {
-                if (col.ColumnName == "Position") newRow[col] = row["ordering_position"].ToString();
-                if (col.ColumnName == "Duration") newRow[col] = row["duration"].ToString();
-                if (col.ColumnName == "Patient") newRow[col] = row["last_name"].ToString() + ", " + row["first_name"].ToString();
-                if (col.ColumnName == "Birthdate")
+            if ((row["med_rec_nbr"].ToString() != "") && (row["med_rec_nbr"].ToString() != "000000000000"))
+                foreach (DataColumn col in info.Columns)
                 {
-                    String birthdate = "";
-                    if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
-                    newRow[col] = birthdate;
+                    if (col.ColumnName == "Position") newRow[col] = row["ordering_position"].ToString();
+                    if (col.ColumnName == "Duration") newRow[col] = row["duration"].ToString();
+                    if (col.ColumnName == "Patient") newRow[col] = row["last_name"].ToString() + ", " + row["first_name"].ToString();
+                    if (col.ColumnName == "Birthdate")
+                    {
+                        String birthdate = "";
+                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
+                        newRow[col] = birthdate;
+                    }
+                    if (col.ColumnName == "Age")
+                    {
+                        if (row["date_of_birth"].ToString() != "") newRow[col] = getAge(row["date_of_birth"].ToString()).ToString();
+                        else newRow[col] = "";
+                    }
+                    if (col.ColumnName == "Gender") newRow[col] = row["sex"].ToString();
+                    if (col.ColumnName == "Weight") newRow[col] = row["weight_lb"].ToString();
+                    if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
+                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
+                    if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
+                    if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
+                    if (col.ColumnName == "MedRec#") newRow[col] = row["med_rec_nbr"].ToString();
+                    if (col.ColumnName == "ID") newRow[col] = row["surgery_event_id"].ToString();
                 }
-                if (col.ColumnName == "Age")
+            else
+                foreach (DataColumn col in info.Columns)
                 {
-                    if (row["date_of_birth"].ToString() != "") newRow[col] = getAge(row["date_of_birth"].ToString()).ToString();
-                    else newRow[col] = "";
+                    if (col.ColumnName == "Position") newRow[col] = row["ordering_position"].ToString();
+                    if (col.ColumnName == "Duration") newRow[col] = row["duration"].ToString();
+                    if (col.ColumnName == "Patient") newRow[col] = "";
+                    if (col.ColumnName == "Birthdate") newRow[col] = "";
+                    if (col.ColumnName == "Age") newRow[col] = "";
+                    if (col.ColumnName == "Gender") newRow[col] = "";
+                    if (col.ColumnName == "Weight") newRow[col] = "";
+                    if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
+                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
+                    if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
+                    if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
+                    if (col.ColumnName == "MedRec#") newRow[col] = "";
+                    if (col.ColumnName == "ID") newRow[col] = row["surgery_event_id"].ToString();
                 }
-                if (col.ColumnName == "Gender") newRow[col] = row["sex"].ToString();
-                if (col.ColumnName == "Weight") newRow[col] = row["weight_lb"].ToString();
-                if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
-                if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
-                if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
-                if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
-                if (col.ColumnName == "MedRec#") newRow[col] = row["med_rec_nbr"].ToString();
-                if (col.ColumnName == "ID") newRow[col] = row["surgery_event_id"].ToString();
-            }
             info.Rows.Add(newRow);
         }
         for (int i = 0; i < info.Rows.Count; i++)
