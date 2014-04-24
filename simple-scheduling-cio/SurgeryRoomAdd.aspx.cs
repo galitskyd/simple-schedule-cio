@@ -360,10 +360,13 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue);
                 cmd.Parameters.AddWithValue("@surg_date", date);
                 cmd.Parameters.AddWithValue("@duration", tbDuration.Text);
-                cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                 cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
-                cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
-                cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
+                if (insertEvent != "surgAddBlock")
+                {
+                    cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
+                    cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
+                    cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
+                }
 
                 if (insertEvent == "surgModifyEvent")
                 {
@@ -379,16 +382,22 @@ public partial class Default2 : System.Web.UI.Page
                         SqlDataReader reader = cmd.ExecuteReader();
                         dtID.Load(reader);
                         conn.Close();
+                        System.Diagnostics.Debug.WriteLine("ping");
                         id = Int32.Parse(dtID.Rows[0][0].ToString());
+                        System.Diagnostics.Debug.WriteLine("pong");
                         blnRedirect = true;
+                        System.Diagnostics.Debug.WriteLine("ding");
                     }
                     catch { Console.WriteLine("Error"); }
             }
         }
         addEventComponent("surgAddEventProvider", lbProvider, id, "provider");
-        addEventComponent("surgAddEventItem", lbAnesthesia, id, "A");
-        addEventComponent("surgAddEventItem", lbEquipment, id, "E");
-        addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
+        if (insertEvent != "surgAddBlock")
+        {
+            addEventComponent("surgAddEventItem", lbAnesthesia, id, "A");
+            addEventComponent("surgAddEventItem", lbEquipment, id, "E");
+            addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
+        }
         if (blnRedirect) Response.Redirect("SurgeryRoom.aspx");
     }
     protected void modifyEvent()
@@ -396,6 +405,10 @@ public partial class Default2 : System.Web.UI.Page
         int id = int.Parse(Session["surg_event_id"].ToString());
         Session["surg_event_id"] = null;
         addEvent("surgModifyEvent", id);
+    }
+    protected void btnBlock_Click(object sender, EventArgs e)
+    {
+        addEvent("surgAddBlock", -1);
     }
 
     protected void tbPatient_TextChanged(object sender, EventArgs e)

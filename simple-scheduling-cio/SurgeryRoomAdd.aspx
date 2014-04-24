@@ -48,10 +48,12 @@
                             },
                             greaterThan: {
                                 value: 0,
+                                inclusive: true,
                                 message: 'The input must be greater than 0 minutes'
                             },
                             lessThan: {
                                 value: timevar,
+                                inclusive: false,
                                 message: 'The input must be less than or equal to ' + timevar + ' minutes'
                             }
                         }
@@ -177,6 +179,13 @@
                         <div class="col-lg-12">
                             <div class="col-lg-4 col-lg-offset-4">
                                 <asp:Button TabIndex="13" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-lg-4 col-lg-offset-4">
+                                <asp:Button TabIndex="14" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
                             </div>
                         </div>
                     </div>
