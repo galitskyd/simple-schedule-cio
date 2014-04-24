@@ -72,7 +72,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Birthdate")
                     {
                         String birthdate = "";
-                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/DD/YYYY");
+                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
                         newRow[col] = birthdate;
                     }
                     if (col.ColumnName == "Age")
