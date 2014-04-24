@@ -72,7 +72,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Birthdate")
                     {
                         String birthdate = "";
-                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/DD/YYYY");
                         newRow[col] = birthdate;
                     }
                     if (col.ColumnName == "Age")
@@ -83,7 +83,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Gender") newRow[col] = row["sex"].ToString();
                     if (col.ColumnName == "Weight") newRow[col] = row["weight_lb"].ToString();
                     if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
-                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
                     if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
                     if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
                     if (col.ColumnName == "MedRec#") newRow[col] = row["med_rec_nbr"].ToString();
@@ -100,7 +100,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Gender") newRow[col] = "";
                     if (col.ColumnName == "Weight") newRow[col] = "";
                     if (col.ColumnName == "Surgery Details") newRow[col] = row["surgery_details"].ToString();
-                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd");
+                    if (col.ColumnName == "Date") newRow[col] = DateTime.ParseExact(row["surg_date"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
                     if (col.ColumnName == "Location") newRow[col] = row["location_name"].ToString();
                     if (col.ColumnName == "Room") newRow[col] = row["room_name"].ToString();
                     if (col.ColumnName == "MedRec#") newRow[col] = "";

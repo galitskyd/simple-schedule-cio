@@ -17,7 +17,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tbDate').datepicker({
-                    dateFormat: "yy/mm/dd",
+                    dateFormat: "mm/dd/yy",
                     showOtherMonths: true,
                     selectOtherMonths: true,
                     changeMonth: true,

@@ -36,7 +36,7 @@ public partial class _Default : System.Web.UI.Page
             ddlRoom.SelectedValue = Session["room"].ToString();
             Session["room"] = null;
         }
-        else if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
+        else if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
         Session["surgery_event_id"] = null;
         listViewUpdate();
         checkUser();
@@ -44,6 +44,7 @@ public partial class _Default : System.Web.UI.Page
     protected void listViewUpdate()
     {
         dv = new DataView(dt);
+        System.Diagnostics.Debug.WriteLine("Bing" + tbDate.Text);
         dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedItem + "' AND Date='" + tbDate.Text + "'";
         dtBind = dv.ToTable();
         dtBind = calculateTimes(dtBind);

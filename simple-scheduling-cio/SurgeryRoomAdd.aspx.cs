@@ -186,7 +186,7 @@ public partial class Default2 : System.Web.UI.Page
                 String pattern = "yyyyMMdd";
                 DateTime parsedDate;
                 DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                date = parsedDate.ToString("yyyy/MM/dd");
+                date = parsedDate.ToString("MM/DD/YYYY");
                 tbDate.Text = date;
             }
             if (col.ColumnName == "duration") tbDuration.Text = dtModifyEvent.Rows[0][col].ToString();
@@ -268,6 +268,11 @@ public partial class Default2 : System.Web.UI.Page
     protected int sumDuration(String surg_event_id)
     {
         int sumDur = 0;
+        String date = tbDate.Text;
+        string pattern = "MM/dd/yyyy";
+        DateTime parsedDate;
+        DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
+        date = parsedDate.ToString("yyyyMMdd");
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String sqlCmdString = "surgGetSumDuration";
@@ -276,6 +281,7 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@location_name", ddlLocation.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@surg_date", date);
                 if (surg_event_id != null) cmd.Parameters.AddWithValue("@surgery_event_id", surg_event_id);
                 try
                 {
@@ -337,7 +343,7 @@ public partial class Default2 : System.Web.UI.Page
     protected void addEvent(String insertEvent, int id)
     {
         String date = tbDate.Text;
-        string pattern = "yyyy/MM/dd";
+        string pattern = "MM/dd/yyyy";
         DateTime parsedDate;
         DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
         date = parsedDate.ToString("yyyyMMdd");

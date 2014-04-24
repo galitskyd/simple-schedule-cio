@@ -65,7 +65,7 @@
                             },
                             regexp: {
                                 regexp: /^[0-9]{4}\/(0[1-9]|1[0-2])\/([0-2][0-9]|3[0-1])/,
-                                message: 'The date must be of form YYYY/MM/DD'
+                                message: 'The date must be of form MM/DD/YYYY'
                             }
                         }
                     }
@@ -116,7 +116,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label id="lblDate">Date (YYYY/MM/DD)</label>
+                                <label id="lblDate">Date (MM/DD/YYYY)</label>
                                 <asp:TextBox TabIndex="3" ID="tbDate" CssClass="form-control" runat="server" />
                                 </div>
                         </div>
