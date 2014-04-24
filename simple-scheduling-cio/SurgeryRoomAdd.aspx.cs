@@ -62,18 +62,6 @@ public partial class Default2 : System.Web.UI.Page
         {
             control = page.FindControl(ctrlname);
         }
-        else
-        {
-            foreach (string ctl in page.Request.Form)
-            {
-                Control c = page.FindControl(ctl);
-                if (c is System.Web.UI.WebControls.Button || c is System.Web.UI.WebControls.ImageButton)
-                {
-                    control = c;
-                    break;
-                }
-            }
-        }
         return control;
     }
 
@@ -168,6 +156,8 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void loadModifyEvent()
     {
+        btnBlock.Enabled = false;
+        btnBlock.Visible = false;
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String sqlCmdString = "surgGetEvent";
@@ -206,7 +196,12 @@ public partial class Default2 : System.Web.UI.Page
                 if (dtModifyEvent.Rows[0][col].ToString() != "")
                     FindPatients(dtModifyEvent.Rows[0][col].ToString());
             }
-            if (col.ColumnName == "surgery_details") tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
+            if (col.ColumnName == "surgery_details")
+                if (tbPatient.Text == "")
+                    if (dtModifyEvent.Rows[0][col].ToString().Contains("BLOCKED TIME: "))
+                        tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString().Substring(14);
+                    else tbSurgery.Text = "";
+                else tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
             if (col.ColumnName == "latex_allergy") chkLatex.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
             if (col.ColumnName == "is_diabetic") chkDiabetic.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
         }
@@ -363,6 +358,13 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
                 if (insertEvent != "surgAddBlock")
                 {
+                    if (tbPatient.Text == "")
+                    {
+                        cmd.Parameters.RemoveAt("@surgery_name");
+                        if (tbSurgery.Text != "")
+                            cmd.Parameters.AddWithValue("@surgery_name", "BLOCKED TIME: " + tbSurgery.Text);
+                        else cmd.Parameters.AddWithValue("@surgery_name", "BLOCKED TIME");
+                    }
                     cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                     cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
                     cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
