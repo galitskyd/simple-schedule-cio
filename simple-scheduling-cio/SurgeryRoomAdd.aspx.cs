@@ -25,7 +25,6 @@ public partial class Default2 : System.Web.UI.Page
             if (Session["date"] != null) tbDate.Text = Session["date"].ToString();
             if (Session["location"] != null) ddlLocation.SelectedValue = Session["location"].ToString();
             if (Session["room"] != null) ddlRoom.SelectedValue = Session["room"].ToString();
-            LoadPatients();
             LoadProviders();
             LoadORRooms();
             LoadItems();
@@ -38,8 +37,6 @@ public partial class Default2 : System.Web.UI.Page
             else intSumDuration = sumDuration(null);
         }
         
-        //SetValidation();
-
         if (Page.IsPostBack)
         {
             WebControl wcICausedPostBack = (WebControl)GetPostBackControl(sender as Page);
@@ -80,32 +77,30 @@ public partial class Default2 : System.Web.UI.Page
         return control;
     }
 
-    /*private void SetValidation()
+    private void FindPatients(String medrecnbr)
     {
-        valCompareDurationMax.ValueToCompare = (585 - intSumDuration).ToString();
-        valCompareDurationMax.ErrorMessage = "This room cannot be booked past 4:15.<br /> Please select a duration less than " + (585 - intSumDuration).ToString() + " minutes, or consider a different OR room.";
-    }*/
-
-    private void LoadPatients()
-    {
-        using (SqlConnection conn = dbConnect.connectionSurgery())
-        {
-            String sqlCmdString = "surgGetPatients";
-            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+        dtPatients.Clear();
+        if (medrecnbr.Length == 12)
+            using (SqlConnection conn = dbConnect.connectionSurgery())
             {
-                try
+                String sqlCmdString = "surgGetPatient";
+                using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
                 {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    dtPatients.Load(reader);
-                    conn.Close();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@med_rec_nbr", medrecnbr);
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        dtPatients.Load(reader);
+                        conn.Close();
+                    }
+                    catch { Console.WriteLine("Error"); }
                 }
-                catch { Console.WriteLine("Error"); }
             }
-        }
-        dtPatients.Columns.Add("full_name", typeof(string), "last_name + ', ' + first_name");
-        lbPatient.DataSource = dtPatients;
-        lbPatient.DataBind();
+        showPatient.Text = ""; 
+        if (dtPatients.Rows.Count > 0)
+            showPatient.Text = dtPatients.Rows[0]["last_name"] + ", " + dtPatients.Rows[0]["first_name"];
     }
     private void LoadProviders()
     {
@@ -208,8 +203,8 @@ public partial class Default2 : System.Web.UI.Page
             if (col.ColumnName == "med_rec_nbr")
             {
                 tbPatient.Text = dtModifyEvent.Rows[0][col].ToString();
-                if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
-                    lbPatient.SelectedValue = tbPatient.Text;
+                if (dtModifyEvent.Rows[0][col].ToString() != "")
+                    FindPatients(dtModifyEvent.Rows[0][col].ToString());
             }
             if (col.ColumnName == "surgery_details") tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
             if (col.ColumnName == "latex_allergy") chkLatex.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
@@ -346,7 +341,6 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void addEvent(String insertEvent, int id)
     {
-        System.Diagnostics.Debug.WriteLine("Ping");
         String date = tbDate.Text;
         string pattern = "yyyy/MM/dd";
         DateTime parsedDate;
@@ -406,13 +400,7 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void tbPatient_TextChanged(object sender, EventArgs e)
     {
-        if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
-        {
-            lbPatient.SelectedValue = tbPatient.Text;
-            var name = lbPatient.SelectedItem.Text;
-            showPatient.Text = "Patient: " + name;
-        }
-        lbProvider.Focus();
+        FindPatients(tbPatient.Text);
     }
     protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
     {
