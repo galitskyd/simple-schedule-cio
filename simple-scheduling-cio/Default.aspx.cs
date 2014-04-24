@@ -392,4 +392,35 @@ public partial class _Default : System.Web.UI.Page
 
 
 
+    protected void startDateTxtBx_TextChanged(object sender, EventArgs e)
+    {
+        rememberActiveTab("5");
+         if (testDate(startDateTxtBx.Text) )
+        {
+            DateTime sT = DateTime.Today;  
+            try { sT = Convert.ToDateTime(startDateTxtBx); }
+            catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); } 
+            if (startDateTxtBx.Text != "" && EndDate.Text != "") changeDate(startDateTxtBx.Text, startDateTxtBx.Text);
+            else emptyVal();
+        }
+        if (testDate(startDateTxtBx.Text) == false) errorOut(startDateTxtBx, errorApptDate, "Not Valid Date"); 
+    }
+    protected void EndDate_TextChanged(object sender, EventArgs e)
+    {
+        rememberActiveTab("5");
+        if (testDate(startDateTxtBx.Text) && testDate(EndDate.Text))
+        { 
+            DateTime eT = DateTime.Today;
+            DateTime sT = DateTime.Today; 
+            try { 
+                eT = Convert.ToDateTime(EndDate.Text);
+                sT = Convert.ToDateTime(startDateTxtBx.Text);
+                if (EndDate.Text != "" && sT<=eT) changeDate(startDateTxtBx.Text, EndDate.Text);
+                else emptyVal();
+            }
+            catch { errorOut(EndDate, errorApptDate, "Not Valid Date"); } 
+        }
+        if (testDate(startDateTxtBx.Text) == false) errorOut(startDateTxtBx, errorApptDate, "Not Valid Date");
+        if (testDate(EndDate.Text) == false) errorOut(EndDate, errorApptDate, "Not Valid Date");
+    }
 }

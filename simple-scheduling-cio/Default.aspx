@@ -172,8 +172,8 @@
                         Appointment Date:<asp:Button Text="Filter" runat="server" ID="apptDateBTN" OnClick="apptDateBTN_Click" />
                         <asp:Button Text="Reset" runat="server" ID="apptDateClearBTN" OnClick="apptDateClearBTN_Click" />
                         <br /><br />
-                        Start Date: <asp:TextBox ID="startDateTxtBx" runat="server" placeholder="Start Date" Width="100px"></asp:TextBox>
-                        <div id="endDateContainer"> End Date: &nbsp;&nbsp;<asp:TextBox ID="EndDate" runat="server" placeholder="End Date" Width="100px"></asp:TextBox></div>
+                        Start Date: <asp:TextBox ID="startDateTxtBx" runat="server" placeholder="Start Date" Width="100px" OnTextChanged="startDateTxtBx_TextChanged" AutoPostBack="true"></asp:TextBox>
+                        <div id="endDateContainer"> End Date: &nbsp;&nbsp;<asp:TextBox ID="EndDate" runat="server" placeholder="End Date" Width="100px" OnTextChanged="EndDate_TextChanged" AutoPostBack="true"></asp:TextBox></div>
                         <div id="dateSubmitButtonContainer">
                         
                         </div>
