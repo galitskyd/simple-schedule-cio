@@ -397,6 +397,9 @@ public partial class Default2 : System.Web.UI.Page
             addEventComponent("surgAddEventItem", lbEquipment, id, "E");
             addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
         }
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
         if (blnRedirect) Response.Redirect("SurgeryRoom.aspx");
     }
     protected void modifyEvent()
