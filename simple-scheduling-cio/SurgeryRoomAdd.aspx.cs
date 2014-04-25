@@ -16,7 +16,7 @@ public partial class Default2 : System.Web.UI.Page
     DataTable dtPlatesImplants = new DataTable();
     DataTable dtModifyEvent = new DataTable();
     surgManager surgMan = new surgManager();
-    int intSumDuration;
+    protected int intSumDuration;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -25,7 +25,6 @@ public partial class Default2 : System.Web.UI.Page
             if (Session["date"] != null) tbDate.Text = Session["date"].ToString();
             if (Session["location"] != null) ddlLocation.SelectedValue = Session["location"].ToString();
             if (Session["room"] != null) ddlRoom.SelectedValue = Session["room"].ToString();
-            LoadPatients();
             LoadProviders();
             LoadORRooms();
             LoadItems();
@@ -37,8 +36,7 @@ public partial class Default2 : System.Web.UI.Page
             }
             else intSumDuration = sumDuration(null);
         }
-        SetValidation();
-
+        
         if (Page.IsPostBack)
         {
             WebControl wcICausedPostBack = (WebControl)GetPostBackControl(sender as Page);
@@ -47,6 +45,12 @@ public partial class Default2 : System.Web.UI.Page
                        where control.TabIndex > indx
                        select control;
             ctrl.DefaultIfEmpty(wcICausedPostBack).First().Focus();
+
+            if (Session["surg_event_id"] != null)
+            {
+                intSumDuration = sumDuration(Session["surg_event_id"].ToString());
+            }
+            else intSumDuration = sumDuration(null);
         }
     }
 
@@ -58,47 +62,33 @@ public partial class Default2 : System.Web.UI.Page
         {
             control = page.FindControl(ctrlname);
         }
-        else
-        {
-            foreach (string ctl in page.Request.Form)
-            {
-                Control c = page.FindControl(ctl);
-                if (c is System.Web.UI.WebControls.Button || c is System.Web.UI.WebControls.ImageButton)
-                {
-                    control = c;
-                    break;
-                }
-            }
-        }
         return control;
     }
 
-    private void SetValidation()
+    private void FindPatients(String medrecnbr)
     {
-        valCompareDurationMax.ValueToCompare = (585 - intSumDuration).ToString();
-        valCompareDurationMax.ErrorMessage = "This room cannot be booked past 4:15.<br /> Please select a duration less than " + (585 - intSumDuration).ToString() + " minutes, or consider a different OR room.";
-    }
-
-    private void LoadPatients()
-    {
-        using (SqlConnection conn = dbConnect.connectionSurgery())
-        {
-            String sqlCmdString = "surgGetPatients";
-            using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+        dtPatients.Clear();
+        if (medrecnbr.Length == 12)
+            using (SqlConnection conn = dbConnect.connectionSurgery())
             {
-                try
+                String sqlCmdString = "surgGetPatient";
+                using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
                 {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    dtPatients.Load(reader);
-                    conn.Close();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@med_rec_nbr", medrecnbr);
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        dtPatients.Load(reader);
+                        conn.Close();
+                    }
+                    catch { Console.WriteLine("Error"); }
                 }
-                catch { Console.WriteLine("Error"); }
             }
-        }
-        dtPatients.Columns.Add("full_name", typeof(string), "last_name + ', ' + first_name");
-        lbPatient.DataSource = dtPatients;
-        lbPatient.DataBind();
+        showPatient.Text = ""; 
+        if (dtPatients.Rows.Count > 0)
+            showPatient.Text = dtPatients.Rows[0]["last_name"] + ", " + dtPatients.Rows[0]["first_name"];
     }
     private void LoadProviders()
     {
@@ -166,6 +156,8 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void loadModifyEvent()
     {
+        btnBlock.Enabled = false;
+        btnBlock.Visible = false;
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String sqlCmdString = "surgGetEvent";
@@ -194,17 +186,22 @@ public partial class Default2 : System.Web.UI.Page
                 String pattern = "yyyyMMdd";
                 DateTime parsedDate;
                 DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                date = parsedDate.ToString("yyyy/MM/dd");
+                date = parsedDate.ToString("MM/DD/YYYY");
                 tbDate.Text = date;
             }
             if (col.ColumnName == "duration") tbDuration.Text = dtModifyEvent.Rows[0][col].ToString();
             if (col.ColumnName == "med_rec_nbr")
             {
                 tbPatient.Text = dtModifyEvent.Rows[0][col].ToString();
-                if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
-                    lbPatient.SelectedValue = tbPatient.Text;
+                if (dtModifyEvent.Rows[0][col].ToString() != "")
+                    FindPatients(dtModifyEvent.Rows[0][col].ToString());
             }
-            if (col.ColumnName == "surgery_details") tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
+            if (col.ColumnName == "surgery_details")
+                if (tbPatient.Text == "")
+                    if (dtModifyEvent.Rows[0][col].ToString().Contains("BLOCKED TIME: "))
+                        tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString().Substring(14);
+                    else tbSurgery.Text = "";
+                else tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
             if (col.ColumnName == "latex_allergy") chkLatex.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
             if (col.ColumnName == "is_diabetic") chkDiabetic.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
         }
@@ -271,6 +268,11 @@ public partial class Default2 : System.Web.UI.Page
     protected int sumDuration(String surg_event_id)
     {
         int sumDur = 0;
+        String date = tbDate.Text;
+        string pattern = "MM/dd/yyyy";
+        DateTime parsedDate;
+        DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
+        date = parsedDate.ToString("yyyyMMdd");
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String sqlCmdString = "surgGetSumDuration";
@@ -279,6 +281,7 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@location_name", ddlLocation.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@surg_date", date);
                 if (surg_event_id != null) cmd.Parameters.AddWithValue("@surgery_event_id", surg_event_id);
                 try
                 {
@@ -340,7 +343,7 @@ public partial class Default2 : System.Web.UI.Page
     protected void addEvent(String insertEvent, int id)
     {
         String date = tbDate.Text;
-        string pattern = "yyyy/MM/dd";
+        string pattern = "MM/dd/yyyy";
         DateTime parsedDate;
         DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
         date = parsedDate.ToString("yyyyMMdd");
@@ -358,10 +361,20 @@ public partial class Default2 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@room_number", ddlRoom.SelectedValue);
                 cmd.Parameters.AddWithValue("@surg_date", date);
                 cmd.Parameters.AddWithValue("@duration", tbDuration.Text);
-                cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                 cmd.Parameters.AddWithValue("@surgery_name", tbSurgery.Text);
-                cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
-                cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
+                if (insertEvent != "surgAddBlock")
+                {
+                    if (tbPatient.Text == "")
+                    {
+                        cmd.Parameters.RemoveAt("@surgery_name");
+                        if (tbSurgery.Text != "")
+                            cmd.Parameters.AddWithValue("@surgery_name", "BLOCKED TIME: " + tbSurgery.Text);
+                        else cmd.Parameters.AddWithValue("@surgery_name", "BLOCKED TIME");
+                    }
+                    cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
+                    cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
+                    cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
+                }
 
                 if (insertEvent == "surgModifyEvent")
                 {
@@ -384,9 +397,15 @@ public partial class Default2 : System.Web.UI.Page
             }
         }
         addEventComponent("surgAddEventProvider", lbProvider, id, "provider");
-        addEventComponent("surgAddEventItem", lbAnesthesia, id, "A");
-        addEventComponent("surgAddEventItem", lbEquipment, id, "E");
-        addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
+        if (insertEvent != "surgAddBlock")
+        {
+            addEventComponent("surgAddEventItem", lbAnesthesia, id, "A");
+            addEventComponent("surgAddEventItem", lbEquipment, id, "E");
+            addEventComponent("surgAddEventItem", lbPlatesImplants, id, "P");
+        }
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
         if (blnRedirect) Response.Redirect("SurgeryRoom.aspx");
     }
     protected void modifyEvent()
@@ -395,16 +414,14 @@ public partial class Default2 : System.Web.UI.Page
         Session["surg_event_id"] = null;
         addEvent("surgModifyEvent", id);
     }
+    protected void btnBlock_Click(object sender, EventArgs e)
+    {
+        addEvent("surgAddBlock", -1);
+    }
 
     protected void tbPatient_TextChanged(object sender, EventArgs e)
     {
-        if (lbPatient.Items.FindByValue(tbPatient.Text) != null)
-        {
-            lbPatient.SelectedValue = tbPatient.Text;
-            var name = lbPatient.SelectedItem.Text;
-            showPatient.Text = "Patient: " + name;
-        }
-        lbProvider.Focus();
+        FindPatients(tbPatient.Text);
     }
     protected void ddlLocation_SelectedIndexChanged(object sender, EventArgs e)
     {
