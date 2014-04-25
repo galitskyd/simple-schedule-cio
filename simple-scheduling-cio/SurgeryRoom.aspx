@@ -215,7 +215,6 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <asp:Button ID="btnModifyItem" runat="server" Text="Edit" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false"/>
-                                    <asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false"/>
                                 </div>
                             </div>
                         </div>

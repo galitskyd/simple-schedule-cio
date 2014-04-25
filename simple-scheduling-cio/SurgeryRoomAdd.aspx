@@ -179,6 +179,7 @@
                         <div class="col-lg-12">
                             <div class="col-lg-4 col-lg-offset-4">
                                 <asp:Button TabIndex="13" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="14" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
                             </div>
                         </div>
                     </div>
