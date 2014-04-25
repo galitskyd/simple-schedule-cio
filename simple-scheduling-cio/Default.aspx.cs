@@ -31,7 +31,7 @@ public partial class _Default : System.Web.UI.Page
         
         if (fullPathURL == "")
         {
-                string todayDate = DateTime.Today.ToString("MM/DD/YYYY");
+                string todayDate = DateTime.Today.ToString("MM/dd/yyyy");
                 changeDate(todayDate, todayDate);
         }
         if(!IsPostBack)
@@ -133,8 +133,8 @@ public partial class _Default : System.Web.UI.Page
             catch {errorOut(EndDate, errorApptDate, "Not Valid Date"); }
             
             
-            if (type == 0) filter = "( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/DD/YYYY") + "# )";
-            else filter += " AND  ( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/DD/YYYY") + "# )";
+            if (type == 0) filter = "( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
+            else filter += " AND  ( [Appt Date] >= #" + parameters["startDate"] + "# And [Appt Date] <= #" + tempDate.ToString("MM/dd/yyyy") + "# )";
         }
         
         if (details != null)
@@ -229,7 +229,7 @@ public partial class _Default : System.Web.UI.Page
         try{ eT = Convert.ToDateTime(EndDate.Text); }
         catch{ errorOut(EndDate, errorApptDate, "Not Valid Date"); }
 
-        if (startDateTxtBx.Text == "") startDateTxtBx.Text = DateTime.Today.ToString("MM/DD/YYYY");
+        if (startDateTxtBx.Text == "") startDateTxtBx.Text = DateTime.Today.ToString("MM/dd/yyyy");
         if (EndDate.Text == "" || eT < sT) EndDate.Text = startDateTxtBx.Text;
             changeDate(startDateTxtBx.Text, EndDate.Text);
     }
@@ -355,7 +355,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void apptDateClearBTN_Click(object sender, EventArgs e)
     {
-        string now = DateTime.Today.ToString("MM/DD/YYYY");
+        string now = DateTime.Today.ToString("MM/dd/yyyy");
         Uri uri = new Uri(HttpContext.Current.Request.Url.AbsoluteUri);
         var parameters = HttpUtility.ParseQueryString(uri.Query);
         parameters.Remove("startDate");
