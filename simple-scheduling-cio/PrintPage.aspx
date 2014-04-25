@@ -62,17 +62,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <div class="row">
-                                                        <div id="divRoom" class="col-lg-12">
-                                                            <b>Room: <%#Eval("Room") %></b>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </li>
                                     </ul>
-                                    <ul class="selectable surgery-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
+                                    <ul class="print-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
                                         <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                                     </ul>
                                 </section>
