@@ -155,38 +155,46 @@
                         <label id="lblSurgery">Surgery Details</label>
                         <asp:TextBox TabIndex="7" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
                     </div>
-                    <div style="float:left; width:33%">
+                    <div style="float:left; width:25%">
                         <asp:Label ID="lblLatex" Text="Latex Allergy: " runat="server"></asp:Label><br />
                         <asp:CheckBox TabIndex="8" ID="chkLatex" runat="server" />
                     </div>
-                    <div style="float:left;width:33%">
+                    <div style="float:left;width:25%">
                         <asp:Label ID="lblDiabetic" Text="Diabetic: " runat="server"></asp:Label><br />
                         <asp:CheckBox TabIndex="9" ID="chkDiabetic" runat="server" />
                     </div>
+                    <div style="float:left;width:25%">
+                        <asp:Label ID="lblVanco" Text="Vanco Preop: " runat="server"></asp:Label><br />
+                        <asp:CheckBox TabIndex="10" ID="chkVanco" runat="server" />
+                    </div>
+                    <div style="float:left;width:25%">
+                        <asp:Label ID="lblCoagucheck" Text="Coagucheck: " runat="server"></asp:Label><br />
+                        <asp:CheckBox TabIndex="11" ID="chkCoagucheck" runat="server" />
+                    </div>
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
-                        <asp:ListBox TabIndex="10" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="12" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblEquipment">Equipment</label>
-                        <asp:ListBox TabIndex="11" ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="13" ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblPlatesImplants">Plates/Implants</label>
-                        <asp:ListBox TabIndex="12" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="14" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="col-lg-4 col-lg-offset-4">
-                                <asp:Button TabIndex="13" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
-                                <asp:Button TabIndex="14" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
+                                <asp:Button TabIndex="15" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="16" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="col-lg-4 col-lg-offset-4">
-                                <asp:Button TabIndex="14" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="16" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
                             </div>
                         </div>
                     </div>
