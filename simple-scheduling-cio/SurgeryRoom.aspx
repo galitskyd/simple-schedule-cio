@@ -111,7 +111,7 @@
                     <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
                     <div class="pull-right">
                         <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
-                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" Enabled="false" />
+                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule"/>
                     </div>
                 </div>
             </section>
@@ -214,8 +214,8 @@
                         <div class="col-lg-1">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <asp:Button ID="btnModifyItem" runat="server" Text="Edit" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
-                                    <asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
+                                    <asp:Button ID="btnModifyItem" runat="server" Text="Edit" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false"/>
+                                    <asp:Button ID="btnDeleteItem" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false"/>
                                 </div>
                             </div>
                         </div>

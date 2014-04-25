@@ -19,6 +19,7 @@
                 </LayoutTemplate>
                 <ItemTemplate>
                     <li>
+                        <div><%#Eval("Key") %></div>
                         <asp:ListView ID="ListView1" runat="server">
                             <LayoutTemplate>
                                 <section style="background-color: #F0F1F1; padding-bottom: 20px;">

@@ -224,6 +224,7 @@ public partial class _Default : System.Web.UI.Page
     {
         LoadORRooms();
         listViewUpdate();
+        checkUser();
     }
     protected void modifyEvent(int id)
     {

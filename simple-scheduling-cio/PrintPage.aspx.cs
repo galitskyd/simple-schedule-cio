@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 public partial class PrintPage : System.Web.UI.Page
 {
-   List<DataTable> dtList = new List<DataTable>();
+    Dictionary<String,DataTable> dtList = new Dictionary<String,DataTable>();
     DataTable dt = basicInfoSurgery.dt();
     DataView dv;
     String location;
@@ -26,8 +26,6 @@ public partial class PrintPage : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["location"] = "Office CIO Muncie";
-        Session["date"] = "05/05/2014";
         location = Session["location"].ToString();
         date = Session["date"].ToString();
         System.Diagnostics.Debug.Write(date);
@@ -86,13 +84,13 @@ public partial class PrintPage : System.Web.UI.Page
         {
             dv = dt.AsDataView();
             dv.RowFilter = "Location = '" + location + "' AND Room = '" + row["room_name"] + "' AND Date = '" + date + "'";
-            dtList.Add(dv.ToTable());
+            dtList.Add(row["room_name"].ToString(),dv.ToTable());
         }
     }
     protected void ListViewPrime_ItemDataBound(object sender, ListViewItemEventArgs e)
     {
         var ListView1 = (ListView)e.Item.FindControl("ListView1");
-        ListView1.DataSource = dtList.ElementAt(i);
+        ListView1.DataSource = dtList.ElementAt(i).Value;
         i++;
         ListView1.DataBind();
     }
