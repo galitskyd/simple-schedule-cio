@@ -155,6 +155,7 @@
                         <label id="lblSurgery">Surgery Details</label>
                         <asp:TextBox TabIndex="7" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
                     </div>
+                    <div class="form-group">
                     <div style="float:left; width:25%">
                         <asp:Label ID="lblLatex" Text="Latex Allergy: " runat="server"></asp:Label><br />
                         <asp:CheckBox TabIndex="8" ID="chkLatex" runat="server" />
@@ -171,6 +172,8 @@
                         <asp:Label ID="lblCoagucheck" Text="Coagucheck: " runat="server"></asp:Label><br />
                         <asp:CheckBox TabIndex="11" ID="chkCoagucheck" runat="server" />
                     </div>
+                    </div>
+                    <br /><br />
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
                         <asp:ListBox TabIndex="12" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
