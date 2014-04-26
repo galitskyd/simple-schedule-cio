@@ -37,7 +37,7 @@ public partial class _Default : System.Web.UI.Page
             Session["room"] = null;
         }
         else if (tbDate.Text == "") tbDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
-        Session["surgery_event_id"] = null;
+        Session["surg_event_id"] = null;
         listViewUpdate();
         checkUser();
     }
@@ -253,6 +253,7 @@ public partial class _Default : System.Web.UI.Page
     {
         LoadORRooms();
         listViewUpdate();
+        checkUser();
     }
     protected void modifyEvent(int id)
     {
@@ -295,11 +296,6 @@ public partial class _Default : System.Web.UI.Page
         {
             int id = int.Parse(e.CommandArgument.ToString());
             modifyEvent(id);
-        }
-        if (e.CommandName == "DeleteEvent")
-        {
-            int id = int.Parse(e.CommandArgument.ToString());
-            deleteEvent(id);
         }
     }
 }

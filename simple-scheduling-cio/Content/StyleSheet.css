@@ -165,6 +165,16 @@ img.btn_close {
     border: 3px solid #9999FF !important;
 }
 
+.print-holdings {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.print-holdings li {
+    border-top: 1px solid #000;
+    padding: 10px 15px;
+}
+
 .surgery-menu {
     display: inline-block;
     padding: 10px 0;
