@@ -116,6 +116,30 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Latex</b>
+                                <%#Eval("Latex") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Diabetic</b>
+                                <%#Eval("Diabetic") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Vanco-Preop</b>
+                                <%#Eval("Vanco") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Coaguchek</b>
+                                <%#Eval("Coaguchek") %>
+                            </div>
+                        </div>
                                     </div>
                                     <div>
                                         <hr />

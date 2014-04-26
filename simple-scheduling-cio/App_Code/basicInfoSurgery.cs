@@ -65,7 +65,7 @@ public class basicInfoSurgery
         info.Columns.Add(dc);
         dc = new DataColumn("Vanco");
         info.Columns.Add(dc);
-        dc = new DataColumn("Coagucheck");
+        dc = new DataColumn("Coaguchek");
         info.Columns.Add(dc);
         DataRow newRow;
         foreach (DataRow row in infoDataTable.Rows)
@@ -99,7 +99,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Latex") newRow[col] = row["latex_allergy"].ToString();
                     if (col.ColumnName == "Diabetic") newRow[col] = row["is_diabetic"].ToString();
                     if (col.ColumnName == "Vanco") newRow[col] = row["vanco_preop"].ToString();
-                    if (col.ColumnName == "Coagucheck") newRow[col] = row["coagucheck"].ToString();
+                    if (col.ColumnName == "Coaguchek") newRow[col] = row["coagucheck"].ToString();
                 }
             else
                 foreach (DataColumn col in info.Columns)
@@ -120,7 +120,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Latex") newRow[col] = "";
                     if (col.ColumnName == "Diabetic") newRow[col] = "";
                     if (col.ColumnName == "Vanco") newRow[col] = "";
-                    if (col.ColumnName == "Coagucheck") newRow[col] = "";
+                    if (col.ColumnName == "Coaguchek") newRow[col] = "";
                 }
             info.Rows.Add(newRow);
         }
