@@ -98,7 +98,7 @@ public partial class _Default : System.Web.UI.Page
         if (parameters["birthDate"] != null) birthDate = Regex.Split(parameters["birthDate"], ",");
         if (parameters["medRecNum"] != null) medRec = Regex.Split(parameters["medRecNum"], ",");
 
-        if (providers != null) filter = filterSelection(filter, "Doctor", providers, type);
+        if (providers != null) filter = filterSelection(filter, "Provider", providers, type);
         if (patient != null)
         {
             if (providers == null) type = 0; else type = 1;
@@ -187,7 +187,7 @@ public partial class _Default : System.Web.UI.Page
         else
         {
             rememberActiveTab("0");
-            errorOut(providerName,errorProvider,"*Please Insert A Doctor's Name");
+            errorOut(providerName,errorProvider,"*Please Insert A Provider's Name");
         }
     }
     protected void patientNameBTN_Click(object sender, EventArgs e)
