@@ -18,7 +18,7 @@ public partial class PrintPage : System.Web.UI.Page
     DataTable dt = basicInfoSurgery.dt();
     DataView dv;
     String location;
-    String date;
+    protected String date;
     protected String room = "Testing";
     DataTable dtORRooms = new DataTable();
     protected DateTime timestamp = new DateTime();

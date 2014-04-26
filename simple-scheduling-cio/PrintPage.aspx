@@ -20,6 +20,7 @@
                 <ItemTemplate>
                     <li>
                         <div><%#Eval("Key") %></div>
+                        <div>Surgery Schedule for <%=date %> with schedule start time of 6:30:00 AM</div>
                         <asp:ListView ID="ListView1" runat="server">
                             <LayoutTemplate>
                                 <section style="background-color: #F0F1F1; padding-bottom: 20px;">
