@@ -169,8 +169,8 @@
                         <asp:CheckBox TabIndex="10" ID="chkVanco" runat="server" />
                     </div>
                     <div style="float:left;width:25%">
-                        <asp:Label ID="lblCoagucheck" Text="Coagucheck: " runat="server"></asp:Label><br />
-                        <asp:CheckBox TabIndex="11" ID="chkCoagucheck" runat="server" />
+                        <asp:Label ID="lblCoaguchek" Text="Coaguchek: " runat="server"></asp:Label><br />
+                        <asp:CheckBox TabIndex="11" ID="chkCoaguchek" runat="server" />
                     </div>
                     </div>
                     <br /><br />

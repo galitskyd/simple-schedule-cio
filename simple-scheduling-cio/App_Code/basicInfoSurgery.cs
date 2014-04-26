@@ -99,7 +99,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Latex") newRow[col] = row["latex_allergy"].ToString();
                     if (col.ColumnName == "Diabetic") newRow[col] = row["is_diabetic"].ToString();
                     if (col.ColumnName == "Vanco") newRow[col] = row["vanco_preop"].ToString();
-                    if (col.ColumnName == "Coaguchek") newRow[col] = row["coagucheck"].ToString();
+                    if (col.ColumnName == "Coaguchek") newRow[col] = row["coaguchek"].ToString();
                 }
             else
                 foreach (DataColumn col in info.Columns)

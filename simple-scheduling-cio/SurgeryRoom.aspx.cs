@@ -168,8 +168,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void finalVal_TextChanged(object sender, EventArgs e)
     {
-        if (Session["loggedIN"] == "true")
-        {
         int begin = int.Parse(beginVal.Value);
         int end = int.Parse(finalVal.Value);
         string date = Regex.Replace(tbDate.Text, @"[^\d]", "");
@@ -215,7 +213,6 @@ public partial class _Default : System.Web.UI.Page
         Session["location"] = ddlLocation.SelectedValue;
         Session["room"] = ddlRoom.SelectedValue;
         Response.Redirect("SurgeryRoom.aspx");
-    }
     }
     protected void Print_Click(object sender, EventArgs e)
     {
