@@ -1,7 +1,7 @@
 ﻿<LayoutTemplate>
     <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
 </LayoutTemplate>
-
+<!--
 <ItemTemplate>
     <li>
         <table style="table-layout: fixed">
@@ -28,3 +28,4 @@
         </table>
     </li>
 </ItemTemplate>
+-->

@@ -20,6 +20,7 @@ public partial class _Default : System.Web.UI.Page
     DataView dv;
     protected void Page_Load(object sender, EventArgs e)
     {
+        System.Diagnostics.Debug.Write("PAGE 1---- PAGE 1");
         if (!Page.IsPostBack) LoadORRooms();
         if (tbTime.Text == "") tbTime.Text = "06:30:00";
         if (Session["date"] != null)
