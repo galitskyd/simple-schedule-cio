@@ -11,6 +11,7 @@ using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.Text.RegularExpressions;
+using System.Web.UI.HtmlControls;
 public partial class _Default : System.Web.UI.Page
 {
     DataTable dt = basicInfoSurgery.dt();
@@ -98,6 +99,9 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void checkUser()
     {
+        HtmlGenericControl javascript = new HtmlGenericControl("script");
+        javascript.Attributes["type"] = "text/javascript";
+        javascript.Attributes["src"] = "Scripts/dragDrop.js";
 
         if (Session["loggedIN"] != "true")
         {
@@ -111,6 +115,7 @@ public partial class _Default : System.Web.UI.Page
             eManager.Enabled = false;
             pManager.Visible = false;
             pManager.Enabled = false;
+            Page.Header.Controls.Remove(javascript);
             foreach (ListViewItem item in ListView1.Items)
             {
                 Button btnDelete = item.FindControl("btnDeleteItem") as Button;
@@ -139,6 +144,7 @@ public partial class _Default : System.Web.UI.Page
             eManager.Enabled = true;
             pManager.Visible = true;
             pManager.Enabled = true;
+            Page.Header.Controls.Add(javascript);
             foreach (ListViewItem item in ListView1.Items)
             {
                 Button btnDelete = item.FindControl("btnDeleteItem") as Button;
@@ -176,7 +182,13 @@ public partial class _Default : System.Web.UI.Page
     protected void signOUT_Click(object sender, EventArgs e)
     {
         Session["loggedIN"] = "false";
+        HtmlGenericControl javascript = new HtmlGenericControl("script");
+        javascript.Attributes["type"] = "text/javascript";
+        javascript.Attributes["src"] = "Scripts/dragDrop.js";
+        Page.Header.Controls.Remove(javascript);
         checkUser();
+        Session["date"] = tbDate.Text;
+        Response.Redirect("SurgeryRoom.aspx");
     }
     protected void finalVal_TextChanged(object sender, EventArgs e)
     {
