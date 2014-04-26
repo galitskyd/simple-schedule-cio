@@ -158,6 +158,8 @@ public partial class Default2 : System.Web.UI.Page
     {
         btnBlock.Enabled = false;
         btnBlock.Visible = false;
+        btnDeleteItem.Enabled = true;
+        btnDeleteItem.Visible = true;
         using (SqlConnection conn = dbConnect.connectionSurgery())
         {
             String sqlCmdString = "surgGetEvent";
@@ -186,7 +188,7 @@ public partial class Default2 : System.Web.UI.Page
                 String pattern = "yyyyMMdd";
                 DateTime parsedDate;
                 DateTime.TryParseExact(date, pattern, null, System.Globalization.DateTimeStyles.None, out parsedDate);
-                date = parsedDate.ToString("MM/DD/YYYY");
+                date = parsedDate.ToString("MM/dd/yyyy");
                 tbDate.Text = date;
             }
             if (col.ColumnName == "duration") tbDuration.Text = dtModifyEvent.Rows[0][col].ToString();
@@ -427,5 +429,38 @@ public partial class Default2 : System.Web.UI.Page
     {
         LoadORRooms();
         ddlRoom.SelectedValue = "1";
+    }
+
+    protected void deleteEvent(int id)
+    {
+        if (id != null)
+        {
+            using (SqlConnection conn = dbConnect.connectionSurgery())
+            {
+                String sqlCmdString = "surgDeleteEvent";
+                using (SqlCommand cmd = new SqlCommand(sqlCmdString, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@surgery_event_id", id);
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    catch
+                    { Console.WriteLine("Error"); }
+                }
+            }
+        }
+        Session["date"] = tbDate.Text;
+        Session["location"] = ddlLocation.SelectedValue;
+        Session["room"] = ddlRoom.SelectedValue;
+        Response.Redirect("SurgeryRoom.aspx");
+    }
+    protected void btnDeleteItem_Click(object sender, EventArgs e)
+    {
+        int id = int.Parse(Session["surg_event_id"].ToString());
+        deleteEvent(id);
     }
 }

@@ -117,7 +117,7 @@
                                 <div class="col-lg-12">
                                     <div class="pull-right">
                                         <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
-                                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" Enabled="false" />
+                                        <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" />
                                     </div>
                                 </div>
                             </div>
@@ -225,10 +225,7 @@
                         <div class="col-lg-1">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <asp:Button ID="btnModifyItem" CssClass="btn-link" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
-                                    <div style="margin-top: 10px;">
-                                        <asp:Button ID="btnDeleteItem" CssClass="btn-link" runat="server" Text="Delete" CommandName="DeleteEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" />
-                                    </div>
+                                    <asp:Button ID="btnModifyItem" CssClass="btn-link" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false" />
                                 </div>
                             </div>
                         </div>
