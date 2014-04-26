@@ -19,7 +19,7 @@ public partial class PrintPage : System.Web.UI.Page
     DataView dv;
     String location;
     protected String date;
-    protected String room = "Testing";
+    protected String room;
     DataTable dtORRooms = new DataTable();
     protected DateTime timestamp = new DateTime();
     int i = 0;
@@ -28,11 +28,9 @@ public partial class PrintPage : System.Web.UI.Page
     {
         location = Session["location"].ToString();
         date = Session["date"].ToString();
-        System.Diagnostics.Debug.Write(date);
         populateTimestamp();
         calculateTimes(dt);
         LoadORRooms();
-        System.Diagnostics.Debug.WriteLine(dtORRooms.Rows.Count);
         listViewUpdate();
         ListViewPrime.DataSource = dtList;
         ListViewPrime.DataBind();
