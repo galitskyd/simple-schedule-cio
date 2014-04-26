@@ -84,7 +84,8 @@ public partial class PrintPage : System.Web.UI.Page
         {
             dv = dt.AsDataView();
             dv.RowFilter = "Location = '" + location + "' AND Room = '" + row["room_name"] + "' AND Date = '" + date + "'";
-            dtList.Add(row["room_name"].ToString(),dv.ToTable());
+            if (dv.ToTable().Rows.Count > 0)
+                dtList.Add(row["room_name"].ToString(),dv.ToTable());
         }
     }
     protected void ListViewPrime_ItemDataBound(object sender, ListViewItemEventArgs e)
