@@ -14,6 +14,10 @@ public partial class SurgeryRoomManagerEquipment : System.Web.UI.Page
     surgManager surgMan = new surgManager();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["loggedIN"] != "true")
+        {
+            Response.Redirect("SurgeryRoom.aspx");
+        }
         if(!Page.IsPostBack) LoadEquipment();
     }
     private void LoadEquipment()

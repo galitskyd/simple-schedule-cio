@@ -29,6 +29,38 @@
                 changeMonth: true,
                 changeYear: true
             });
+            $('#lblLatex').click(function () {
+                var checkbox = $('#chkLatex');
+                if (checkbox.is(':checked')) {
+                    checkbox.prop('checked', false);
+                } else {
+                    checkbox.prop('checked', true);
+                }
+            });
+            $('#lblDiabetic').click(function () {
+                var checkbox = $('#chkDiabetic');
+                if (checkbox.is(':checked')) {
+                    checkbox.prop('checked', false);
+                } else {
+                    checkbox.prop('checked', true);
+                }
+            });
+            $('#lblVanco').click(function () {
+                var checkbox = $('#chkVanco');
+                if (checkbox.is(':checked')) {
+                    checkbox.prop('checked', false);
+                } else {
+                    checkbox.prop('checked', true);
+                }
+            });
+            $('#lblCoaguchek').click(function () {
+                var checkbox = $('#chkCoaguchek');
+                if (checkbox.is(':checked')) {
+                    checkbox.prop('checked', false);
+                } else {
+                    checkbox.prop('checked', true);
+                }
+            });
         })
     </script>
     <script type="text/javascript">
@@ -82,10 +114,10 @@
         data-bv-message="This value is not valid">
         <header class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand" href="SurgeryRoom.aspx">SurgeryGenie</a>
+                <a class="navbar-brand" href="SurgeryRoom.aspx">Genie</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="SurgeryRoom.aspx">Back to SurgeryGenie</a></li>
+                        <li><a href="SurgeryRoom.aspx">Back to Genie</a></li>
                     </ul>
                 </div>
             </div>
@@ -156,41 +188,56 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkbox">
-                                <label id="lblLatex">Latex Allergy</label>
+                                <label id="lblLatex">Latex Allergy <img src='/simple-scheduling-cio/Content/images/latex-icon-small.png' alt='Latex Allergy' width='16' /></label>
                                 <asp:CheckBox TabIndex="7" ID="chkLatex" runat="server" />
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="checkbox">
-                                <label id="lblDiabetic">Diabetic</label>
+                                <label id="lblDiabetic">Diabetic <img src='/simple-scheduling-cio/Content/images/diabetes-icon-small.png' alt='Diabetic' width='16' /></label>
                                 <asp:CheckBox TabIndex="8" ID="chkDiabetic" runat="server" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label id="lblVanco">Vanco Preop <img src='/simple-scheduling-cio/Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='16' /></label>
+                                <asp:CheckBox TabIndex="9" ID="chkVanco" runat="server" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 clearfix">
+                            <div class="checkbox">
+                                <label id="lblCoaguchek">Coaguchek <img src='/simple-scheduling-cio/Content/images/coagucheck-small.png' alt='CoaguCheck' width='16' /></label>
+                                <asp:CheckBox TabIndex="10" ID="chkCoaguchek" runat="server" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label id="lblSurgery">Surgery Details</label>
-                        <asp:TextBox TabIndex="9" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
+                        <asp:TextBox TabIndex="11" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
                     </div>
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
-                        <asp:ListBox TabIndex="10" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="12" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblEquipment">Equipment</label>
-                        <asp:ListBox TabIndex="11" ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="13" ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="form-group">
                         <label id="lblPlatesImplants">Plates/Implants</label>
-                        <asp:ListBox TabIndex="12" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <asp:ListBox TabIndex="14" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" style="padding: 20px 0 40px 0;">
                             <div class="col-lg-4 col-lg-offset-4">
-                                <asp:Button TabIndex="13" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="15" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                            </div>
+                            <div class="col-lg-2 col-lg-offset-2">
+                                <asp:Button TabIndex="-1" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary btn-danger submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
 
-                                <asp:Button TabIndex="14" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
-
-                                <asp:Button TabIndex="15" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="16" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
                             </div>
                         </div>
                     </div>

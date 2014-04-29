@@ -20,6 +20,7 @@
                 <ItemTemplate>
                     <li>
                         <div><%#Eval("Key") %></div>
+                        <div>Surgery Schedule for <%=date %> with schedule start time of 6:30:00 AM</div>
                         <asp:ListView ID="ListView1" runat="server">
                             <LayoutTemplate>
                                 <section style="background-color: #F0F1F1; padding-bottom: 20px;">
@@ -115,6 +116,30 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Latex</b>
+                                <%#Eval("Latex") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Diabetic</b>
+                                <%#Eval("Diabetic") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Vanco-Preop</b>
+                                <%#Eval("Vanco") %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <b>Coaguchek</b>
+                                <%#Eval("Coaguchek") %>
+                            </div>
+                        </div>
                                     </div>
                                     <div>
                                         <hr />

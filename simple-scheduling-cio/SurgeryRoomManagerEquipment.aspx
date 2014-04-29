@@ -19,10 +19,10 @@
     <body style="background-color: #F0F1F1">
         <header class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand">SurgeryGenie</a>
+                <a class="navbar-brand">Genie</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="SurgeryRoom.aspx">Back to SurgeryGenie</a></li>
+                        <li><a href="SurgeryRoom.aspx">Back to Genie</a></li>
                     </ul>
                 </div>
             </div>

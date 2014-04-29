@@ -18,8 +18,8 @@ public partial class PrintPage : System.Web.UI.Page
     DataTable dt = basicInfoSurgery.dt();
     DataView dv;
     String location;
-    String date;
-    protected String room = "Testing";
+    protected String date;
+    protected String room;
     DataTable dtORRooms = new DataTable();
     protected DateTime timestamp = new DateTime();
     int i = 0;
@@ -28,11 +28,9 @@ public partial class PrintPage : System.Web.UI.Page
     {
         location = Session["location"].ToString();
         date = Session["date"].ToString();
-        System.Diagnostics.Debug.Write(date);
         populateTimestamp();
         calculateTimes(dt);
         LoadORRooms();
-        System.Diagnostics.Debug.WriteLine(dtORRooms.Rows.Count);
         listViewUpdate();
         ListViewPrime.DataSource = dtList;
         ListViewPrime.DataBind();
@@ -84,7 +82,8 @@ public partial class PrintPage : System.Web.UI.Page
         {
             dv = dt.AsDataView();
             dv.RowFilter = "Location = '" + location + "' AND Room = '" + row["room_name"] + "' AND Date = '" + date + "'";
-            dtList.Add(row["room_name"].ToString(),dv.ToTable());
+            if (dv.ToTable().Rows.Count > 0)
+                dtList.Add(row["room_name"].ToString(),dv.ToTable());
         }
     }
     protected void ListViewPrime_ItemDataBound(object sender, ListViewItemEventArgs e)

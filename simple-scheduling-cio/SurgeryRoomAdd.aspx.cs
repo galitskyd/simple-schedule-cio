@@ -20,6 +20,11 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["loggedIN"] != "true")
+        {
+            Response.Redirect("SurgeryRoom.aspx");
+        }
+
         if (!Page.IsPostBack)
         {
             if (Session["date"] != null) tbDate.Text = Session["date"].ToString();
@@ -206,6 +211,8 @@ public partial class Default2 : System.Web.UI.Page
                 else tbSurgery.Text = dtModifyEvent.Rows[0][col].ToString();
             if (col.ColumnName == "latex_allergy") chkLatex.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
             if (col.ColumnName == "is_diabetic") chkDiabetic.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
+            if (col.ColumnName == "vanco_preop") chkVanco.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
+            if (col.ColumnName == "coaguchek") chkCoaguchek.Checked = Convert.ToBoolean(dtModifyEvent.Rows[0][col].ToString());
         }
         dtModifyEvent = new DataTable();
         using (SqlConnection conn = dbConnect.connectionSurgery())
@@ -376,15 +383,19 @@ public partial class Default2 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@med_rec_nbr", tbPatient.Text);
                     cmd.Parameters.AddWithValue("@is_diabetic", chkDiabetic.Checked);
                     cmd.Parameters.AddWithValue("@latex_allergy", chkLatex.Checked);
+                    cmd.Parameters.AddWithValue("@vanco_preop", chkVanco.Checked);
+                    cmd.Parameters.AddWithValue("@coaguchek", chkCoaguchek.Checked);
                 }
 
                 if (insertEvent == "surgModifyEvent")
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                    blnRedirect = true;
-                }
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        blnRedirect = true;
+                    }
+                    catch { Console.WriteLine("Error"); }
 
                 else try
                     {
