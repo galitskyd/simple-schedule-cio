@@ -152,7 +152,7 @@ img.btn_close {
 }
 
 .surgery-holdings li:first-child {
-    border-top: 2px solid #000;
+    border-top: 0;
 }
 
 .ui-sortable-helper {
@@ -204,4 +204,8 @@ img.btn_close {
 .management-content {
     padding: 20px 0;
     background-color: #F0F1F1;
+}
+
+#genie-footer {
+    padding: 20px 0 40px 0;
 }

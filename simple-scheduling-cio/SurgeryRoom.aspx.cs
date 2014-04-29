@@ -12,6 +12,7 @@ using System.Web.Services;
 using System.Web.Script.Services;
 using System.Text.RegularExpressions;
 using System.Web.UI.HtmlControls;
+
 public partial class _Default : System.Web.UI.Page
 {
     DataTable dt = basicInfoSurgery.dt();
@@ -307,6 +308,54 @@ public partial class _Default : System.Web.UI.Page
         {
             int id = int.Parse(e.CommandArgument.ToString());
             modifyEvent(id);
+        }
+    }
+
+    public String checkDiabetes(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='/simple-scheduling-cio/Content/images/diabetes-icon-small.png' alt='Diabetic' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkLatex(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='/simple-scheduling-cio/Content/images/latex-icon-small.png' alt='Latex Allergy' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkCoaguCheck(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='/simple-scheduling-cio/Content/images/coagucheck-small.png' alt='CoaguCheck' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkVancomycin(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='/simple-scheduling-cio/Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='25' />";
+        }
+        else
+        {
+            return "";
         }
     }
 }

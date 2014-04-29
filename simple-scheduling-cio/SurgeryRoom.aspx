@@ -106,51 +106,9 @@
                 <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand">
                 <LayoutTemplate>
                     <section style="background-color: #F0F1F1; padding-bottom: 20px;">
-                        <ul class="col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
-                        <li class="appointment-listitem">
-                        <div class="row">
-                        <div class="col-lg-7 clearfix">
-                            <div class="row">
-                                <div id="appointment-time" class="col-lg-4"><b>Start Time - End Time</b></div>
-                                <div id="appointment-patient" class="col-lg-4">Patient</div>
-                                <div id="appointment-dob" class="col-lg-2">Birthdate</div>
-                                <div id="appointment-weight" class="col-lg-1">Weight</div>
-                                <div id="appointment-room" class="col-lg-1">Room</div>
-                            </div>
-                            <div class="row" style="margin-top: 5px;">
-                                <div id="appointment-provider" class="col-lg-4">Provider</div>
-                                <div id="appointment-mrn" class="col-lg-4">MedRec#</div>
-                                <div class="col-lg-2"></div>
-                                <div id="appointment-age" class="col-lg-1">Age</div>
-                                <div id="appointment-gender" class="col-lg-1">Gender</div>
-                            </div>
-                            <div class="row" style="margin-top: 10px;">
-                                <div id="appointment-surgery" class="col-lg-12"><b>Details:</b> Surgery Details</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <b>Anasthesia</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <b>Surgery Equipment</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <b>Plates/Implants</b>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </li>
-                    </ul>
-                    <ul class="selectable surgery-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
-                        <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
-                    </ul>
+                        <ul class="selectable surgery-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
+                            <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
+                        </ul>
                     </section>
                 </LayoutTemplate>
                 <ItemTemplate>
@@ -199,30 +157,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <b>Latex</b>
-                                <%#Eval("Latex") %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <b>Diabetic</b>
-                                <%#Eval("Diabetic") %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <b>Vanco-Preop</b>
-                                <%#Eval("Vanco") %>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <b>Coaguchek</b>
-                                <%#Eval("Coaguchek") %>
-                            </div>
-                        </div>
+                        <%# checkLatex(Eval("Latex").ToString()) %>
+                        <%# checkDiabetes(Eval("Diabetic").ToString()) %>
+                        <%# checkVancomycin(Eval("Vanco").ToString()) %>
+                        <%# checkCoaguCheck(Eval("Coaguchek").ToString()) %>
                         <div class="col-lg-1">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -235,5 +173,29 @@
                 </ItemTemplate>
             </asp:ListView>
         </form>
+        <footer id="genie-footer">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>Latex Allergy</label>
+                            <img src='/simple-scheduling-cio/Content/images/latex-icon-small.png' alt='Latex Allergy' width='25' />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Diabetic</label>
+                            <img src='/simple-scheduling-cio/Content/images/diabetes-icon-small.png' alt='Diabetic' width='25' />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Vanco Preop</label>
+                            <img src='/simple-scheduling-cio/Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='25' />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>CoaguCheck</label>
+                            <img src='/simple-scheduling-cio/Content/images/coagucheck-small.png' alt='CoaguCheck' width='25' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>
