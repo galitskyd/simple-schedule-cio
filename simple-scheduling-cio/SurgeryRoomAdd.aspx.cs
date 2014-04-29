@@ -20,6 +20,11 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["loggedIN"] != "true")
+        {
+            Response.Redirect("SurgeryRoom.aspx");
+        }
+
         if (!Page.IsPostBack)
         {
             if (Session["date"] != null) tbDate.Text = Session["date"].ToString();
