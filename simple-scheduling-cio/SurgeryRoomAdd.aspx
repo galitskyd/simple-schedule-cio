@@ -167,20 +167,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label id="lblVanco">Vanco Preop</label>
+                                <asp:CheckBox TabIndex="9" ID="chkVanco" runat="server" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label id="lblCoaguchek">Coaguchek</label>
+                                <asp:CheckBox TabIndex="10" ID="chkCoaguchek" runat="server" />
+                            </div>
+                        </div>
                     <div class="form-group">
                         <label id="lblSurgery">Surgery Details</label>
-                        <asp:TextBox TabIndex="9" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
+                        <asp:TextBox TabIndex="11" ID="tbSurgery" TextMode="MultiLine" CssClass="form-control" Rows="5" runat="server" />
                     </div>
-                    <div style="float:left;width:25%">
-                        <asp:Label ID="lblVanco" Text="Vanco Preop: " runat="server"></asp:Label><br />
-                        <asp:CheckBox TabIndex="10" ID="chkVanco" runat="server" />
-                    </div>
-                    <div style="float:left;width:25%">
-                        <asp:Label ID="lblCoaguchek" Text="Coaguchek: " runat="server"></asp:Label><br />
-                        <asp:CheckBox TabIndex="11" ID="chkCoaguchek" runat="server" />
-                    </div>
-                    </div>
-                    <br /><br />
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
                         <asp:ListBox TabIndex="12" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
@@ -196,11 +199,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="col-lg-4 col-lg-offset-4">
-                                <asp:Button TabIndex="13" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="15" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
 
-                                <asp:Button TabIndex="14" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
+                                <asp:Button TabIndex="16" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
 
-                                <asp:Button TabIndex="15" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
+                                <asp:Button TabIndex="17" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
                             </div>
                         </div>
                     </div>
