@@ -80,25 +80,28 @@
 
         });
     </script>
-    <header class="navbar navbar-default" role="navigation">
-        <a class="navbar-brand">Central Indiana Orthopedics</a> 
-        <p class="navbar-text">Main Schedule View</p>
-        <a class="pull-right" href="SurgeryRoom.aspx">SurgeryGenie</a>
-    </header>
     <form id="form1" runat="server">
+        <header class="navbar navbar-default" role="navigation">
+            <a class="navbar-brand">Central Indiana Orthopedics</a> 
+            <p class="navbar-text">Main Schedule View</p>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><asp:LinkButton ID="clearAll" runat="server" OnClick="clearAll_Click" Text="Clear All Filters" TabIndex="-1"></asp:LinkButton></li>
+                    <li><a href="SurgeryRoom.aspx">Genie</a></li>
+                </ul>
+            </div>
+        </header>
         <div id="mainPageContainer">
             <asp:GridView ID="GridView1" CssClass="table table-striped" RowStyle-CssClass="table-row" runat="server" AllowSorting="true" OnSorting="GridView1_Sorting" ></asp:GridView>
         </div>
             <div id="expanded-filter" class="filter-bar filter-box">
                 <i id="filter-collapse" class="glyphicon glyphicon-arrow-down pull-right"></i> 
                 <div id="clearContainer">
-                <asp:Button id="clearAll" runat="server" onclick="clearAll_Click" Text="Clear All Filters" TabIndex="-1"></asp:Button>
+                    
                 </div>
         <div class="filter-tabs">
         <div class="tabs">
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" />
-           
-       
             <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" style="visibility:visible">
                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="Provider">
                     <ContentTemplate>
