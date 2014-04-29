@@ -4,7 +4,7 @@
     <head runat="server">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SurgeryGenie</title>
+        <title>Genie</title>
         <link rel="stylesheet" type="text/css" href="Content/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="Content/jquery-ui-1.10.4.custom.min.css" />
         <link rel="stylesheet" type="text/css" href="Content/StyleSheet.css" />
@@ -32,7 +32,7 @@
         <form id="loginform" runat="server">
         <header class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
-                <a class="navbar-brand">SurgeryGenie</a>
+                <a class="navbar-brand">Genie</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="Default.aspx">Main Schedule View</a></li>
