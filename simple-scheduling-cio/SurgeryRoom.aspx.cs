@@ -45,7 +45,6 @@ public partial class _Default : System.Web.UI.Page
     protected void listViewUpdate()
     {
         dv = new DataView(dt);
-        System.Diagnostics.Debug.WriteLine("Bing" + tbDate.Text);
         dv.RowFilter = "Location='" + ddlLocation.SelectedValue + "' AND Room='" + ddlRoom.SelectedItem + "' AND Date='" + tbDate.Text + "'";
         dtBind = dv.ToTable();
         dtBind = calculateTimes(dtBind);
