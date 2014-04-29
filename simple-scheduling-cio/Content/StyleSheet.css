@@ -148,7 +148,7 @@ img.btn_close {
 .surgery-holdings li {
     border-top: 1px solid #000;
     padding: 10px 15px;
-    cursor: move;
+    cursor: pointer;
 }
 
 .surgery-holdings li:first-child {
@@ -161,7 +161,7 @@ img.btn_close {
 }
 
 .sortable-placeholder {
-    height: 80px;
+    height: 140px;
     border: 3px solid #9999FF !important;
 }
 

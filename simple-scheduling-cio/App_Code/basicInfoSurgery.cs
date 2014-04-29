@@ -80,7 +80,7 @@ public class basicInfoSurgery
                     if (col.ColumnName == "Birthdate")
                     {
                         String birthdate = "";
-                        if (row["date_of_birth"].ToString() != "") birthdate = "Birth Date:   " + DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
+                        if (row["date_of_birth"].ToString() != "") birthdate = DateTime.ParseExact(row["date_of_birth"].ToString(), "yyyyMMdd", null).ToString("MM/dd/yyyy");
                         newRow[col] = birthdate;
                     }
                     if (col.ColumnName == "Age")
@@ -130,7 +130,7 @@ public class basicInfoSurgery
             String items = "";
             int surgEventID = int.Parse(info.Rows[i]["ID"].ToString());
             dt = dtItemFilter(providerDataTable, surgEventID, "provider");
-            items = parsedItems(dt, surgEventID, ", <br />&nbsp&nbsp&nbsp");
+            items = parsedItems(dt, surgEventID, ", <br />");
             info.Rows[i]["Provider"] = items;
             dt = dtItemFilter(itemsDataTable, surgEventID, "A");
             items = parsedItems(dt, surgEventID, ", ");
