@@ -188,13 +188,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkbox">
-                                <label id="lblLatex">Latex Allergy <img src='/simple-scheduling-cio/Content/images/latex-icon-small.png' alt='Latex Allergy' width='16' /></label>
+                                <label id="lblLatex">Latex Allergy <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='16' /></label>
                                 <asp:CheckBox TabIndex="7" ID="chkLatex" runat="server" />
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="checkbox">
-                                <label id="lblDiabetic">Diabetic <img src='/simple-scheduling-cio/Content/images/diabetes-icon-small.png' alt='Diabetic' width='16' /></label>
+                                <label id="lblDiabetic">Diabetic <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='16' /></label>
                                 <asp:CheckBox TabIndex="8" ID="chkDiabetic" runat="server" />
                             </div>
                         </div>
@@ -202,13 +202,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkbox">
-                                <label id="lblVanco">Vanco Preop <img src='/simple-scheduling-cio/Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='16' /></label>
+                                <label id="lblVanco">Vanco Preop <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='16' /></label>
                                 <asp:CheckBox TabIndex="9" ID="chkVanco" runat="server" />
                             </div>
                         </div>
                         <div class="col-lg-6 clearfix">
                             <div class="checkbox">
-                                <label id="lblCoaguchek">Coaguchek <img src='/simple-scheduling-cio/Content/images/coagucheck-small.png' alt='CoaguCheck' width='16' /></label>
+                                <label id="lblCoaguchek">Coaguchek <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='16' /></label>
                                 <asp:CheckBox TabIndex="10" ID="chkCoaguchek" runat="server" />
                             </div>
                         </div>
