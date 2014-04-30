@@ -124,12 +124,12 @@
         </header>
         <div class="container-fluid">
             <div class="row" style="background-color: #D4E6E8">
-                <div  class="col-lg-8 col-lg-offset-2">
+                <div  class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                     <h1>New Surgery Event</h1>
                 </div>
             </div>
             <div class="row" style="background-color: #F0F1F1; padding-top: 20px; padding-bottom: 20px;">
-                <div class="col-lg-8 col-lg-offset-2 col-sm-8 col-sm-offset-2">
+                <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-md-10 col-md-offset-1">
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
