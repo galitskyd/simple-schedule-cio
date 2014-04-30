@@ -179,19 +179,19 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label>Latex Allergy</label>
-                            <img src='/simple-scheduling-cio/Content/images/latex-icon-small.png' alt='Latex Allergy' width='25' />
+                            <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='25' />
                         </div>
                         <div class="col-lg-3">
                             <label>Diabetic</label>
-                            <img src='/simple-scheduling-cio/Content/images/diabetes-icon-small.png' alt='Diabetic' width='25' />
+                            <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='25' />
                         </div>
                         <div class="col-lg-3">
                             <label>Vanco Preop</label>
-                            <img src='/simple-scheduling-cio/Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='25' />
+                            <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='25' />
                         </div>
                         <div class="col-lg-3">
                             <label>CoaguCheck</label>
-                            <img src='/simple-scheduling-cio/Content/images/coagucheck-small.png' alt='CoaguCheck' width='25' />
+                            <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='25' />
                         </div>
                     </div>
                 </div>
