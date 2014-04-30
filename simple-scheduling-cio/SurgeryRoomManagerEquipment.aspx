@@ -30,20 +30,20 @@
         <form id="form1" runat="server">
             <div class="container-fluid">
                 <div class="row management-title">
-                    <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <h1>Equipment Manager</h1>
                     </div>
                 </div>
                 <div class="row management-content">
-                    <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label id="lblEnabled">Enabled</label>
                                     <asp:ListBox ID="lbEnabled" runat="server" CssClass="form-control" ToolTip="Enabled" SelectionMode="Multiple" Height="400px"></asp:ListBox>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <label id="lblDisabled">Disabled</label>
                                     <asp:ListBox ID="lbDisabled" runat="server" CssClass="form-control" ToolTip="Disabled" SelectionMode="Multiple" Height="400px"></asp:ListBox>
@@ -53,15 +53,15 @@
                     </div>
                 </div>
                 <div class="row management-content" style="padding-top: 0;">
-                    <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-sm-4">
                                 <a id="btnAdd" class="btn btn-primary btn-lg btn-full" runat="server" onclick="$('#add-equipment').modal();">Add Equipment</a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-sm-4">
                                 <asp:Button ID="btnToggle" CssClass="btn btn-primary btn-lg btn-full" runat="server" Text="Toggle Equipment" OnClick="btnToggle_Click" />
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-sm-4">
                                 <asp:Button ID="btnRemove" CssClass="btn btn-danger btn-lg btn-full" runat="server" Text="Delete Equipment" OnClick="btnDelete_Click" />
                             </div>
                         </div>

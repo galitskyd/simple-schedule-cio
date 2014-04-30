@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1" style="float: none; padding: 15px;">
+                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12" style="float: none; padding: 15px;">
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
@@ -106,7 +106,7 @@
                 <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand">
                 <LayoutTemplate>
                     <section style="background-color: #F0F1F1; padding-bottom: 20px;">
-                        <ul class="selectable surgery-holdings col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1" style="float: none; margin-bottom: 0;">
+                        <ul class="selectable surgery-holdings col-lg-10 col-md-10 col-sm-12 col-lg-offset-1 col-md-offset-1" style="float: none; margin-bottom: 0;">
                             <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                         </ul>
                     </section>
@@ -175,7 +175,7 @@
         </form>
         <footer id="genie-footer">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-sm-8 col-sm-offset-2">
+                <div class="col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
                     <div class="row">
                         <div class="col-lg-3 col-sm-3">
                             <label>Latex Allergy</label>
