@@ -69,9 +69,9 @@
                     </div>
                 </div>
 
-                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1" style="float: none; padding: 15px;">
+                <div id="mainPageContainer" class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12" style="float: none; padding: 15px;">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <asp:TextBox ID="tbTime" runat="server" AutoPostBack="true" Visible="false" />
                             <asp:TextBox ID="tbDate" runat="server" AutoPostBack="true" CssClass="surgery-menu" />
                             <asp:DropDownList ID="ddlLocation" CssClass="surgery-menu smaller" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
@@ -80,9 +80,9 @@
                             </asp:DropDownList>
                             <asp:DropDownList ID="ddlRoom" CssClass="surgery-menu smaller" runat="server" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="row" style="margin-top: 10px;">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <div class="pull-right">
                                         <asp:Button ID="aManager" runat="server" CssClass="btn" Text="Anesthesia Manager" OnClick="btnAnesthesia_Click" />
                                         <asp:Button ID="eManager" runat="server" CssClass="btn" Text="Equipment Manager" OnClick="btnEquipment_Click" />
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <div class="pull-right">
                                         <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary" Text="Add Event" OnClick="btnAdd_Click" />
                                         <asp:Button ID="Print" runat="server" OnClick="Print_Click" CssClass="btn btn-primary" Text="Print Schedule" />
@@ -106,7 +106,7 @@
                 <asp:ListView ID="ListView1" runat="server" OnItemCommand="ListView1_ItemCommand">
                 <LayoutTemplate>
                     <section style="background-color: #F0F1F1; padding-bottom: 20px;">
-                        <ul class="selectable surgery-holdings col-lg-10 col-lg-offset-1" style="float: none; margin-bottom: 0;">
+                        <ul class="selectable surgery-holdings col-lg-10 col-md-10 col-sm-12 col-lg-offset-1 col-md-offset-1" style="float: none; margin-bottom: 0;">
                             <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                         </ul>
                     </section>
@@ -114,43 +114,43 @@
                 <ItemTemplate>
                     <li class="appointment-listitem">
                         <div class="row">
-                        <div class="col-lg-7 clearfix">
+                        <div class="col-lg-7 col-sm-7 clearfix">
                             <div class="row">
-                                <div id="appointment-time" class="col-lg-4"><b><%#Eval("Start Time") %> - <%#Eval("End Time") %></b></div>
-                                <div id="appointment-patient" class="col-lg-3"><%#Eval("Patient") %></div>
-                                <div id="appointment-duration" class="col-lg-1"><%#Eval("Duration") %></div>
-                                <div id="appointment-dob" class="col-lg-2"><%#Eval("Birthdate") %></div>
-                                <div id="appointment-weight" class="col-lg-1"><%#Eval("Weight") %></div>
-                                <div id="appointment-room" class="col-lg-1"><%#Eval("Room") %></div>
+                                <div id="appointment-time" class="col-lg-4 col-sm-4"><b><%#Eval("Start Time") %> - <%#Eval("End Time") %></b></div>
+                                <div id="appointment-patient" class="col-lg-3 col-sm-3"><%#Eval("Patient") %></div>
+                                <div id="appointment-duration" class="col-lg-1 col-sm-1"><%#Eval("Duration") %></div>
+                                <div id="appointment-dob" class="col-lg-2 col-sm-2"><%#Eval("Birthdate") %></div>
+                                <div id="appointment-weight" class="col-lg-1 col-sm-1"><%#Eval("Weight") %></div>
+                                <div id="appointment-room" class="col-lg-1 col-sm-1"><%#Eval("Room") %></div>
                             </div>
                             <div class="row" style="margin-top: 5px;">
-                                <div id="appointment-provider" class="col-lg-4"><%#Eval("Provider") %></div>
-                                <div id="appointment-mrn" class="col-lg-4"><%#Eval("MedRec#") %></div>
-                                <div class="col-lg-2"></div>
-                                <div id="appointment-age" class="col-lg-1"><%#Eval("Age") %></div>
-                                <div id="appointment-gender" class="col-lg-1"><%#Eval("Gender") %></div>
+                                <div id="appointment-provider" class="col-lg-4 col-sm-4"><%#Eval("Provider") %></div>
+                                <div id="appointment-mrn" class="col-lg-4 col-sm-4"><%#Eval("MedRec#") %></div>
+                                <div class="col-lg-2 col-sm-2"></div>
+                                <div id="appointment-age" class="col-lg-1 col-sm-1"><%#Eval("Age") %></div>
+                                <div id="appointment-gender" class="col-lg-1 col-sm-1"><%#Eval("Gender") %></div>
                             </div>
                             <div class="row" style="margin-top: 10px;">
-                                <div id="appointment-surgery" class="col-lg-12"><b>Details:</b> <%#Eval("Surgery Details") %></div>
+                                <div id="appointment-surgery" class="col-lg-12 col-sm-12"><b>Details:</b> <%#Eval("Surgery Details") %></div>
                             </div>
                         </div>
-                        <div class="col-lg-4"">
+                        <div class="col-lg-4 col-sm-4">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <b>Anasthesia</b>
                                     <br />
                                     <%#Eval("Anesthesia") %>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <b>Surgery Equipment</b>
                                     <br />
                                     <%#Eval("Equipment") %>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <b>Plates/Implants</b>
                                     <br />
                                     <%#Eval("Plates") %>
@@ -161,9 +161,9 @@
                         <%# checkDiabetes(Eval("Diabetic").ToString()) %>
                         <%# checkVancomycin(Eval("Vanco").ToString()) %>
                         <%# checkCoaguCheck(Eval("Coaguchek").ToString()) %>
-                        <div class="col-lg-1">
+                        <div class="col-lg-1 col-sm-1">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12">
                                     <asp:Button ID="btnModifyItem" CssClass="btn-link" runat="server" Text="Modify" CommandName="ModifyEvent" CommandArgument='<%#Eval("ID") %>' OnCommand="ListView1_ItemCommand" Enabled="false" Visible="false" />
                                 </div>
                             </div>
@@ -175,21 +175,21 @@
         </form>
         <footer id="genie-footer">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-8 col-lg-offset-2 col-sm-10 col-sm-offset-1">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-3">
                             <label>Latex Allergy</label>
                             <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='25' />
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-3">
                             <label>Diabetic</label>
                             <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='25' />
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-3">
                             <label>Vanco Preop</label>
                             <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='25' />
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-sm-3">
                             <label>CoaguCheck</label>
                             <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='25' />
                         </div>

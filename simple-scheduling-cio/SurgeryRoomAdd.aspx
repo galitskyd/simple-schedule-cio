@@ -124,14 +124,14 @@
         </header>
         <div class="container-fluid">
             <div class="row" style="background-color: #D4E6E8">
-                <div  class="col-lg-8 col-lg-offset-2">
+                <div  class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                     <h1>New Surgery Event</h1>
                 </div>
             </div>
             <div class="row" style="background-color: #F0F1F1; padding-top: 20px; padding-bottom: 20px;">
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-8 col-lg-offset-2 col-sm-12 col-md-10 col-md-offset-1">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblLocation">Location</label>
                                 <asp:DropDownList TabIndex="1" ID="ddlLocation" CssClass="form-control" runat="server" DataTextField="Location" DataValueField="Location" AutoPostBack="true" OnSelectedIndexChanged="ddlLocation_SelectedIndexChanged">
@@ -140,19 +140,19 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <label id="lblORRom">OR#</label>
                             <asp:DropDownList TabIndex="2" ID="ddlRoom" runat="server" CssClass="form-control" DataTextField="room_name" DataValueField="room_number" AutoPostBack="true"></asp:DropDownList>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblDate">Date (MM/DD/YYYY)</label>
                                 <asp:TextBox TabIndex="3" ID="tbDate" CssClass="form-control" runat="server" PlaceHolder="Date (MM/DD/YYYY)" />
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblDuration">Duration (in minutes)</label>
                                 <asp:TextBox TabIndex="4" ID="tbDuration" CssClass="form-control" runat="server" PlaceHolder="Duration"/>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblPatient">Medical Record Number</label>
                                 <asp:TextBox TabIndex="5" ID="tbPatient" CssClass="form-control" runat="server" AutoPostBack="true" PlaceHolder="Medical Record Number" OnTextChanged="tbPatient_TextChanged"
@@ -178,7 +178,7 @@
 
                         <asp:ListBox ID="lbPatient" Visible="false" runat="server" DataTextField="full_name" DataValueField="med_rec_nbr" AutoPostBack="true" TabIndex="-1"/>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblProvider">Provider</label>
                                 <asp:ListBox TabIndex="6" ID="lbProvider" CssClass="form-control" runat="server" DataTextField="description" DataValueField="provider_id" AutoPostBack="true" SelectionMode="Multiple" Rows="5"/>
@@ -186,13 +186,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="checkbox">
                                 <label id="lblLatex">Latex Allergy <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='16' /></label>
                                 <asp:CheckBox TabIndex="7" ID="chkLatex" runat="server" />
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="checkbox">
                                 <label id="lblDiabetic">Diabetic <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='16' /></label>
                                 <asp:CheckBox TabIndex="8" ID="chkDiabetic" runat="server" />
@@ -200,13 +200,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <div class="checkbox">
                                 <label id="lblVanco">Vanco Preop <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='16' /></label>
                                 <asp:CheckBox TabIndex="9" ID="chkVanco" runat="server" />
                             </div>
                         </div>
-                        <div class="col-lg-6 clearfix">
+                        <div class="col-lg-6 col-sm-6 clearfix">
                             <div class="checkbox">
                                 <label id="lblCoaguchek">Coaguchek <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='16' /></label>
                                 <asp:CheckBox TabIndex="10" ID="chkCoaguchek" runat="server" />
@@ -230,11 +230,11 @@
                         <asp:ListBox TabIndex="14" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12" style="padding: 20px 0 40px 0;">
-                            <div class="col-lg-4 col-lg-offset-4">
+                        <div class="col-lg-12 col-sm-12" style="padding: 20px 0 40px 0;">
+                            <div class="col-lg-4 col-lg-offset-4 col-sm-5 col-sm-offset-3">
                                 <asp:Button TabIndex="15" ID="btnAdd" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Add Event" OnClick="btnAdd_Click" UseSubmitBehavior="false"/>
                             </div>
-                            <div class="col-lg-2 col-lg-offset-2">
+                            <div class="col-lg-2 col-lg-offset-2 col-sm-3 col-sm-offset-1">
                                 <asp:Button TabIndex="-1" ID="btnDeleteItem" CssClass="btn btn-lg btn-primary btn-danger submit-add-surgery" runat="server" Text="Delete Event" CommandName="DeleteEvent" OnCommand="btnDeleteItem_Click" UseSubmitBehavior="false" Enabled="false" Visible="false"/>
 
                                 <asp:Button TabIndex="16" ID="btnBlock" CssClass="btn btn-lg btn-primary submit-add-surgery" runat="server" Text="Block Time" OnClick="btnBlock_Click" UseSubmitBehavior="false"/>
