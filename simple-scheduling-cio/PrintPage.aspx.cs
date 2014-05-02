@@ -93,4 +93,52 @@ public partial class PrintPage : System.Web.UI.Page
         i++;
         ListView1.DataBind();
     }
+
+    public String checkDiabetes(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='Content/images/diabetes-icon-small.png' alt='Diabetic' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkLatex(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='Content/images/latex-icon-small.png'  alt='Latex Allergy' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkCoaguCheck(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='Content/images/coagucheck-small.png' alt='CoaguCheck' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public String checkVancomycin(string item)
+    {
+        if (item == "1")
+        {
+            return "<img src='Content/images/vancomycin-icon-small.png' alt='Vanco preop' width='25' />";
+        }
+        else
+        {
+            return "";
+        }
+    }
 }

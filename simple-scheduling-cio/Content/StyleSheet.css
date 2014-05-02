@@ -1,6 +1,4 @@
-﻿<<<<<<< HEAD
-﻿
-#mainPageContainer{
+﻿﻿#mainPageContainer{
     text-align:center;
     margin:auto auto;
     position:relative;
@@ -100,46 +98,6 @@ span.active {
     height: 100%;
 }
 
-/*Login css styles*/
-#mask {
-	display: none;
-	background: #000; 
-	position: fixed; left: 0; top: 0; 
-	z-index: 10;
-	width: 100%; height: 100%;
-	opacity: 0.8;
-	z-index: 999;
-}
-
-.login-popup{
-	display:none;
-	background: #333;
-	padding: 10px; 	
-	border: 2px solid #ddd;
-	float: left;
-	font-size: 1.2em;
-	position: fixed;
-	top: 50%; left: 50%;
-	z-index: 99999;
-	box-shadow: 0px 0px 20px #999;
-	-moz-box-shadow: 0px 0px 20px #999; /* Firefox */
-    -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
-	border-radius:3px 3px 3px 3px;
-    -moz-border-radius: 3px; /* Firefox */
-    -webkit-border-radius: 3px; /* Safari, Chrome */
-}
-
-img.btn_close {
-	float: right; 
-	margin: -28px -28px 0 0;
-}
- 
-.inputs{
-    position:relative;
-    width:60%;
-    left:-30px;
-}
-
 .surgery-holdings {
     padding-left: 0;
     padding-right: 0;
@@ -208,4 +166,48 @@ img.btn_close {
 
 #genie-footer {
     padding: 20px 0 40px 0;
+}
+
+.holder-print {
+    padding-left: 0;
+}
+
+#appointment-duration {
+    text-align: center;
+}
+
+.appointment-holdings li {
+    border: 1px solid #000;
+    border-bottom: 0;
+    padding: 5px;
+}
+
+.list-header {
+    font-size: 2.0em;
+    font-weight: bold;
+    border: 3px solid #000;
+}
+
+.list-header .small-text {
+    font-size: 0.6em;
+}
+
+@media print {
+    .pagebreak {
+        display: block;
+        page-break-before: always;
+    }
+
+    .appointment-holdings li {
+        font-size: 0.8em;
+        page-break-inside: avoid;
+    }
+
+    .appointment-holdings li:last-child {
+        border-bottom: 1px solid #000;
+    }
+
+    .appointment-holdings img {
+        width: 20px;
+    }
 }
