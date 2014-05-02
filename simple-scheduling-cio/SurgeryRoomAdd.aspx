@@ -158,6 +158,7 @@
                                 <asp:TextBox TabIndex="4" ID="tbDuration" CssClass="form-control" runat="server" PlaceHolder="Duration"/>
                                 <asp:CompareValidator Visible="false" ID="valCompareDurationMax" runat="server" ControlToValidate="tbDuration" Type="Integer" Operator="LessThanEqual" ErrorMessage="This room cannot be booked past 4:15." ValueToCompare="1"></asp:CompareValidator>
                                 <asp:CompareValidator Visible="false" ID="valCompareDurationMin" runat="server" ControlToValidate="tbDuration" Type="Integer" Operator="GreaterThan" ErrorMessage="Please select a duration greater than zero (0) minutes." ValueToCompare="0"></asp:CompareValidator>
+                                <p class="help-block">If creating block time, fill duration then go to "Block Time".</p>
                             </div>
                         </div>
                     </div>
@@ -181,7 +182,7 @@
                         <div class="col-lg-6 col-sm-6">
                             <div class="form-group">
                                 <label id="lblProvider">Provider</label>
-                                <asp:ListBox TabIndex="6" ID="lbProvider" CssClass="form-control" runat="server" DataTextField="description" DataValueField="provider_id" AutoPostBack="true" SelectionMode="Multiple" Rows="5"/>
+                                <asp:ListBox TabIndex="6" ID="lbProvider" CssClass="form-control" runat="server" DataTextField="description" DataValueField="provider_id" AutoPostBack="false" SelectionMode="Multiple" Rows="5"/>
                             </div>
                         </div>
                     </div>
@@ -220,14 +221,17 @@
                     <div class="form-group">
                         <label id="lblAnesthesia">Anesthesia</label>
                         <asp:ListBox TabIndex="12" ID="lbAnesthesia" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <p class="help-block">Hold Shift or Shift + Click to select multiple consecutive items.  Ctrl + Click to select multiple items.</p>
                     </div>
                     <div class="form-group">
                         <label id="lblEquipment">Equipment</label>
                         <asp:ListBox TabIndex="13" ID="lbEquipment" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <p class="help-block">Hold Shift or Shift + Click to select multiple consecutive items.  Ctrl + Click to select multiple items.</p>
                     </div>
                     <div class="form-group">
                         <label id="lblPlatesImplants">Plates/Implants</label>
                         <asp:ListBox TabIndex="14" ID="lbPlatesImplants" CssClass="form-control" DataTextField="name" DataValueField="id" runat="server" SelectionMode="Multiple" Rows="6"/>
+                        <p class="help-block">Hold Shift or Shift + Click to select multiple consecutive items.  Ctrl + Click to select multiple items.</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-sm-12" style="padding: 20px 0 40px 0;">
