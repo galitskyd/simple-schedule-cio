@@ -76,6 +76,7 @@
                             <div class="form-group">
                                 <label>Plate/Implant Name</label>
                                 <asp:TextBox  runat="server" ID="txtPlatesImplants" CssClass="form-control" PlaceHolder="Plate/Implant Name"></asp:TextBox>
+                                <p class="help-block">Click "Add Item" to add item to Enabled list.</p>
                             </div>
                         </div>
                         <div class="modal-footer">

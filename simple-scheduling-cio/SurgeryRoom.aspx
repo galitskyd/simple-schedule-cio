@@ -174,24 +174,26 @@
             </asp:ListView>
         </form>
         <footer id="genie-footer">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-xs-10 col-xs-offset-1">
-                    <div class="row">
-                        <div class="col-lg-3 col-xs-3">
-                            <label>Latex Allergy</label>
-                            <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='25' />
-                        </div>
-                        <div class="col-lg-3 col-xs-3">
-                            <label>Diabetic</label>
-                            <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='25' />
-                        </div>
-                        <div class="col-lg-3 col-xs-3">
-                            <label>Vanco Preop</label>
-                            <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='25' />
-                        </div>
-                        <div class="col-lg-3 col-xs-3">
-                            <label>CoaguCheck</label>
-                            <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='25' />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-xs-10 col-xs-offset-1">
+                        <div class="row">
+                            <div class="col-lg-3 col-xs-3">
+                                <label>Latex Allergy</label>
+                                <img src="Content/images/latex-icon-small.png" alt='Latex Allergy' width='25' />
+                            </div>
+                            <div class="col-lg-3 col-xs-3">
+                                <label>Diabetic</label>
+                                <img src="Content/images/diabetes-icon-small.png" alt='Diabetic' width='25' />
+                            </div>
+                            <div class="col-lg-3 col-xs-3">
+                                <label>Vanco Preop</label>
+                                <img src="Content/images/vancomycin-icon-small.png" alt='Vanco preop' width='25' />
+                            </div>
+                            <div class="col-lg-3 col-xs-3">
+                                <label>CoaguCheck</label>
+                                <img src="Content/images/coagucheck-small.png" alt='CoaguCheck' width='25' />
+                            </div>
                         </div>
                     </div>
                 </div>

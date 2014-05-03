@@ -76,6 +76,7 @@
                             <div class="form-group">
                                 <label>Equipment Name</label>
                                 <asp:TextBox  runat="server" ID="txtEquipment" CssClass="form-control" PlaceHolder="Equipment Name"></asp:TextBox>
+                                <p class="help-block">Click "Add Item" to add item to Enabled list.</p>
                             </div>
                         </div>
                         <div class="modal-footer">
